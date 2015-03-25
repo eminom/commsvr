@@ -38,7 +38,7 @@ void echo_read(uv_stream_t *client, ssize_t nread, const uv_buf_t *buf) {
             fprintf(stderr, "Read error %s\n", uv_err_name(nread));
         uv_close((uv_handle_t*) client, NULL);
     } else if (nread > 0) {
-			  printf("Read for %d\n", nread);
+			  //printf("Read for %d\n", nread);
 				gStreamBuffer.append(buf->base, nread);
 				gStateObj.consume();
         //uv_write_t *req = (uv_write_t *) malloc(sizeof(uv_write_t));
