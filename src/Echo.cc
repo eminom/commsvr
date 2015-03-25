@@ -33,13 +33,6 @@ void alloc_buffer(uv_handle_t *handle, size_t suggested_size, uv_buf_t *buf) {
     buf->len = suggested_size;
 }
 
-void echo_write(uv_write_t *req, int status) {
-    if (status) {
-        fprintf(stderr, "Write error %s\n", uv_strerror(status));
-    }
-    free(req);
-}
-
 void echo_read(uv_stream_t *client, ssize_t nread, const uv_buf_t *buf) {
     if (nread < 0) {
         if (nread != UV_EOF)
@@ -71,10 +64,9 @@ void on_new_connection(uv_stream_t *server, int status) {
     // uv_tcp_init(loop, client);
     client_proc_t *client = createClientProcessor();
     if (uv_accept(server, (uv_stream_t*) client) == 0) {
-				printf("New connection made\n");
+		//printf("New connection made\n");
         uv_read_start((uv_stream_t*) client, alloc_buffer, echo_read);
-                printf("Starting read\n");
-				printf("Starting read\n");
+    	//printf("Starting read\n");
     }
     else {
         // uv _close((uv_handle_t*) client, NULL);
