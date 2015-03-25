@@ -1,5 +1,5 @@
 Library = -Llib/libuv/out/Debug/obj.target
-Source = echo.cc
+Source = src/echo.cc
 Protocols = pb/dir.pb.cc pb/error_code.pb.cc pb/data.pb.cc pb/world.pb.cc
 IncludeFlag = -Ilib/libuv/include\
 	-Ipb
