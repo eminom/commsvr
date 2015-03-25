@@ -15,10 +15,11 @@ void ServerInitDispatcher(ProtoDispatcher& dispatcher)
 
 #else
 
+// The World Server
+
 void ServerInitDispatcher(ProtoDispatcher& dispatcher)
 {
-	dispatcher.registerProto(1, "WorldListCommand", proto_WorldListCommand);
-	dispatcher.registerProto(3, "RegisterUserCommand", proto_RegisterUserCommand);
+	 dispatcher.registerProto(1, "LoginCommand", proto_LoginCommand);
 }
 
 
