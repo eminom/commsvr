@@ -7,7 +7,7 @@ $protoc = "protoc"
 
 module ProtoSync
 	def self.current_path
-		File.dirname(__FILE__.encode("UTF-8"))
+		File.absolute_path(File.dirname(__FILE__.encode("UTF-8")))
 	end	
 
 	def self.init
@@ -15,6 +15,10 @@ module ProtoSync
 		if not File.directory? @origin_path then
 			print "Not expected for #{@origin_path}\n"
 			exit
+		end
+		@pb_out = ProtoSync.current_path + "/pb"
+		if not File.directory? @pb_out then
+			FileUtils.mkdir_p @pb_out
 		end
 	end
 
@@ -26,7 +30,7 @@ module ProtoSync
 			lpath = lpath.chomp(File.extname(lpath)) + ".pb"
 			target_path = "#{ProtoSync.current_path}/#{lpath}"
 
-			cmd = "#{$protoc} -I=\"#{@origin_path}\" #{path} --cpp_out=."
+			cmd = "#{$protoc} -I=\"#{@origin_path}\" #{path} --cpp_out=pb"
 			if not system cmd then
 				print "Error compiling protocols:#{$?}\n"
 				print "Command line: #{cmd}\n"
