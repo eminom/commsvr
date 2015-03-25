@@ -8,9 +8,11 @@
 #include <cassert>
 
 #include "ProtoHandle.h"
+#include "Server.h"
 
-StreamStateObj::StreamStateObj(StreamBuffer*buffer)
+StreamStateObj::StreamStateObj(StreamBuffer*buffer, client_proc_t *host)
 	:buffer_(buffer)
+	,host_(host)
 {
 	state_ = StreamState::ZeroRead;
 	init();
@@ -18,8 +20,7 @@ StreamStateObj::StreamStateObj(StreamBuffer*buffer)
 
 void StreamStateObj::init()
 {
-	dispatcher_.registerProto(1, "WorldListCommand", proto_WorldListCommand);
-	dispatcher_.registerProto(3, "RegisterUserCommand", proto_RegisterUserCommand);
+	ServerInitDispatcher(dispatcher_);
 }
 
 //Changed
@@ -56,7 +57,7 @@ void StreamStateObj::consume()
 				payload_ = str;
 				//ok, time to deal with payload
 				//printf("Consumed\n");
-				dispatcher_.dispatch(typecode_, payload_);
+				dispatcher_.dispatch(typecode_, payload_, host_);
 				nextState = StreamState::ZeroRead;
 				cont = true;
 			}

@@ -7,14 +7,16 @@
 #include <map>
 #include <list>
 
-typedef void(*BufferDecoder)(const std::string &proto, const std::string&);
+struct client_proc_t;
+
+typedef void(*BufferDecoder)(const std::string &proto, const std::string&, client_proc_t *host);
 
 class ProtoDispatcher
 {
 public:
 	ProtoDispatcher();
 	void registerProto(int id, const std::string &name, BufferDecoder);
-	void dispatch(int id, const std::string&);
+	void dispatch(int id, const std::string&, client_proc_t *host);
 
 private:
 	typedef std::map<int,std::string> DistMap;

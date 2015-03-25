@@ -11,11 +11,19 @@
 #include "StreamState.h"
 #include "EnvConfig.h"
 
-StreamBuffer gStreamBuffer;
-StreamStateObj gStateObj(&gStreamBuffer);
+// StreamBuffer gStreamBuffer;
+// StreamStateObj gStateObj(&gStreamBuffer);
 
-#define DEFAULT_PORT 11000
+#ifdef _DIRECTORY_DIST
+#   define DEFAULT_PORT 11000
+#else
+#   define DEFAULT_PORT 12000
+#endif
+
+
 #define DEFAULT_BACKLOG 128
+
+#include "client_proc_t.h"
 
 //Global
 uv_loop_t *loop;
@@ -36,11 +44,13 @@ void echo_read(uv_stream_t *client, ssize_t nread, const uv_buf_t *buf) {
     if (nread < 0) {
         if (nread != UV_EOF)
             fprintf(stderr, "Read error %s\n", uv_err_name(nread));
-        uv_close((uv_handle_t*) client, NULL);
+        //uv _close((uv_handle_t*) client, NULL);
+        destroyClientProcessor((client_proc_t*)client);
     } else if (nread > 0) {
 			  //printf("Read for %d\n", nread);
-				gStreamBuffer.append(buf->base, nread);
-				gStateObj.consume();
+        client_proc_t *clt = (client_proc_t*)client;
+		clt->sb->append(buf->base, nread);
+		clt->so->consume();
         //uv_write_t *req = (uv_write_t *) malloc(sizeof(uv_write_t));
         //uv_buf_t wrbuf = uv_buf_init(buf->base, nread);
         //uv_write(req, client, &wrbuf, 1, echo_write);
@@ -57,25 +67,34 @@ void on_new_connection(uv_stream_t *server, int status) {
         return;
     }
 
-    uv_tcp_t *client = (uv_tcp_t*) malloc(sizeof(uv_tcp_t));
-    uv_tcp_init(loop, client);
+    // uv_tcp_t *client = (uv_tcp_t*) malloc(sizeof(uv_tcp_t));
+    // uv_tcp_init(loop, client);
+    client_proc_t *client = createClientProcessor();
     if (uv_accept(server, (uv_stream_t*) client) == 0) {
 				printf("New connection made\n");
         uv_read_start((uv_stream_t*) client, alloc_buffer, echo_read);
+                printf("Starting read\n");
 				printf("Starting read\n");
     }
     else {
-        uv_close((uv_handle_t*) client, NULL);
+        // uv _close((uv_handle_t*) client, NULL);
+        destroyClientProcessor(client);
     }
 }
 
 int main() {
+
+#ifdef _DIRECTORY_DIST
+    printf("Directory server starting ... \n");
+#else
+    printf("World server starting ... \n");
+#endif
     loop = uv_default_loop();
 
     uv_tcp_t server;
     uv_tcp_init(loop, &server);
 
-		struct sockaddr_in addr;
+	struct sockaddr_in addr;
     uv_ip4_addr("0.0.0.0", DEFAULT_PORT, &addr);
 
     uv_tcp_bind(&server, (const struct sockaddr*)&addr, 0);

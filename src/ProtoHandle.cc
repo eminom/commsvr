@@ -9,13 +9,13 @@
 #include <cstdlib>
 #include <cstring>
 
-void proto_WorldListCommand(const std::string &proto, const std::string &)
+void proto_WorldListCommand(const std::string &proto, const std::string &, client_proc_t*)
 {
 	printf("On WorldListCommand:\n");
 	printf("done\n");
 }
 
-void proto_RegisterUserCommand(const std::string &proto, const std::string&buf)
+void proto_RegisterUserCommand(const std::string &proto, const std::string&buf, client_proc_t*)
 {
 	RegisterUserCommand cmd;
 	if(cmd.ParseFromString(buf)){

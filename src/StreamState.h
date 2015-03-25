@@ -21,7 +21,7 @@ class StreamBuffer;
 class StreamStateObj
 {
 public:
-	StreamStateObj(StreamBuffer*buffer);
+	StreamStateObj(StreamBuffer*buffer, client_proc_t *host);
 	void consume();
 
 private:
@@ -34,6 +34,7 @@ private:
 	int typecode_;
 	std::string payload_;
 	ProtoDispatcher dispatcher_;
+	client_proc_t *host_;
 };
 
 #endif
