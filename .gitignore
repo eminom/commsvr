@@ -1,5 +1,8 @@
 a.out
+echo
+test
 *.out
+*.o
 out
 *.pb.cc
 *.pb.h

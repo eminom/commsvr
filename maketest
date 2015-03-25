@@ -1,0 +1,2 @@
+#! /bin/sh
+g++ test.cc pb/data.pb.cc -lprotobuf -o test
