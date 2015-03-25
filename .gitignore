@@ -3,5 +3,5 @@ a.out
 out
 *.pb.cc
 *.pb.h
-proto
+protocol
 

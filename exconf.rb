@@ -1,6 +1,6 @@
 
 module ConfigEx
 	def self.origin_path
-		"./proto"
+		"./protocol"
 	end
 end
