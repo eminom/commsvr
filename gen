@@ -1,0 +1,45 @@
+#! /usr/local/bin/ruby
+
+require "fileutils"
+require_relative "exconf"
+
+$protoc = "protoc"
+
+module ProtoSync
+	def self.current_path
+		File.dirname(__FILE__.encode("UTF-8"))
+	end	
+
+	def self.init
+		@origin_path = File.absolute_path(ConfigEx.origin_path)
+		if not File.directory? @origin_path then
+			print "Not expected for #{@origin_path}\n"
+			exit
+		end
+	end
+
+	def self.process
+		Dir.glob("#{@origin_path}/**/*.proto") do |path|
+			next if File.directory?(path)
+			lpath = File.basename(path)
+			print "Processing #{lpath} ... "
+			lpath = lpath.chomp(File.extname(lpath)) + ".pb"
+			target_path = "#{ProtoSync.current_path}/#{lpath}"
+
+			cmd = "#{$protoc} -I=\"#{@origin_path}\" #{path} --cpp_out=."
+			if not system cmd then
+				print "Error compiling protocols:#{$?}\n"
+				print "Command line: #{cmd}\n"
+				exit
+			end
+			print "\n"
+		end
+	end
+end
+
+# ProtoSync.test
+ProtoSync.init
+ProtoSync.process
+print "Finished\n"
+
+

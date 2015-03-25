@@ -1,5 +1,5 @@
 Library = -Llib/libuv/out/Debug/obj.target
-Source = uvcat.c
+Source = echo.c
 IncludeFlag = -Ilib/libuv/include 
 
 all:
@@ -8,3 +8,5 @@ all:
 
 clean:
 	rm -rf *.o
+	rm -rf *.pb.cc 
+	rm -rf *.pb.h

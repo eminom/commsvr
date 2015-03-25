@@ -1,4 +1,7 @@
 a.out
 *.out
 out
+*.pb.cc
+*.pb.h
+proto
 
