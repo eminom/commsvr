@@ -17,7 +17,7 @@ StreamBuffer::StreamBuffer()
 
 void StreamBuffer::append(char *start, int length)
 {
-	printf("Start = %p,  length = %d\n", start, length);
+	//printf("Start = %p,  length = %d\n", start, length);
 	if(length <= 0 ){
 		return;
 	}
@@ -29,14 +29,14 @@ void StreamBuffer::append(char *start, int length)
 	int totLeft = left + (read_ptr_ - begin_ptr_);
 	if (left >= length)
 	{
-		printf("Copy one\n");
+		//printf("Copy one\n");
 		char *new_write_ptr = write_ptr_ + length;
 		memcpy(write_ptr_, start, length * sizeof(char));
 		write_ptr_ = new_write_ptr;
 	}
 	else if(totLeft >= length )
 	{
-		printf("Copy two\n");
+		//printf("Copy two\n");
 		int offset = read_ptr_ - begin_ptr_;
 		memmove(begin_ptr_, read_ptr_, offset * sizeof(char));
 		read_ptr_ -= offset;
@@ -45,7 +45,7 @@ void StreamBuffer::append(char *start, int length)
 	}
 	else
 	{
-		printf("Copy three\n");
+		//printf("Copy three\n");
 		int size = (end_ptr_ - begin_ptr_) * 2;
 		char *new_begin_ptr = (char*)malloc(size * sizeof(char));
 		char *new_end_ptr = new_begin_ptr + size;

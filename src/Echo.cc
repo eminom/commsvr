@@ -3,22 +3,22 @@
 #include <stdlib.h>
 #include <string.h>
 #include <uv.h>
+
 #include <string>
 #include <cassert>
 
 #include "StreamBuffer.h"
 #include "StreamState.h"
+#include "EnvConfig.h"
 
 StreamBuffer gStreamBuffer;
-
-
 StreamStateObj gStateObj(&gStreamBuffer);
 
 #define DEFAULT_PORT 11000
 #define DEFAULT_BACKLOG 128
 
+//Global
 uv_loop_t *loop;
-struct sockaddr_in addr;
 
 void alloc_buffer(uv_handle_t *handle, size_t suggested_size, uv_buf_t *buf) {
     buf->base = (char*) malloc(suggested_size);
@@ -75,6 +75,7 @@ int main() {
     uv_tcp_t server;
     uv_tcp_init(loop, &server);
 
+		struct sockaddr_in addr;
     uv_ip4_addr("0.0.0.0", DEFAULT_PORT, &addr);
 
     uv_tcp_bind(&server, (const struct sockaddr*)&addr, 0);

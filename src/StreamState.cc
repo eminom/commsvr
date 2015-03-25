@@ -1,15 +1,25 @@
 
 #include "StreamState.h"
 #include "StreamBuffer.h"
+#include "ProtoDispatcher.h"
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
 #include <cassert>
 
+#include "ProtoHandle.h"
+
 StreamStateObj::StreamStateObj(StreamBuffer*buffer)
 	:buffer_(buffer)
 {
 	state_ = StreamState::ZeroRead;
+	init();
+}
+
+void StreamStateObj::init()
+{
+	dispatcher_.registerProto(1, "WorldListCommand", proto_WorldListCommand);
+	dispatcher_.registerProto(3, "RegisterUserCommand", proto_RegisterUserCommand);
 }
 
 //Changed
@@ -27,7 +37,7 @@ void StreamStateObj::consume()
 			if(buffer_->readInt32(length)){
 				full_length_ = length;
 				nextState = StreamState::LengthRead;
-				printf("Full length expecting: %d\n", full_length_);
+				//printf("Full length expecting: %d\n", full_length_);
 				//printf("pay load length is %d\n", buffer_->payLength());
 				cont = true;
 			}
@@ -36,7 +46,7 @@ void StreamStateObj::consume()
 			if(buffer_->readInt16(typecode)){
 				typecode_ = typecode;
 				nextState = StreamState::TypeCodeRead;
-				printf("Type code is: %d\n", typecode_);
+				//printf("Type code is: %d\n", typecode_);
 				//printf("payload length is %d\n", buffer_->payLength());
 				cont = true;
 			}
@@ -45,7 +55,8 @@ void StreamStateObj::consume()
 			if(buffer_->readString(str, full_length_ - 6)){
 				payload_ = str;
 				//ok, time to deal with payload
-				printf("Consumed\n");
+				//printf("Consumed\n");
+				dispatcher_.dispatch(typecode_, payload_);
 				nextState = StreamState::ZeroRead;
 				cont = true;
 			}
