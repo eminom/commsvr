@@ -87,7 +87,7 @@ void proto_LoginCommand(const std::string &proto, const std::string& buf, client
 		}
 		LoginNotify loginNotify;
 		loginNotify.set_exception(result);
-		loginNotify.set_token("201520142013");
+		loginNotify.set_token(ServerModel::tokenForAccount(cmd.has_account()? cmd.account():""));
 		std::string buffer;
 		loginNotify.SerializeToString(&buffer);
 		sendCltBuf<LoginNotify>(clt, buffer.data(), buffer.size());

@@ -9,7 +9,7 @@ class ServerModel
 {
 public:
 	static bool checkUser(const std::string &user, const std::string &passwd);
-	
+	static std::string tokenForAccount(const std::string &account);
 };
 
 #endif
