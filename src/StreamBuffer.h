@@ -8,7 +8,9 @@
 class StreamBuffer
 {
 public:
+	StreamBuffer(const char *buffer, int length);
 	StreamBuffer();
+	~StreamBuffer();
 	void append(char *start, int length);
 	bool readInt32(int &value);
 	bool readInt16(int &value);
@@ -22,6 +24,11 @@ private:
 	char *write_ptr_;
 	char *begin_ptr_;
 	char *end_ptr_;
+	bool owned_;
+
+private:
+	StreamBuffer(const StreamBuffer&);
+	void operator=(const StreamBuffer&);
 };
 
 

@@ -6,7 +6,7 @@
 #include <string>
 #include <cassert>
 
-StreamBuffer::StreamBuffer()
+StreamBuffer::StreamBuffer():owned_(true)
 {
 	int sizePrefer = 2;
 	begin_ptr_ = (char*)malloc(sizePrefer * sizeof(char));
@@ -15,8 +15,30 @@ StreamBuffer::StreamBuffer()
 	write_ptr_= begin_ptr_;
 }
 
+StreamBuffer::StreamBuffer(const char *start, int length)
+	:owned_(false)
+{
+	begin_ptr_ = const_cast<char*>(start);
+	end_ptr_ = begin_ptr_ + length;
+	read_ptr_ = begin_ptr_;
+	write_ptr_ = end_ptr_;  //Useless
+}
+
+StreamBuffer::~StreamBuffer()
+{
+	if(owned_)
+	{
+		free(begin_ptr_);
+	}
+}
+
 void StreamBuffer::append(char *start, int length)
 {
+	if(!owned_)
+	{
+		return;
+	}
+
 	//printf("Start = %p,  length = %d\n", start, length);
 	if(length <= 0 ){
 		return;
@@ -69,8 +91,8 @@ bool StreamBuffer::readInt32(int &value)
 	}
 	int v = 0, b = 1;
 	for(int i=0;i<4;++i){
-		v += read_ptr_[i] * b;
-		b <<= 4;
+		v += (unsigned char)(read_ptr_[i]) * b;
+		b <<= 8;
 	}
 	value = v;
 	commit(4);
@@ -82,10 +104,11 @@ bool StreamBuffer::readInt16(int &value)
 	if(payLength() < 2){
 		return false;
 	}
+	//printf("Debuggin readInt16 with(from low to high): %02x : %02x\n", read_ptr_[0], read_ptr_[1]);
 	int v = 0, b = 1;
 	for(int i=0;i<2;++i){
-		v += read_ptr_[i] * b;
-		b <<= 4;
+		v += (unsigned char)(read_ptr_[i]) * b;
+		b <<= 8;
 	}
 	value = v;
 	commit(2);

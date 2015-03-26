@@ -20,6 +20,7 @@ void ServerInitDispatcher(ProtoDispatcher& dispatcher)
 void ServerInitDispatcher(ProtoDispatcher& dispatcher)
 {
 	dispatcher.registerProto<LoginCommand>(proto_LoginCommand);
+	dispatcher.registerProto<CreatePlayerCommand>(proto_CreatePlayerCommand);
 }
 
 

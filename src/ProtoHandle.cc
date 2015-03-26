@@ -88,3 +88,26 @@ void proto_LoginCommand(const std::string &proto, const std::string& buf, client
 		_ErrorParsing()
 	}
 }
+
+void proto_CreatePlayerCommand(const std::string &proto, const std::string &buf, client_proc_t *clt)
+{
+	CreatePlayerCommand cmd;
+	if(cmd.ParseFromString(buf)){
+		printf("----------- CreatePlayerCommand ---------\n");
+		printf("is_anonymous: %d\n", cmd.is_anonymous());
+		if(cmd.has_device_id()){
+			printf("device id: %s\n", cmd.device_id().c_str());
+		}
+		if(cmd.has_account()){
+			printf("account: %s\n", cmd.account().c_str());
+		}
+		CreatePlayerNotify notify;
+		notify.set_exception(ET_OK);
+		std::string buffer;
+		notify.SerializeToString(&buffer);
+		sendCltBuf<CreatePlayerNotify>(clt, buffer.data(), buffer.size());
+	} else {
+		_ErrorParsing()
+	}
+
+}

@@ -12,6 +12,7 @@ void proto_RegisterUserCommand(const std::string &proto, const std::string&, cli
 
 //~World server
 void proto_LoginCommand(const std::string &proto, const std::string&, client_proc_t*);
+void proto_CreatePlayerCommand(const std::string &proto, const std::string&, client_proc_t*);
 
 
 #endif
