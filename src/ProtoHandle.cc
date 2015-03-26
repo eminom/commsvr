@@ -34,7 +34,7 @@ void proto_WorldListCommand(const std::string &proto, const std::string &, clien
 
 	std::string buffer;
 	notify.SerializeToString(&buffer);
-	sendStreamBuffer(clt, WorldListNotify::ID, buffer.data(), buffer.size());
+	sendCltBuf<WorldListNotify>(clt, buffer.data(), buffer.size());
 	//printf("Sent !\n");
 	//printf("done\n");
 }
@@ -54,7 +54,7 @@ void proto_RegisterUserCommand(const std::string &proto, const std::string&buf, 
 		regNotify.set_exception(ET_OK);
 		std::string buffer;
 		regNotify.SerializeToString(&buffer);
-		sendStreamBuffer(clt, RegisterUserNotify::ID, buffer.data(), buffer.size());
+		sendCltBuf<RegisterUserNotify>(clt, buffer.data(), buffer.size());
 	} else {
 		_ErrorParsing()
 	}
@@ -81,7 +81,7 @@ void proto_LoginCommand(const std::string &proto, const std::string& buf, client
 		loginNotify.set_token("201520142013");
 		std::string buffer;
 		loginNotify.SerializeToString(&buffer);
-		sendStreamBuffer(clt, LoginNotify::ID, buffer.data(), buffer.size());
+		sendCltBuf<LoginNotify>(clt, buffer.data(), buffer.size());
 		printf("responsed with %d bytes\n", buffer.size());
 	} else {
 		_ErrorParsing()

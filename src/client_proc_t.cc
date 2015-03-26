@@ -35,10 +35,10 @@ void echo_write(uv_write_t *req, int status) {
     free(req);
 }
 
-void sendStreamBuffer(client_proc_t *ptr, int typecode, const char *buffer, int length)
+void _sendStreamBuffer(client_proc_t *ptr, int typecode, const char *buffer, int length)
 {
-	uv_stream_t *stream = (uv_stream_t*)ptr;
-	uv_write_t *req = (uv_write_t *) malloc(sizeof(uv_write_t));
+    uv_stream_t *stream = (uv_stream_t*)ptr;
+    uv_write_t *req = (uv_write_t *) malloc(sizeof(uv_write_t));
 
     int final_length = length + 4 + 2;
     char *ex_buffer = (char*)malloc(final_length);
