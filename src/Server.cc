@@ -9,8 +9,8 @@
 
 void ServerInitDispatcher(ProtoDispatcher& dispatcher)
 {
-	dispatcher.registerProto(1, "WorldListCommand", proto_WorldListCommand);
-	dispatcher.registerProto(3, "RegisterUserCommand", proto_RegisterUserCommand);
+	dispatcher.registerProto<WorldListCommand>(proto_WorldListCommand);
+	dispatcher.registerProto<RegisterUserCommand>(proto_RegisterUserCommand);
 }
 
 #else
@@ -19,7 +19,7 @@ void ServerInitDispatcher(ProtoDispatcher& dispatcher)
 
 void ServerInitDispatcher(ProtoDispatcher& dispatcher)
 {
-	 dispatcher.registerProto(1, "LoginCommand", proto_LoginCommand);
+	dispatcher.registerProto<LoginCommand>(proto_LoginCommand);
 }
 
 

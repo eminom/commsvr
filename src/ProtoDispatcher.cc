@@ -10,12 +10,6 @@ ProtoDispatcher::ProtoDispatcher()
 
 }
 
-void ProtoDispatcher::registerProto(int id, const std::string &name, BufferDecoder decoder)
-{
-	dist_map_[id] = name; //Override
-	decoder_map_[id] = decoder;
-}
-
 void ProtoDispatcher::dispatch(int id, const std::string &buffer, client_proc_t *host)
 {
 	DistMapIt pos = dist_map_.find(id);

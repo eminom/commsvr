@@ -20,7 +20,7 @@
 		for(int i=0;i<4&&i<buf.size();++i){\
 			fprintf(stderr,"%02x ", buf[0]);\
 		}\
-		fprintf(stderr,"\n");\
+		fprintf(stderr,".\n");\
 
 void proto_WorldListCommand(const std::string &proto, const std::string &, client_proc_t* clt)
 {
@@ -34,7 +34,7 @@ void proto_WorldListCommand(const std::string &proto, const std::string &, clien
 
 	std::string buffer;
 	notify.SerializeToString(&buffer);
-	sendStreamBuffer(clt, 2, buffer.data(), buffer.size());
+	sendStreamBuffer(clt, WorldListNotify::ID, buffer.data(), buffer.size());
 	//printf("Sent !\n");
 	//printf("done\n");
 }
@@ -54,7 +54,7 @@ void proto_RegisterUserCommand(const std::string &proto, const std::string&buf, 
 		regNotify.set_exception(ET_OK);
 		std::string buffer;
 		regNotify.SerializeToString(&buffer);
-		sendStreamBuffer(clt, 4, buffer.data(), buffer.size());
+		sendStreamBuffer(clt, RegisterUserNotify::ID, buffer.data(), buffer.size());
 	} else {
 		_ErrorParsing()
 	}
@@ -78,10 +78,10 @@ void proto_LoginCommand(const std::string &proto, const std::string& buf, client
 
 		LoginNotify loginNotify;
 		//loginNotify.set_exception(ET_OK);
-		loginNotify.set_token("2");
+		loginNotify.set_token("201520142013");
 		std::string buffer;
 		loginNotify.SerializeToString(&buffer);
-		sendStreamBuffer(clt, 2, buffer.data(), buffer.size());
+		sendStreamBuffer(clt, LoginNotify::ID, buffer.data(), buffer.size());
 		printf("responsed with %d bytes\n", buffer.size());
 	} else {
 		_ErrorParsing()

@@ -15,8 +15,16 @@ class ProtoDispatcher
 {
 public:
 	ProtoDispatcher();
-	void registerProto(int id, const std::string &name, BufferDecoder);
 	void dispatch(int id, const std::string&, client_proc_t *host);
+
+public:
+	template<class T>
+	void registerProto(BufferDecoder decoder)
+	{
+		dist_map_[T::ID] = T::descriptor()->full_name(); //Override
+		decoder_map_[T::ID] = decoder;
+	}
+
 
 private:
 	typedef std::map<int,std::string> DistMap;
