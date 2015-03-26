@@ -10,6 +10,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include "ServerConfig.h"
 
 #include "client_proc_t.h"
 
@@ -27,8 +28,8 @@ void proto_WorldListCommand(const std::string &proto, const std::string &, clien
 	//printf("On WorldListCommand:\n");
 	WorldListNotify notify;
 	WorldData* worldData = notify.add_world_list();
-	worldData->set_host("192.168.2.23");
-	worldData->set_port(12000);
+	worldData->set_host(WorldServerHost);
+	worldData->set_port(WorldServerPort);
 	worldData->set_id(101);
 	worldData->set_name("The world No.1 server");
 
