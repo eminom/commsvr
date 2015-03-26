@@ -13,16 +13,7 @@
 
 // StreamBuffer gStreamBuffer;
 // StreamStateObj gStateObj(&gStreamBuffer);
-
-#ifdef _DIRECTORY_DIST
-#   define DEFAULT_PORT 11000
-#else
-#   define DEFAULT_PORT 12000
-#endif
-
-
 #define DEFAULT_BACKLOG 128
-
 #include "client_proc_t.h"
 
 //Global

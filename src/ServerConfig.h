@@ -5,4 +5,12 @@
 #define WorldServerHost	"192.168.2.12"
 #define WorldServerPort 12000
 
+
+#ifdef _DIRECTORY_DIST
+#   define DEFAULT_PORT 11000
+#else
+#   define DEFAULT_PORT 12000
+#endif
+
+
 #endif
