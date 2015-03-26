@@ -6,13 +6,14 @@
 
 #include <string>
 #include <cassert>
+#include <ctime>
 
 #include "StreamBuffer.h"
 #include "StreamState.h"
 #include "EnvConfig.h"
 
-// StreamBuffer gStreamBuffer;
-// StreamStateObj gStateObj(&gStreamBuffer);
+#include "ServerConfig.h"
+
 #define DEFAULT_BACKLOG 128
 #include "client_proc_t.h"
 
@@ -66,6 +67,7 @@ void on_new_connection(uv_stream_t *server, int status) {
 }
 
 int main() {
+    srand((unsigned int)time(0));
 
 #ifdef _DIRECTORY_DIST
     printf("Directory server starting ... \n");

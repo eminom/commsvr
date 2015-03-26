@@ -3,7 +3,7 @@ Library = -Llib/libuv/out/Debug/obj.target
 
 Source =  src/StreamBuffer.cc src/StreamState.cc \
 			src/ProtoDispatcher.cc src/ProtoHandle.cc \
-			src/client_proc_t.cc
+			src/client_proc_t.cc src/ServerModel.cc
 
 ServerDist = src/Server.cc src/Echo.cc
 

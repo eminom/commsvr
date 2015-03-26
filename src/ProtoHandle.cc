@@ -11,7 +11,7 @@
 #include <cstdlib>
 #include <cstring>
 #include "ServerConfig.h"
-
+#include "ServerModel.h"
 #include "client_proc_t.h"
 
 #define _ErrorParsing()\
@@ -77,13 +77,20 @@ void proto_LoginCommand(const std::string &proto, const std::string& buf, client
 		}
 		printf("-----------------------------\n\n");
 
+		ExceptionType result = ET_FAIL;
+		if(cmd.has_account() && cmd.has_password()){
+			std::string account = cmd.account();
+			std::string passwd  = cmd.password();
+			if(ServerModel::checkUser(account, passwd)){
+				result = ET_OK;
+			}
+		}
 		LoginNotify loginNotify;
-		//loginNotify.set_exception(ET_OK);
+		loginNotify.set_exception(result);
 		loginNotify.set_token("201520142013");
 		std::string buffer;
 		loginNotify.SerializeToString(&buffer);
 		sendCltBuf<LoginNotify>(clt, buffer.data(), buffer.size());
-		printf("responsed with %d bytes\n", buffer.size());
 	} else {
 		_ErrorParsing()
 	}
