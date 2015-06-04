@@ -29,4 +29,3 @@ clean:
 	rm -rf *.o
 	rm -rf *.pb.cc 
 	rm -rf *.pb.h
-	rm echo dir world

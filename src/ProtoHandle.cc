@@ -20,7 +20,7 @@
 
 #define _ErrorParsing()\
 		fprintf(stderr, "parsing error %s\n", proto.c_str());\
-		fprintf(stderr, "buf length is %d\n", buf.size());\
+		fprintf(stderr, "buf length is %lu\n", buf.size());\
 		fprintf(stderr, "print first 4 bytes:\n");\
 		for(int i=0;i<4&&i<buf.size();++i){\
 			fprintf(stderr,"%02x ", buf[0]);\
