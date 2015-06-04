@@ -1,4 +1,4 @@
 #! /bin/bash
-./dir &
-./world &
+./out/dir &
+./out/world &
 
