@@ -46,7 +46,7 @@ void proto_WorldListCommand(const std::string &proto, const std::string &, clien
 
 void proto_RegisterUserCommand(const std::string &proto, const std::string&buf, client_proc_t* clt)
 {
-	RequestRegisterUser req;
+	RequestUserRegister req;
 	if(req.ParseFromString(buf)){
 
 		printf("---------Register new user--------\n");

@@ -10,7 +10,7 @@
 void ServerInitDispatcher(ProtoDispatcher& dispatcher)
 {
 	dispatcher.registerProto<RequestWorldList>(proto_WorldListCommand);
-	dispatcher.registerProto<RequestRegisterUser>(proto_RegisterUserCommand);
+	dispatcher.registerProto<RequestUserRegister>(proto_RegisterUserCommand);
 }
 
 #else

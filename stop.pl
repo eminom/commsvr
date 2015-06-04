@@ -1,4 +1,6 @@
 #! /usr/bin/perl -w
+#It works on mac
+# Due to the ps format
 
 use strict;
 use warnings;
@@ -6,16 +8,16 @@ use warnings;
 sub find_proc_id{
 	my $target = shift // die "No parameters";
 	my @a = `ps -ef | grep $target`;
-	#print @a;
+	print @a;
 	#print "\n\n";
-	my $pat = qr/\.\/$target\b/;
+	my $pat = qr/$target\b/;
 	my $pid;
 	for(@a){
 		chomp;
 		#print "Yes: $_\n" if $_ =~ /$pat/;
 		if(/$pat/){
-			/^([\w\d]+)\s+([\w\d]+)/;
-			#print $2, "\n";
+			/^\s+([\w\d]+)\s+([\w\d]+)/;
+			print $2, "\n";
 			$pid = $2;
 			last;
 		}
@@ -23,14 +25,19 @@ sub find_proc_id{
 	$pid;
 }
 
-my @kills = qw/dir
-	world/;
+my @kills = qw{ 
+	./out/dir
+	./out/world
+};
+
 for(@kills){
 	my $pid = find_proc_id($_);
 	if($pid){
-		system "kill $pid";
-		print "Error killing $pid" if $?;
-		print "Killing $pid\n";
+		system "Kill $pid";
+		print "Error killing $pid\n" if $?;
+		print "Killing $pid ...\n" if not $?;
+	}else{
+		print "Not found for $_\n";
 	}
 }
 
