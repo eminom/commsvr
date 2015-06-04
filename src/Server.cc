@@ -1,16 +1,16 @@
 
 #include "Server.h"
 #include "ProtoHandle.h"
-#include "dir.pb.h"
-#include "world.pb.h"
+#include "cs_dir.pb.h"
+#include "cs_world.pb.h"
 
 
 #ifdef _DIRECTORY_DIST
 
 void ServerInitDispatcher(ProtoDispatcher& dispatcher)
 {
-	dispatcher.registerProto<WorldListCommand>(proto_WorldListCommand);
-	dispatcher.registerProto<RegisterUserCommand>(proto_RegisterUserCommand);
+	dispatcher.registerProto<RequestWorldList>(proto_WorldListCommand);
+	dispatcher.registerProto<RequestRegisterUser>(proto_RegisterUserCommand);
 }
 
 #else
@@ -19,8 +19,8 @@ void ServerInitDispatcher(ProtoDispatcher& dispatcher)
 
 void ServerInitDispatcher(ProtoDispatcher& dispatcher)
 {
-	dispatcher.registerProto<LoginCommand>(proto_LoginCommand);
-	dispatcher.registerProto<CreatePlayerCommand>(proto_CreatePlayerCommand);
+	dispatcher.registerProto<RequestLogin>(proto_LoginCommand);
+	dispatcher.registerProto<RequestCreatePlayer>(proto_CreatePlayerCommand);
 }
 
 

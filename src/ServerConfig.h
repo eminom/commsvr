@@ -2,9 +2,9 @@
 #ifndef _EMINEM_SERVER_DEF_CONFIG___
 #define _EMINEM_SERVER_DEF_CONFIG___
 
-#define WorldServerHost	"192.168.2.12"
+//~ Since I'm at home
+#define WorldServerHost	"192.168.1.108"
 #define WorldServerPort 12000
-
 
 #ifdef _DIRECTORY_DIST
 #   define DEFAULT_PORT 11000

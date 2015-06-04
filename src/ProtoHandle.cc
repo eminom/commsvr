@@ -2,16 +2,20 @@
 
 
 #include "ProtoHandle.h"
+
+#include "cs_world.pb.h"
+#include "cs_dir.pb.h"
+
 #include "data.pb.h"
-#include "world.pb.h"
-#include "error_code.pb.h"
-#include "dir.pb.h"
+#include "exceptiontype.pb.h"
 
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+
 #include "ServerConfig.h"
 #include "ServerModel.h"
+
 #include "client_proc_t.h"
 
 #define _ErrorParsing()\
@@ -26,36 +30,36 @@
 void proto_WorldListCommand(const std::string &proto, const std::string &, client_proc_t* clt)
 {
 	//printf("On WorldListCommand:\n");
-	WorldListNotify notify;
-	WorldData* worldData = notify.add_world_list();
-	worldData->set_host(WorldServerHost);
-	worldData->set_port(WorldServerPort);
-	worldData->set_id(101);
-	worldData->set_name("The world No.1 server");
+	ResponseWorldList response;
+	Data_WorldInfo* data = response.add_world_list();
+	data->set_host(WorldServerHost);
+	data->set_port(WorldServerPort);
+	data->set_id(101);
+	data->set_name("The world No.1 server");
 
 	std::string buffer;
-	notify.SerializeToString(&buffer);
-	sendCltBuf<WorldListNotify>(clt, buffer.data(), buffer.size());
+	response.SerializeToString(&buffer);
+	sendCltBuf<ResponseWorldList>(clt, buffer.data(), buffer.size());
 	//printf("Sent !\n");
 	//printf("done\n");
 }
 
 void proto_RegisterUserCommand(const std::string &proto, const std::string&buf, client_proc_t* clt)
 {
-	RegisterUserCommand cmd;
-	if(cmd.ParseFromString(buf)){
+	RequestRegisterUser req;
+	if(req.ParseFromString(buf)){
 
 		printf("---------Register new user--------\n");
-		printf("User: %s\n", cmd.account().c_str());
-		printf("Passwd:%s\n", cmd.password().c_str());
+		printf("User: %s\n", req.account().c_str());
+		printf("Passwd:%s\n", req.password().c_str());
 		printf("----------------------------------\n\n");
 
 		//Granted !
-		RegisterUserNotify regNotify;
-		regNotify.set_exception(ET_OK);
+		ResponseUserRegister response;
+		response.set_exception(ET_OK);
 		std::string buffer;
-		regNotify.SerializeToString(&buffer);
-		sendCltBuf<RegisterUserNotify>(clt, buffer.data(), buffer.size());
+		response.SerializeToString(&buffer);
+		sendCltBuf<ResponseUserRegister>(clt, buffer.data(), buffer.size());
 	} else {
 		_ErrorParsing()
 	}
@@ -63,34 +67,34 @@ void proto_RegisterUserCommand(const std::string &proto, const std::string&buf, 
 
 void proto_LoginCommand(const std::string &proto, const std::string& buf, client_proc_t* clt)
 {
-	LoginCommand cmd;
-	if(cmd.ParseFromString(buf)){
+	RequestLogin req;
+	if(req.ParseFromString(buf)){
 		printf("------------Login User--------\n");
-		if(cmd.has_device_id()){
-			printf("Device id: %s\n", cmd.device_id().c_str());
+		if(req.has_device_id()){
+			printf("Device id: %s\n", req.device_id().c_str());
 		}
-		if(cmd.has_account()){
-			printf("Acount: %s\n", cmd.account().c_str());
+		if(req.has_account()){
+			printf("Acount: %s\n", req.account().c_str());
 		}
-		if(cmd.has_password()){
-			printf("Password: %s\n", cmd.password().c_str());
+		if(req.has_password()){
+			printf("Password: %s\n", req.password().c_str());
 		}
 		printf("-----------------------------\n\n");
 
 		ExceptionType result = ET_FAIL;
-		if(cmd.has_account() && cmd.has_password()){
-			std::string account = cmd.account();
-			std::string passwd  = cmd.password();
+		if(req.has_account() && req.has_password()){
+			std::string account = req.account();
+			std::string passwd  = req.password();
 			if(ServerModel::checkUser(account, passwd)){
 				result = ET_OK;
 			}
 		}
-		LoginNotify loginNotify;
-		loginNotify.set_exception(result);
-		loginNotify.set_token(ServerModel::tokenForAccount(cmd.has_account()? cmd.account():""));
+		ResponseLogin response;
+		response.set_exception(result);
+		response.set_token(ServerModel::tokenForAccount(req.has_account()? req.account():""));
 		std::string buffer;
-		loginNotify.SerializeToString(&buffer);
-		sendCltBuf<LoginNotify>(clt, buffer.data(), buffer.size());
+		response.SerializeToString(&buffer);
+		sendCltBuf<ResponseLogin>(clt, buffer.data(), buffer.size());
 	} else {
 		_ErrorParsing()
 	}
@@ -98,21 +102,21 @@ void proto_LoginCommand(const std::string &proto, const std::string& buf, client
 
 void proto_CreatePlayerCommand(const std::string &proto, const std::string &buf, client_proc_t *clt)
 {
-	CreatePlayerCommand cmd;
-	if(cmd.ParseFromString(buf)){
+	RequestCreatePlayer req;
+	if(req.ParseFromString(buf)){
 		printf("----------- CreatePlayerCommand ---------\n");
-		printf("is_anonymous: %d\n", cmd.is_anonymous());
-		if(cmd.has_device_id()){
-			printf("device id: %s\n", cmd.device_id().c_str());
+		printf("is_anonymous: %d\n", req.is_anonymous());
+		if(req.has_device_id()){
+			printf("device id: %s\n", req.device_id().c_str());
 		}
-		if(cmd.has_account()){
-			printf("account: %s\n", cmd.account().c_str());
+		if(req.has_account()){
+			printf("account: %s\n", req.account().c_str());
 		}
-		CreatePlayerNotify notify;
-		notify.set_exception(ET_OK);
+		ResponseCreatePlayer response;
+		response.set_exception(ET_OK);
 		std::string buffer;
-		notify.SerializeToString(&buffer);
-		sendCltBuf<CreatePlayerNotify>(clt, buffer.data(), buffer.size());
+		response.SerializeToString(&buffer);
+		sendCltBuf<ResponseCreatePlayer>(clt, buffer.data(), buffer.size());
 	} else {
 		_ErrorParsing()
 	}
