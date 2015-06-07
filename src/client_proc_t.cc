@@ -35,17 +35,22 @@ void echo_write(uv_write_t *req, int status) {
     free(req);
 }
 
+void _fillHeader(char *buffer, int final_length, int typecode)
+{
+    *((int*)buffer) = final_length;     //~ x86
+    *((int*)(buffer + 4)) = typecode;
+}
+
 void _sendStreamBuffer(client_proc_t *ptr, int typecode, const char *buffer, int length)
 {
     uv_stream_t *stream = (uv_stream_t*)ptr;
     uv_write_t *req = (uv_write_t *) malloc(sizeof(uv_write_t));
-
-    int final_length = length + 4 + 2;
+    int head_length = 8;   //~ Length and the typecode.
+    int final_length = length + head_length;
     char *ex_buffer = (char*)malloc(final_length);
-    *((int*)ex_buffer) = final_length;
-    *((short*)(ex_buffer + 4)) = typecode;
-    if(length>0){
-        memcpy(ex_buffer + 6, buffer, length);
+    _fillHeader(ex_buffer, final_length, typecode);
+    if (length>0) {
+        memcpy(ex_buffer + head_length, buffer, length);
     }
     uv_buf_t wrbuf = uv_buf_init(ex_buffer, final_length);
     uv_write(req, stream, &wrbuf, 1, echo_write);

@@ -44,7 +44,7 @@ void StreamStateObj::consume()
 			}
 			break;
 		case StreamState::LengthRead:
-			if(buffer_->readInt16(typecode)){
+			if(buffer_->readInt32(typecode)){
 				typecode_ = typecode;
 				nextState = StreamState::TypeCodeRead;
 				//printf("Type code is: %d\n", typecode_);
@@ -53,7 +53,7 @@ void StreamStateObj::consume()
 			}
 			break;
 		case StreamState::TypeCodeRead:
-			if(buffer_->readString(str, full_length_ - 6)){
+			if(buffer_->readString(str, full_length_ - 8)){
 				payload_ = str;
 				//ok, time to deal with payload
 				//printf("Consumed\n");

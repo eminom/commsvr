@@ -3,7 +3,7 @@
 #define _EMINEM_SERVER_DEF_CONFIG___
 
 //~ Since I'm at home
-#define WorldServerHost	"192.168.1.108"
+#define WorldServerHost	"192.168.1.104"
 #define WorldServerPort 12000
 
 #ifdef _DIRECTORY_DIST
