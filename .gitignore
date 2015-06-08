@@ -5,4 +5,5 @@ out
 *.pb.h
 protocol
 pb
+conf.json
 

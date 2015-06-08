@@ -17,6 +17,8 @@
 #include "ServerModel.h"
 
 #include "client_proc_t.h"
+#include "XAssert.h"
+#include "cJSON.h"
 
 #define _ErrorParsing()\
 		fprintf(stderr, "parsing error %s\n", proto.c_str());\
@@ -31,11 +33,46 @@ void proto_WorldListCommand(const std::string &proto, const std::string &, clien
 {
 	//printf("On WorldListCommand:\n");
 	ResponseWorldList response;
-	Data_WorldInfo* data = response.add_world_list();
-	data->set_host(WorldServerHost);
-	data->set_port(WorldServerPort);
-	data->set_id(101);
-	data->set_name("The world No.1 server");
+	FILE *fin = fopen("conf.json","rb");
+	if(!fin){
+		fprintf(stderr, "Cannot read conf for world server");
+		abort();
+	}
+	fseek(fin, 0, SEEK_END);
+	int sz = (int)ftell(fin);
+	char *buf = (char*)malloc(sizeof(char)*(sz+1));
+	memset(buf, 0, sizeof(char)*(sz + 1));
+	rewind(fin);
+	fread(buf, sizeof(char), sz, fin);
+	fclose(fin);
+
+	cJSON *root = cJSON_Parse(buf);
+	cJSON *wd = cJSON_GetObjectItem(root, "world");
+	if(wd){
+		XAssert( wd->type == cJSON_Array, "Must be array for world list");
+		for(int i=0;i<cJSON_GetArraySize(wd);++i){
+			cJSON *one = cJSON_GetArrayItem(wd, i);
+			
+			XAssert( one->type == cJSON_Object, "Must be object for a single entry");
+			Data_WorldInfo* data = response.add_world_list();
+
+			cJSON *ip = cJSON_GetObjectItem(one, "ip");
+			XAssert(cJSON_String == ip->type, "Must be string");
+			cJSON *port = cJSON_GetObjectItem(one, "port");
+			XAssert(cJSON_Number == port->type, "Must be number for port");
+			cJSON *id = cJSON_GetObjectItem(one, "id");
+			XAssert(cJSON_Number == id->type, "Must be number for id");
+			cJSON *name = cJSON_GetObjectItem(one, "name");
+			XAssert(cJSON_String == name->type, "Must be string for name");
+
+			data->set_host(ip->string);
+			data->set_port(port->valueint);
+			data->set_id(id->valueint);
+			data->set_name(name->valuestring);
+		}
+	}
+	cJSON_Delete(root);
+	free(buf);
 
 	std::string buffer;
 	response.SerializeToString(&buffer);

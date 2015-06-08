@@ -4,7 +4,7 @@ Library = -Llib/libuv/build/Release -L/usr/local/lib
 
 Source =  src/StreamBuffer.cc src/StreamState.cc \
 			src/ProtoDispatcher.cc src/ProtoHandle.cc \
-			src/client_proc_t.cc src/ServerModel.cc
+			src/client_proc_t.cc src/ServerModel.cc \
 
 ServerDist = src/Server.cc src/Echo.cc
 
@@ -13,9 +13,13 @@ Protocols = pb/cs_dir.pb.cc pb/exceptiontype.pb.cc \
 	
 IncludeFlag = -Ilib/libuv/include\
 	-Ipb\
-	-I/usr/local/include
+	-I/usr/local/include\
+	-Ilib/cJSON
+
+JsonSrc = lib/cJSON/cJSON.c
 
 all:
+	gcc -g -c ${IncludeFlag} ${JsonSrc} 
 	g++ -g -c ${IncludeFlag} ${Source}
 	g++ -g -c ${IncludeFlag} ${Protocols}
 	g++ -D_DIRECTORY_DIST -g -c ${IncludeFlag} ${ServerDist}
