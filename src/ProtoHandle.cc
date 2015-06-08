@@ -65,7 +65,7 @@ void proto_WorldListCommand(const std::string &proto, const std::string &, clien
 			cJSON *name = cJSON_GetObjectItem(one, "name");
 			XAssert(cJSON_String == name->type, "Must be string for name");
 
-			data->set_host(ip->string);
+			data->set_host(ip->valuestring);
 			data->set_port(port->valueint);
 			data->set_id(id->valueint);
 			data->set_name(name->valuestring);
