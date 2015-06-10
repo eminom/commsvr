@@ -7,11 +7,11 @@ import "exceptiontype.proto";
 //~ RESPONSE ID = REQUEST ID + 10,000
 
 message RequestWorldList {
-    enum Type { ID = 1001; }; 
+    enum Type { ID = 1001; }
 }
 
 message RequestUserRegister {
-	enum Type { ID = 1002; };
+	enum Type { ID = 1002; }
 	required string account = 1;
 	required string password = 2;
 }
@@ -21,11 +21,11 @@ message RequestUserRegister {
 // FROM SERVER TO CLIENTS
 
 message ResponseWorldList {
-  enum Type { ID = 101001; };
+  enum Type { ID = 101001; }
 	repeated Data_WorldInfo world_list = 1; 
 }
 
 message ResponseUserRegister {
-	enum Type { ID = 101002; };
+	enum Type { ID = 101002; }
   optional ExceptionType exception = 1[default = ET_OK];
 }
