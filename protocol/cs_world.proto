@@ -1,0 +1,36 @@
+
+// C/S
+
+import "data.proto";
+import "exceptiontype.proto";
+
+// THE ID SEQUENCE RULES ARE WRITTEN IN CS_DIR
+
+message RequestLogin {
+    enum Type { ID = 2001; }; 
+	required bool 	is_anonymous 	= 1;
+	optional string device_id 		= 2;
+	optional string account	  		= 3;
+	optional string password  		= 4;
+};
+
+message RequestCreatePlayer {
+    enum Type { ID = 2002; };
+	required bool 	is_anonymous 	= 1;
+	optional string device_id 		= 2;
+	optional string account	  		= 3;
+};
+
+////~~~~ RESPONSE  
+//FROM SERVER TO CLIENTS
+
+message ResponseLogin { 
+	enum Type { ID = 102001; };
+    optional ExceptionType exception = 1[default = ET_OK];
+	required string token = 2;
+};
+
+message ResponseCreatePlayer { 
+	enum Type { ID = 102002; };
+    optional ExceptionType exception = 1[default = ET_OK];
+};

@@ -3,7 +3,6 @@
 out
 *.pb.cc
 *.pb.h
-protocol
 pb
 conf.json
 

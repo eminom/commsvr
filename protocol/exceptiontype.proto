@@ -1,0 +1,11 @@
+
+
+
+enum ExceptionType {
+  ET_OK = 0;
+	ET_FAIL	= 1;
+	ET_ACCOUNT_ALREADY_EXSIT =2;
+	ET_NO_DATA = 3;
+	ET_NOT_LOGIN = 4;
+	ET_ALREADY_CREATE_PLAYER = 5;
+}

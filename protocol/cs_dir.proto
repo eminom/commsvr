@@ -1,0 +1,31 @@
+
+import "data.proto";
+import "exceptiontype.proto";
+
+// Request
+//~FROM CLIENTS TO SERVER
+//~ RESPONSE ID = REQUEST ID + 10,000
+
+message RequestWorldList {
+    enum Type { ID = 1001; }; 
+}
+
+message RequestUserRegister {
+	enum Type { ID = 1002; };
+	required string account = 1;
+	required string password = 2;
+}
+
+////////////////////////////
+//~ Responses are for the clients
+// FROM SERVER TO CLIENTS
+
+message ResponseWorldList {
+  enum Type { ID = 101001; };
+	repeated Data_WorldInfo world_list = 1; 
+}
+
+message ResponseUserRegister {
+	enum Type { ID = 101002; };
+  optional ExceptionType exception = 1[default = ET_OK];
+}
