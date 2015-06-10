@@ -4,5 +4,6 @@ out
 *.pb.cc
 *.pb.h
 pb
+*.pb
 conf.json
 
