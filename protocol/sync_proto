@@ -1,0 +1,65 @@
+#!/usr/bin/ruby
+
+$target_path = File.expand_path "~/Projects/rawfilesvr/src/proto/"
+$cur_path = File.absolute_path(__FILE__.encode("utf-8"))
+$cur_path = $cur_path.chomp(File.basename($cur_path))
+#puts cur_path
+
+def find_proto(start_path, dest_path)
+	Dir.glob("#{start_path}**/*.proto") do |path|
+		basename = File.basename(path)
+		from = path
+		dest = "#{dest_path}/#{basename}"
+		print from, " ", dest, "\n"
+	end
+end
+
+#find_proto cur_path, target_path
+
+def make_replace(org_name, new_ext)
+	org_name.chomp(File.extname(org_name)) + new_ext
+end
+
+def main
+	to_moves = []
+	for i in ["data", "cs_dir", "cs_world"] do
+		proto_file = "#{$cur_path}#{i}.proto"
+		hrl_file = make_replace(proto_file, "_pb.hrl")
+		beam_file= make_replace(proto_file, "_pb.beam")
+		#puts hrl_file, beam_file
+	
+		next if not File.exist? proto_file or not File.file? proto_file
+		cmd = "erl -noshell -s protobuffs_compile scan_file #{proto_file} -s init stop"
+		if not system cmd then
+			print $?
+			exit
+		end
+		if not File.file? hrl_file then
+			print "#{hrl_file} is not generated properly !\n"
+			exit
+		end
+		to_moves.push(hrl_file)
+
+		if not File.file? beam_file then
+			print "#{beam_file} is not generated properly !\n"
+			exit
+		end
+		to_moves.push(beam_file)
+	end
+
+	$target_path = $target_path + "/" if $target_path[-1] != '/'
+	for f in to_moves do
+		dest = $target_path + File.basename(f)
+		cmd = "cp -f \"#{f}\" \"#{dest}\""
+		if not system cmd then
+			puts $?
+			puts "Error process #{f}"
+			exit
+		end
+	end
+end
+
+#
+main
+
+puts "finished"
