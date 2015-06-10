@@ -57,6 +57,13 @@ def main
 			exit
 		end
 	end
+
+	cmd = "rm #{$cur_path}*.hrl"
+	#puts cmd
+	system cmd
+	cmd = "rm #{$cur_path}*.beam"
+	#puts cmd
+	system cmd
 end
 
 #
