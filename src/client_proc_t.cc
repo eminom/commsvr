@@ -41,7 +41,8 @@ void _fillHeader(char *buffer, int final_length, int typecode)
 {
     int write_length = boost::asio::detail::socket_ops::host_to_network_long(final_length + _LengthFix);
     *((int*)buffer) = write_length;     //~ x86
-    *((int*)(buffer + 4)) = typecode;
+    int tc = boost::asio::detail::socket_ops::host_to_network_long(typecode);
+    *((int*)(buffer + 4)) = tc;
 }
 
 void _sendStreamBuffer(client_proc_t *ptr, int typecode, const char *buffer, int length)
