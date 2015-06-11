@@ -7,6 +7,7 @@
 #include <cstring>
 #include <cassert>
 
+#include "HeaderLengthStyle.h"
 #include "ProtoHandle.h"
 #include "Server.h"
 
@@ -53,7 +54,7 @@ void StreamStateObj::consume()
 			}
 			break;
 		case StreamState::TypeCodeRead:
-			if(buffer_->readString(str, full_length_ - 8)){
+			if(buffer_->readString(str, full_length_ - 8 - _LengthFix)){
 				payload_ = str;
 				//ok, time to deal with payload
 				//printf("Consumed\n");
