@@ -7,6 +7,7 @@
 #include "client_proc_t.h"
 #include "HeaderLengthStyle.h"
 #include "uv.h"
+#include <boost/asio.hpp>
 
 extern uv_loop_t *loop;
 
@@ -38,7 +39,8 @@ void echo_write(uv_write_t *req, int status) {
 
 void _fillHeader(char *buffer, int final_length, int typecode)
 {
-    *((int*)buffer) = final_length + _LengthFix;     //~ x86
+    int write_length = boost::asio::detail::socket_ops::host_to_network_long(final_length + _LengthFix);
+    *((int*)buffer) = write_length;     //~ x86
     *((int*)(buffer + 4)) = typecode;
 }
 

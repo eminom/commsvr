@@ -1,6 +1,8 @@
 
 #Library = -Llib/libuv/out/Debug/obj.target
-Library = -Llib/libuv/build/Release -L/usr/local/lib
+Library = -Llib/libuv/build/Release \
+	-L/usr/local/lib \
+	-L/Users/eminom/dev/boost/macosx/lib
 
 Source =  src/StreamBuffer.cc src/StreamState.cc \
 			src/ProtoDispatcher.cc src/ProtoHandle.cc \
@@ -14,6 +16,7 @@ Protocols = pb/cs_dir.pb.cc pb/exceptiontype.pb.cc \
 IncludeFlag = -Ilib/libuv/include\
 	-Ipb\
 	-I/usr/local/include\
+	-I/Users/eminom/dev/boost/macosx/include\
 	-Ilib/cJSON
 
 JsonSrc = lib/cJSON/cJSON.c
@@ -23,9 +26,9 @@ all:
 	g++ -g -c ${IncludeFlag} ${Source}
 	g++ -g -c ${IncludeFlag} ${Protocols}
 	g++ -D_DIRECTORY_DIST -g -c ${IncludeFlag} ${ServerDist}
-	g++ *.o  ${Library} -luv -lprotobuf -o out/dir
+	g++ *.o  ${Library} -luv -lprotobuf -lboost_system -o out/dir
 	g++ -g -c ${IncludeFlag} ${ServerDist}
-	g++ *.o  ${Library} -luv -lprotobuf -o out/world
+	g++ *.o  ${Library} -luv -lprotobuf -lboost_system -o out/world
 
 
 clean:
