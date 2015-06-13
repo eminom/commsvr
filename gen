@@ -1,5 +1,9 @@
 #!/usr/local/bin/ruby
 
+# Use this script to generate the c++ source code from 
+# the proto-buff definitions
+# "the cpp output for .proto file(s)"
+
 require "fileutils"
 require_relative "exconf"
 
