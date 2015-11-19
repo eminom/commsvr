@@ -3,11 +3,18 @@
 
 #include "ProtoHandle.h"
 
+#ifdef _WIN32
+
+//For now.
+// We do not have protobuf compiler installed nor the libproto.
+
+#else
 #include "cs_world.pb.h"
 #include "cs_dir.pb.h"
-
 #include "data.pb.h"
 #include "exceptiontype.pb.h"
+#include "cJSON.h"
+#endif
 
 #include <cstdio>
 #include <cstdlib>
@@ -18,7 +25,8 @@
 
 #include "client_proc_t.h"
 #include "XAssert.h"
-#include "cJSON.h"
+
+#ifndef _WIN32
 
 #define _ErrorParsing()\
 		fprintf(stderr, "parsing error %s\n", proto.c_str());\
@@ -159,3 +167,31 @@ void proto_CreatePlayerCommand(const std::string &proto, const std::string &buf,
 	}
 
 }
+
+
+#else
+
+//~  Directory server
+void proto_WorldListCommand(const std::string &proto, const std::string &, client_proc_t*)
+{
+
+}
+
+void proto_RegisterUserCommand(const std::string &proto, const std::string&, client_proc_t*)
+{
+}
+
+
+//~World server
+void proto_LoginCommand(const std::string &proto, const std::string&, client_proc_t*)
+{
+
+}
+
+void proto_CreatePlayerCommand(const std::string &proto, const std::string&, client_proc_t*)
+{
+
+}
+
+
+#endif
