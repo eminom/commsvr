@@ -1,3 +1,4 @@
+*.opensdf
 *.out
 *.o
 out
