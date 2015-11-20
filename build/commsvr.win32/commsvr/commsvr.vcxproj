@@ -53,7 +53,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir)\..\libuv\include;F:\Boost.v110\include\boost-1_59;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\..\..\lib\libuv\include;F:\Boost.v110\include\boost-1_59;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -110,7 +110,7 @@
     <ClInclude Include="..\..\..\src\XAssert.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\libuv\libuv.vcxproj">
+    <ProjectReference Include="..\..\..\lib\libuv\libuv.vcxproj">
       <Project>{33066374-88cb-cb8d-15da-61032886329a}</Project>
     </ProjectReference>
   </ItemGroup>
