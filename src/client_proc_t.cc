@@ -32,8 +32,10 @@ void onHandlerClosed(uv_handle_t *handler)
 void destroyClientProcessor(client_proc_t *ptr)
 {
     uv_close((uv_handle_t*)ptr, onHandlerClosed);
+#if 0
     delete ptr->so;
     delete ptr->sb;
+#endif
 	ptr->so = NULL;
 	ptr->sb = NULL;
     //free(ptr); //It must wait.

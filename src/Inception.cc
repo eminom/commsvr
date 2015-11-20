@@ -46,7 +46,7 @@ void echo_read(uv_stream_t *client, ssize_t nread, const uv_buf_t *buf) {
 		destroyClientProcessor((client_proc_t*)client);
 	} else if (nread > 0) {
 		//printf("Read for %d\n", nread);
-#ifdef _WIN32
+#if 1  //_WIN32
 		uv_write_t *req = (uv_write_t*)malloc(sizeof(uv_write_t));
 		uv_buf_t wrbuf = uv_buf_init(buf->base, nread);
 		uv_write(req, client, &wrbuf, 1, echo_write_simple);  //buf is to be released soon.
