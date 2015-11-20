@@ -86,7 +86,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\client_proc_t.cc" />
-    <ClCompile Include="..\..\..\src\Echo.cc" />
+    <ClCompile Include="..\..\..\src\main.cc" />
+    <ClCompile Include="..\..\..\src\Inception.cc" />
     <ClCompile Include="..\..\..\src\ProtoDispatcher.cc" />
     <ClCompile Include="..\..\..\src\ProtoHandle.cc" />
     <ClCompile Include="..\..\..\src\Server.cc" />
@@ -98,6 +99,7 @@
     <ClInclude Include="..\..\..\src\client_proc_t.h" />
     <ClInclude Include="..\..\..\src\EnvConfig.h" />
     <ClInclude Include="..\..\..\src\HeaderLengthStyle.h" />
+    <ClInclude Include="..\..\..\src\Inception.h" />
     <ClInclude Include="..\..\..\src\ProtoDispatcher.h" />
     <ClInclude Include="..\..\..\src\ProtoHandle.h" />
     <ClInclude Include="..\..\..\src\Server.h" />

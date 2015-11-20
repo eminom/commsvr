@@ -4,9 +4,6 @@
     <ClCompile Include="..\..\..\src\client_proc_t.cc">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\Echo.cc">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\ProtoDispatcher.cc">
       <Filter>Source</Filter>
     </ClCompile>
@@ -23,6 +20,12 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\StreamState.cc">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Inception.cc">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\main.cc">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -58,6 +61,9 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\XAssert.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Inception.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
