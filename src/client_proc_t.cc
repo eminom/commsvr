@@ -2,21 +2,25 @@
 #include <cstdlib>
 #include <cstdio>
 #include <cstring>
-#include "StreamBuffer.h"
-#include "StreamState.h"
+//#include "StreamBuffer.h"
+//#include "StreamState.h"
 #include "client_proc_t.h"
 #include "HeaderLengthStyle.h"
 #include "uv.h"
-#include <boost/asio.hpp>
+
+//#include <boost/asio.hpp>
 
 extern uv_loop_t *loop;
 
 client_proc_t* createClientProcessor()
 {
     client_proc_t* rv = (client_proc_t*)malloc(sizeof(client_proc_t));
+	memset(rv,0,sizeof(*rv));
     uv_tcp_init(loop, (uv_tcp_t*)rv);
+#if 0
     rv->sb = new StreamBuffer;
     rv->so = new StreamStateObj(rv->sb, rv);
+#endif
     return rv;
 }
 
@@ -44,6 +48,7 @@ void echo_write(uv_write_t *req, int status) {
     free(req);
 }
 
+#if 0
 void _fillHeader(char *buffer, int final_length, int typecode)
 {
     int write_length = boost::asio::detail::socket_ops::host_to_network_long(final_length + _LengthFix);
@@ -68,3 +73,4 @@ void _sendStreamBuffer(client_proc_t *ptr, int typecode, const char *buffer, int
     //printf("Something is sent to client(%d)\n", final_length);
     free(ex_buffer);
 }
+#endif
