@@ -5,7 +5,7 @@
 #ifdef _DIRECTORY_DIST
 #   define DEFAULT_PORT 11000
 #else
-#   define DEFAULT_PORT 12000
+#   define DEFAULT_PORT 11100
 #endif
 
 #endif

@@ -64,7 +64,7 @@ void StreamStateObj::consume()
 			}
 			break;
 		default:
-			fprintf(stderr, "interesting ...%d>>\n", state_);
+			fprintf(stderr, "UNKNOWN State:<%d>\n", state_);
 			abort();
 			break;
 		}

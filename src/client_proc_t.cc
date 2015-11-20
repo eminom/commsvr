@@ -20,12 +20,19 @@ client_proc_t* createClientProcessor()
     return rv;
 }
 
+void onHandlerClosed(uv_handle_t *handler)
+{
+	free(handler);
+}
+
 void destroyClientProcessor(client_proc_t *ptr)
 {
-    uv_close((uv_handle_t*)ptr, 0);
+    uv_close((uv_handle_t*)ptr, onHandlerClosed);
     delete ptr->so;
     delete ptr->sb;
-    free(ptr);
+	ptr->so = NULL;
+	ptr->sb = NULL;
+    //free(ptr); //It must wait.
 }
 
 void echo_write(uv_write_t *req, int status) {
