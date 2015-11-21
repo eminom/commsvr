@@ -24,7 +24,7 @@ client_proc_t* createClientProcessor()
     return rv;
 }
 
-void onHandlerClosed(uv_handle_t *handler)
+static void onHandlerClosed(uv_handle_t *handler)
 {
 	free(handler);
 }

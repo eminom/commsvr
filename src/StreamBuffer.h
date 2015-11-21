@@ -10,16 +10,16 @@ class StreamBuffer
 public:
 	StreamBuffer(const char *buffer, int length);
 	StreamBuffer();
-	~StreamBuffer();
+	virtual ~StreamBuffer();
+
+public:
 	void append(char *start, int length);
-	bool readInt32(int &value);
-	bool readInt16(int &value);
 	bool readString(std::string &str, int length);
 	
 	int payLength()const;
 	void commit(int offset);
 
-private:
+protected:
 	char *read_ptr_;
 	char *write_ptr_;
 	char *begin_ptr_;

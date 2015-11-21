@@ -4,14 +4,18 @@
 
 #include "uv.h"
 
+#if 0
 class StreamBuffer;
 class StreamStateObj;
+#endif
 
 struct client_proc_t
 {
   uv_tcp_t base;
+#if 0
   StreamBuffer *sb;
   StreamStateObj *so;
+#endif
 };
 
 //typedef struct client_proc_s client_proc_t;
