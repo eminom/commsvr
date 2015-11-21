@@ -13,8 +13,9 @@ public:
 	virtual ~StreamBuffer();
 
 public:
-	void append(char *start, int length);
+	void append(const char *start, int length);
 	bool readString(std::string &str, int length);
+	bool readString(std::string &str);
 	
 	int payLength()const;
 	void commit(int offset);

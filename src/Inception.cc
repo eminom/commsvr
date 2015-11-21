@@ -17,8 +17,80 @@
 #define DEFAULT_BACKLOG 128
 #include "client_proc_t.h"
 
+#include "Inception.h"
+
 //Gobal: literally.
 uv_loop_t *loop;
+static InceptionCallback gCallback = [](const std::string&){};
+
+class CmdStringBuffer
+{
+private:
+	CmdStringBuffer();
+	~CmdStringBuffer();
+
+public:
+	static CmdStringBuffer* getInstance();
+	void imbibe(const char *start, int length);
+
+private:
+	StreamBuffer *const _buffer;
+
+private:
+	CmdStringBuffer(const CmdStringBuffer&);
+	void operator=(const CmdStringBuffer&);
+};
+
+CmdStringBuffer::~CmdStringBuffer()
+{
+	delete _buffer;
+}
+
+CmdStringBuffer::CmdStringBuffer()
+	:_buffer(new StreamBuffer)
+{
+
+}
+
+static CmdStringBuffer *_cmd;
+
+CmdStringBuffer* CmdStringBuffer::getInstance()
+{
+	if( ! _cmd )
+	{
+		_cmd = new CmdStringBuffer;
+	}
+	return _cmd;
+}
+
+void CmdStringBuffer::imbibe(const char *start, int length)
+{
+	int cur = 0, pre = 0;
+	while ( cur < length )
+	{
+		if('\n' == start[cur])
+		{
+			if (cur - pre - 1 > 0)
+			{
+				//~ - 1 removes the last \r(if you test with telnet)
+				_buffer->append(start + pre, cur - pre - 1);
+				std::string content;
+				if( _buffer->readString(content) )
+				{
+					gCallback(content);
+				}
+			}
+			cur = cur + 1;
+			pre = cur;
+		}
+		else
+		{
+			cur++;
+		}
+	}
+	//Length of 0 is acceptable.
+	_buffer->append(start + pre, cur - pre);
+}
 
 namespace inception{
 
@@ -46,6 +118,9 @@ void echo_read(uv_stream_t *client, ssize_t nread, const uv_buf_t *buf) {
 		destroyClientProcessor((client_proc_t*)client);
 	} else if (nread > 0) {
 		//printf("Read for %d\n", nread);
+		CmdStringBuffer::getInstance()->imbibe(buf->base, nread);
+
+		//How to response.
 #if 1  //_WIN32
 		uv_write_t *req = (uv_write_t*)malloc(sizeof(uv_write_t));
 		uv_buf_t wrbuf = uv_buf_init(buf->base, nread);
@@ -78,7 +153,8 @@ void on_new_connection(uv_stream_t *server, int status) {
 	}
 }
 
-int masterLoop() {
+int masterLoop(const InceptionCallback& cb) {
+	gCallback = cb;
 	loop = uv_default_loop();
 	uv_tcp_t server;
 	uv_tcp_init(loop, &server);

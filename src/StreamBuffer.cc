@@ -32,7 +32,7 @@ StreamBuffer::~StreamBuffer()
 	}
 }
 
-void StreamBuffer::append(char *start, int length)
+void StreamBuffer::append(const char *start, int length)
 {
 	if(!owned_)
 	{
@@ -90,10 +90,18 @@ bool StreamBuffer::readString(std::string &str, int length)
 	if(payLength()<length){
 		return false;
 	}
+	if(length<=0){
+		return false;
+	}
 	str.resize(length);
 	memcpy((char*)str.data(), read_ptr_, length * sizeof(char));
 	commit(length);
 	return true;
+}
+
+bool StreamBuffer::readString(std::string &str)
+{
+	return readString(str, payLength());
 }
 
 void StreamBuffer::commit(int offset)
