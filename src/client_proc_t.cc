@@ -35,9 +35,9 @@ void destroyClientProcessor(client_proc_t *ptr)
 #if 0
     delete ptr->so;
     delete ptr->sb;
-#endif
 	ptr->so = NULL;
 	ptr->sb = NULL;
+#endif
     //free(ptr); //It must wait.
 }
 
