@@ -169,5 +169,30 @@ int masterLoop(const InceptionCallback& cb) {
 	return uv_run(loop, UV_RUN_DEFAULT);
 }
 
+/* Locate the 
+ * non-internal
+ * IPv4 family
+ * name which does not start with Virtual
+ */ 
+std::string retrieveLocalIP() {
+	std::string rv = "127.0.0.1"; //Localhost for default.
+	uv_interface_address_t *info = nullptr;
+	int count = 0;
+	uv_interface_addresses(&info, &count);
+	for (int i=count-1;i>=0;--i) {
+		const uv_interface_address_t &intf = info[i];
+		if(intf.is_internal || !strncmp(intf.name, "Virtual", 7)){
+			continue;
+		}
+		if (intf.address.address4.sin_family == AF_INET) {
+			char buf[512];
+			uv_ip4_name(&intf.address.address4, buf, sizeof(buf));
+			rv = buf;
+			break;
+		}
+	}
+	uv_free_interface_addresses(info, count);
+	return rv;
+}
 
 }//End of namespace inception

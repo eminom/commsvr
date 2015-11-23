@@ -11,6 +11,7 @@ typedef std::function<void(const std::string)> InceptionCallback;
 namespace inception
 {
 	int masterLoop(const InceptionCallback&);
+	std::string retrieveLocalIP();
 }
 
 #endif
