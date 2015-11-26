@@ -10,6 +10,7 @@ LOCAL_MODULE_FILENAME := libcommsvr-static-android
 LOCAL_SRC_FILES := \
 ../src/client_proc_t.cc \
 ../src/Inception.cc \
+../src/HelloInception.cc \
 ../src/StreamBuffer.cc 
 
 LOCAL_STATIC_LIBRARIES += libuv
