@@ -6,4 +6,4 @@
 	url = https://github.com/kbranigan/cJSON
 [submodule "lib/haywire"]
 	path = lib/haywire
-	url = https://github.com/kellabyte/Haywire.git
+	url = https://eminom@github.com/eminom/Haywire.git
