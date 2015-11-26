@@ -13,10 +13,13 @@ LOCAL_SRC_FILES := \
 ../src/StreamBuffer.cc 
 
 LOCAL_STATIC_LIBRARIES += libuv
+LOCAL_STATIC_LIBRARIES += libhaywire
 
 LOCAL_C_INCLUDES := \
 $(LOCAL_PATH)/../lib/libuv/include \
 $(LOCAL_PATH)/../lib/libuv/src \
+$(LOCAL_PATH)/../lib/haywire/include
 
 include $(BUILD_STATIC_LIBRARY)
 $(call import-module, commsvr/build/libuv.android)
+$(call import-module, commsvr/build/haywire.android)
