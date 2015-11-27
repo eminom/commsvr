@@ -12,6 +12,7 @@ namespace inception
 {
 	int masterLoop(const InceptionCallback&);
 	int helloLoop(const char *serverRootDir);
+    int getMonitorServerPort();
 
 	std::string retrieveLocalIP();
 }

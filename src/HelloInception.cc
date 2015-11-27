@@ -7,6 +7,7 @@
 #include <cstdlib>
 #include "RootExplorer.h"
 
+#define _DefaultMonitorSvrPort  11122
 //#define CRLF "\r\n"
 
 void response_complete(void* pData)
@@ -70,14 +71,19 @@ void get_root(http_request* request, hw_http_response* response, void* user_data
 
 namespace inception
 {
+    
+int getMonitorServerPort()
+{
+    return _DefaultMonitorSvrPort;
+}
 
-int helloLoop(const char *serverRootDir) 
+int helloLoop(const char *serverRootDir)
 {
 	RootExplorer::getInstance()->setWorkingDir(serverRootDir);
     char route[] = "/";
 	configuration config = {0};
     config.http_listen_address = "0.0.0.0";
-	config.http_listen_port = 11120;
+	config.http_listen_port = _DefaultMonitorSvrPort;
 	config.thread_count = 0; //~ by default
 	config.parser = "http_parser";
     hw_init_with_config(&config);
