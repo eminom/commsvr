@@ -16,7 +16,8 @@ Source = \
 	src/Inception.cc \
 	src/HelloInception.cc \
 	src/DirWalker.cc \
-	src/RootExplorer.cc 
+	src/RootExplorer.cc \
+	src/CmdBuffStr.cc
 
 ServerDist = src/Server.cc src/Echo.cc
 
