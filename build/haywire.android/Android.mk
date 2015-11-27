@@ -14,6 +14,7 @@ LOCAL_SRC_FILES := \
 ../../lib/haywire/src/haywire/http_response.c \
 ../../lib/haywire/src/haywire/http_response_cache.c \
 ../../lib/haywire/src/haywire/http_server.c \
+../../lib/haywire/src/haywire/http_server_impl.c \
 ../../lib/haywire/src/haywire/hw_string.c \
 ../../lib/haywire/src/haywire/route_compare_method.c \
 ../../lib/haywire/src/haywire/server_stats.c 

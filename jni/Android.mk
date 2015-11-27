@@ -11,7 +11,9 @@ LOCAL_SRC_FILES := \
 ../src/client_proc_t.cc \
 ../src/Inception.cc \
 ../src/HelloInception.cc \
-../src/StreamBuffer.cc 
+../src/StreamBuffer.cc \
+../src/DirWalker.cc \
+../src/RootExplorer.cc
 
 LOCAL_STATIC_LIBRARIES += libuv
 LOCAL_STATIC_LIBRARIES += libhaywire
