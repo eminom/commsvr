@@ -4,6 +4,7 @@
 #include "DirWalker.h"
 #include <sstream>
 #include <string>
+#include <cstring>
 
 #if !defined(_MSC_VER)
 

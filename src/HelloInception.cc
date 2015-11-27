@@ -3,6 +3,8 @@
 #include "haywire.h"
 
 #include <string>
+#include <cstring>
+#include <cstdlib>
 #include "RootExplorer.h"
 
 //#define CRLF "\r\n"
