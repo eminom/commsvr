@@ -13,7 +13,8 @@ LOCAL_SRC_FILES := \
 ../src/HelloInception.cc \
 ../src/StreamBuffer.cc \
 ../src/DirWalker.cc \
-../src/RootExplorer.cc
+../src/RootExplorer.cc \
+../src/CmdBuffStr.cc 
 
 LOCAL_STATIC_LIBRARIES += libuv
 LOCAL_STATIC_LIBRARIES += libhaywire

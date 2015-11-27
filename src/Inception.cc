@@ -13,6 +13,7 @@
 #include "StreamState.h"
 #include "EnvConfig.h"
 #include "ServerConfig.h"
+#include "CmdBuffStr.h"
 
 
 #define DEFAULT_BACKLOG 128
@@ -21,79 +22,11 @@
 #include "Inception.h"
 
 //Gobal: literally.
-uv_loop_t *loop;
-static InceptionCallback gCallback = [](const std::string&){};
+uv_loop_t _emptyLoop;
+uv_loop_t *loop = &_emptyLoop;
 
-class CmdStringBuffer
+namespace inception
 {
-private:
-	CmdStringBuffer();
-	~CmdStringBuffer();
-
-public:
-	static CmdStringBuffer* getInstance();
-	void imbibe(const char *start, int length);
-
-private:
-	StreamBuffer *const _buffer;
-
-private:
-	CmdStringBuffer(const CmdStringBuffer&);
-	void operator=(const CmdStringBuffer&);
-};
-
-CmdStringBuffer::~CmdStringBuffer()
-{
-	delete _buffer;
-}
-
-CmdStringBuffer::CmdStringBuffer()
-	:_buffer(new StreamBuffer)
-{
-
-}
-
-static CmdStringBuffer *_cmd;
-
-CmdStringBuffer* CmdStringBuffer::getInstance()
-{
-	if( ! _cmd )
-	{
-		_cmd = new CmdStringBuffer;
-	}
-	return _cmd;
-}
-
-void CmdStringBuffer::imbibe(const char *start, int length)
-{
-	int cur = 0, pre = 0;
-	while ( cur < length )
-	{
-		if('\n' == start[cur])
-		{
-			if (cur - pre - 1 > 0)
-			{
-				//~ - 1 removes the last \r(if you test with telnet)
-				_buffer->append(start + pre, cur - pre - 1);
-				std::string content;
-				if( _buffer->readString(content) )
-				{
-					gCallback(content);
-				}
-			}
-			cur = cur + 1;
-			pre = cur;
-		}
-		else
-		{
-			cur++;
-		}
-	}
-	//Length of 0 is acceptable.
-	_buffer->append(start + pre, cur - pre);
-}
-
-namespace inception{
 
 void alloc_buffer(uv_handle_t *handle, size_t suggested_size, uv_buf_t *buf) 
 {
@@ -155,8 +88,10 @@ void on_new_connection(uv_stream_t *server, int status) {
 }
 
 int masterLoop(const InceptionCallback& cb) {
-	gCallback = cb;
-	loop = uv_default_loop();
+	//gCallback = cb;
+	CmdStringBuffer::getInstance()->setCallback(cb);
+	//loop = uv_default_loop();
+	uv_loop_init(loop);
 	uv_tcp_t server;
 	uv_tcp_init(loop, &server);
 	struct sockaddr_in addr;
@@ -167,7 +102,9 @@ int masterLoop(const InceptionCallback& cb) {
 		fprintf(stderr, "Listen error %s\n", uv_strerror(r));
 		return 1;
 	}
-	return uv_run(loop, UV_RUN_DEFAULT);
+	int rv = uv_run(loop, UV_RUN_DEFAULT);
+	uv_loop_close(loop);
+	return rv;
 }
 
 
