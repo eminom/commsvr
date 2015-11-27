@@ -9,16 +9,20 @@
 
 //#define CRLF "\r\n"
 
-void response_complete(void* user_data)
+void response_complete(void* pData)
 {
-	printf("response_complete(%s)\n", (char*)user_data);
+	//printf("response_complete(%s)\n", (char*)user_data);
+    //std::string *pCont = static_cast<std::string*>(pData);
+    //delete pCont;
 }
 
+/*
 inline void SetString(hw_string &strIn, const std::string &content)
 {
 	strIn.value = const_cast<char*>(content.c_str());
 	strIn.length= content.size();
 }
+*/
 
 void get_root(http_request* request, hw_http_response* response, void* user_data)
 {
@@ -41,9 +45,14 @@ void get_root(http_request* request, hw_http_response* response, void* user_data
 	RootExplorer::getInstance()->retrieveContent(content);
     
     //SETSTRING(body, "hello world");
-    SetString(body, content);
+    size_t sz = sizeof(char) * (content.size()+1);
+    char *bigBuffer = (char*)malloc(sz);
+    bzero(bigBuffer, sz);
+    memcpy(bigBuffer, content.c_str(), content.size() * sizeof(char));
+    //SETSTRING(body, bigBuffer);
+    body.value = bigBuffer;
+    body.length = sz - 1;
     hw_set_body(response, &body);
-    
     if (request->keep_alive)
     {
         SETSTRING(keep_alive_name, "Connection");
@@ -55,7 +64,8 @@ void get_root(http_request* request, hw_http_response* response, void* user_data
         hw_set_http_version(response, 1, 0);
     }
     
-    hw_http_response_send(response, (void*)"user_data", response_complete);
+    //hw_http_response_send(response, (void*)"user_data", response_complete);
+    hw_http_response_send(response, bigBuffer, response_complete);
 }
 
 namespace inception
