@@ -44,6 +44,10 @@ void get_root(http_request* request, hw_http_response* response, void* user_data
 
 	std::string content;
 	RootExplorer::getInstance()->retrieveContent(content);
+    if(!content.size())
+    {
+        content = "You may get nothing, but the server is here.(exactly)";
+    }
     
     //SETSTRING(body, "hello world");
     size_t sz = sizeof(char) * (content.size()+1);
