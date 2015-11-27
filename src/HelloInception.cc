@@ -40,7 +40,8 @@ void get_root(http_request* request, hw_http_response* response, void* user_data
 	std::string content;
 	RootExplorer::getInstance()->retrieveContent(content);
     
-    SETSTRING(body, "hello world");
+    //SETSTRING(body, "hello world");
+    SetString(body, content);
     hw_set_body(response, &body);
     
     if (request->keep_alive)

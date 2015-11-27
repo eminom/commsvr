@@ -1,6 +1,7 @@
 
 #Library = -Llib/libuv/out/Debug/obj.target
-Library = -Llib/libuv/build/Release \
+Library = \
+	-Llib/libuv/build/Release \
 	-L/usr/local/lib \
 	-L/Users/eminom/dev/boost/macosx/lib \
 	-Llib/libuv/libs
@@ -9,7 +10,8 @@ Library = -Llib/libuv/build/Release \
 #			src/ProtoDispatcher.cc src/ProtoHandle.cc \
 #			src/client_proc_t.cc src/ServerModel.cc \
 
-Source = src/StreamBuffer.cc \
+Source = \
+	src/StreamBuffer.cc \
 	src/client_proc_t.cc \
 	src/Inception.cc \
 	src/HelloInception.cc \
