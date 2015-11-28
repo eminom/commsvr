@@ -17,13 +17,11 @@ void response_complete(void* pData)
     //delete pCont;
 }
 
-/*
 inline void SetString(hw_string &strIn, const std::string &content)
 {
 	strIn.value = const_cast<char*>(content.c_str());
 	strIn.length= content.size();
 }
-*/
 
 void get_root(http_request* request, hw_http_response* response, void* user_data)
 {
@@ -50,13 +48,8 @@ void get_root(http_request* request, hw_http_response* response, void* user_data
     }
     
     //SETSTRING(body, "hello world");
-    size_t sz = sizeof(char) * (content.size()+1);
-    char *bigBuffer = (char*)malloc(sz);
-    bzero(bigBuffer, sz);
-    memcpy(bigBuffer, content.c_str(), content.size() * sizeof(char));
     //SETSTRING(body, bigBuffer);
-    body.value = bigBuffer;
-    body.length = sz - 1;
+    SetString(body, content);	//~ Only 1024 (*1024 by modification)
     hw_set_body(response, &body);
     if (request->keep_alive)
     {
@@ -69,8 +62,8 @@ void get_root(http_request* request, hw_http_response* response, void* user_data
         hw_set_http_version(response, 1, 0);
     }
     
-    //hw_http_response_send(response, (void*)"user_data", response_complete);
-    hw_http_response_send(response, bigBuffer, response_complete);
+    hw_http_response_send(response, (void*)"user_data", response_complete);
+    //hw_http_response_send(response, bigBuffer, response_complete);
 }
 
 namespace inception
