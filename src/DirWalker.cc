@@ -18,6 +18,10 @@
 
 #endif
 
+#if defined(_MSC_VER)
+#define snprintf sprintf_s
+#endif
+
 int filterByName(const char *name)
 {
 	if(!strcmp(name, ".") ||
@@ -28,6 +32,27 @@ int filterByName(const char *name)
 	return 0;
 }
 
+void formatContentByInfo(std::vector<std::string> &files, std::vector<std::string> &dirs, std::string &content)
+{
+	std::sort(files.begin(), files.end());
+	std::sort(dirs.begin(), dirs.end());
+	
+	StreamBuffer b;
+	for(auto &f:files)
+	{
+		char buf[BUFSIZ+1000];
+		snprintf(buf, sizeof(buf), "%s<br/>\n", f.c_str());
+		b.append(buf, strlen(buf));
+	}
+	for(auto &d:dirs)
+	{
+		char buf[BUFSIZ+1000];
+		snprintf(buf, sizeof(buf), "&lt;%s&gt;<br/>\n", d.c_str());
+		b.append(buf, strlen(buf));
+	}
+	b.readString(content);
+	//printf("The response length is %ld\n", content.size());
+}
 
 #if defined(_MSC_VER)
 
@@ -97,24 +122,7 @@ void elicitDir(const char *root, std::string &content)
 	//printf("Starting from <%s>\n", root);
 
 	elicitDirSub(root, filev, dirs);
-	std::sort(filev.begin(), filev.end());
-	std::sort(dirs.begin(), dirs.end());
-	
-	StreamBuffer b;
-	for(auto &f:filev)
-	{
-		char buf[BUFSIZ+1000];
-		snprintf(buf, sizeof(buf), "%s<br/>\n", f.c_str());
-		b.append(buf, strlen(buf));
-	}
-	for(auto &d:dirs)
-	{
-		char buf[BUFSIZ+1000];
-		snprintf(buf, sizeof(buf), "&lt;%s&gt;<br/>\n", d.c_str());
-		b.append(buf, strlen(buf));
-	}
-	b.readString(content);
-	//printf("The response length is %ld\n", content.size());
+	formatContentByInfo(filev, dirs, content);
 }
 
 #endif
