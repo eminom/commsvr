@@ -85,7 +85,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\client_proc_t.cc" />
+    <ClCompile Include="..\..\..\src\client_proc_t.cc">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\..\src\CmdBuffStr.cc" />
     <ClCompile Include="..\..\..\src\CommSvr.cc" />
     <ClCompile Include="..\..\..\src\DirWalker.cc" />
@@ -113,7 +115,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\client_proc_t.h" />
+    <ClInclude Include="..\..\..\src\client_proc_t.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="..\..\..\src\CmdBuffStr.h" />
     <ClInclude Include="..\..\..\src\DirWalker.h" />
     <ClInclude Include="..\..\..\src\EnvConfig.h">
