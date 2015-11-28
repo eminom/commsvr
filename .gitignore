@@ -10,3 +10,4 @@ pb
 *.beam
 conf.json
 haysvr
+/build

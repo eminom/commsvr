@@ -28,6 +28,21 @@
     <ClCompile Include="..\..\..\src\main.cc">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\CmdBuffStr.cc">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\CommSvr.cc">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\DirWalker.cc">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\RootExplorer.cc">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\HelloInception.cc">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\client_proc_t.h">
@@ -64,6 +79,15 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\Inception.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\CmdBuffStr.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\DirWalker.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\RootExplorer.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

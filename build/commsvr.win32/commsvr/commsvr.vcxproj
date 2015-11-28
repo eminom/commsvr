@@ -53,14 +53,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir)\..\..\..\lib\libuv\include;F:\Boost.v110\include\boost-1_59;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\..\..\lib\libuv\include;$(ProjectDir)\..\..\..\lib\haywire\include;F:\Boost.v110\include\boost-1_59;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)\..\commsvr\Debug\lib;F:\Boost.v110\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>ws2_32.lib;Iphlpapi.lib;Psapi.lib;Userenv.lib;libuv.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)\..\commsvr\Debug\lib;$(ProjectDir)\builds\windows\Debug\haywire\lib;$(ProjectDir)\Debug;F:\Boost.v110\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>haywire.patch.win32.lib;haywire.lib;ws2_32.lib;Iphlpapi.lib;Psapi.lib;Userenv.lib;libuv.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>libcmtd.lib</IgnoreSpecificDefaultLibraries>
     </Link>
     <ProjectReference>
@@ -86,30 +86,74 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\client_proc_t.cc" />
-    <ClCompile Include="..\..\..\src\main.cc" />
+    <ClCompile Include="..\..\..\src\CmdBuffStr.cc" />
+    <ClCompile Include="..\..\..\src\CommSvr.cc" />
+    <ClCompile Include="..\..\..\src\DirWalker.cc" />
+    <ClCompile Include="..\..\..\src\HelloInception.cc" />
+    <ClCompile Include="..\..\..\src\main.cc">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\..\src\Inception.cc" />
-    <ClCompile Include="..\..\..\src\ProtoDispatcher.cc" />
-    <ClCompile Include="..\..\..\src\ProtoHandle.cc" />
-    <ClCompile Include="..\..\..\src\Server.cc" />
-    <ClCompile Include="..\..\..\src\ServerModel.cc" />
+    <ClCompile Include="..\..\..\src\ProtoDispatcher.cc">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\ProtoHandle.cc">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\RootExplorer.cc" />
+    <ClCompile Include="..\..\..\src\Server.cc">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\ServerModel.cc">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\..\src\StreamBuffer.cc" />
-    <ClCompile Include="..\..\..\src\StreamState.cc" />
+    <ClCompile Include="..\..\..\src\StreamState.cc">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\client_proc_t.h" />
-    <ClInclude Include="..\..\..\src\EnvConfig.h" />
-    <ClInclude Include="..\..\..\src\HeaderLengthStyle.h" />
+    <ClInclude Include="..\..\..\src\CmdBuffStr.h" />
+    <ClInclude Include="..\..\..\src\DirWalker.h" />
+    <ClInclude Include="..\..\..\src\EnvConfig.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\HeaderLengthStyle.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="..\..\..\src\Inception.h" />
-    <ClInclude Include="..\..\..\src\ProtoDispatcher.h" />
-    <ClInclude Include="..\..\..\src\ProtoHandle.h" />
-    <ClInclude Include="..\..\..\src\Server.h" />
-    <ClInclude Include="..\..\..\src\ServerConfig.h" />
-    <ClInclude Include="..\..\..\src\ServerModel.h" />
+    <ClInclude Include="..\..\..\src\ProtoDispatcher.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\ProtoHandle.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\RootExplorer.h" />
+    <ClInclude Include="..\..\..\src\Server.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\ServerConfig.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\ServerModel.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="..\..\..\src\StreamBuffer.h" />
-    <ClInclude Include="..\..\..\src\StreamState.h" />
-    <ClInclude Include="..\..\..\src\XAssert.h" />
+    <ClInclude Include="..\..\..\src\StreamState.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\XAssert.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\proj.win32\haywire.patch.win32\haywire.patch.win32.vcxproj">
+      <Project>{aa902a71-8ba1-4167-ae48-8974ee0adb94}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\lib\haywire\haywire.vcxproj">
+      <Project>{5ecec9e5-8f23-47b6-93e0-c3b328b3be65}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\lib\libuv\libuv.vcxproj">
       <Project>{33066374-88cb-cb8d-15da-61032886329a}</Project>
     </ProjectReference>
