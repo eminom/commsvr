@@ -7,6 +7,7 @@
 #include <vector>
 #include <algorithm>
 #include "StreamBuffer.h"
+#include "SlashDef.h"
 
 #if !defined(_MSC_VER)
 
@@ -20,15 +21,6 @@
 
 #include <windows.h>
 
-#endif
-
-#if defined(_MSC_VER)
-#	define snprintf sprintf_s
-#	define _END_SLASH			'\\'
-#	define _END_SLASH_STR		"\\"
-#else
-#	define _END_SLASH			'/'
-#	define _END_SLASH_STR		"/"
 #endif
 
 #define _DirFontStart	"<font color=\"blue\"><b>"

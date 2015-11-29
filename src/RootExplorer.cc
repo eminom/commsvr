@@ -22,6 +22,11 @@ void RootExplorer::setWorkingDir(const std::string &d)
 	_rootdir = d;
 }
 
+const char* RootExplorer::getWorkingDir()const
+{
+	return _rootdir.c_str();
+}
+
 void RootExplorer::retrieveContent(std::string &out)
 {
 	elicitDir(_rootdir.c_str(), out);
