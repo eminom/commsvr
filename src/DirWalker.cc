@@ -16,38 +16,88 @@
 #include <unistd.h>
 #include <dirent.h>
 
+#else
+
+#include <windows.h>
+
 #endif
 
 #if defined(_MSC_VER)
-#define snprintf sprintf_s
+#	define snprintf sprintf_s
+#	define _END_SLASH			'\\'
+#	define _END_SLASH_STR		"\\"
+#else
+#	define _END_SLASH			'/'
+#	define _END_SLASH_STR		"/"
 #endif
+
+#define _DirFontStart	"<font color=\"blue\"><b>"
+#define _DirFontEnd		"</b></font>"
+#define _PREDESTINE		"fetch"
 
 int filterByName(const char *name)
 {
-	if(!strcmp(name, ".") ||
+	if(!strcmp(name, ".")  ||
 	   !strcmp(name, "..") ||
-	   !strcmp(name, ".git")){
+	   !strcmp(name, ".git")) {
 		return 1; //bingo
 	}
 	return 0;
 }
 
-void formatContentByInfo(std::vector<std::string> &files, std::vector<std::string> &dirs, std::string &content)
+void formatContentByInfo(std::vector<std::string> &files, std::vector<std::string> &dirs, const char *root, std::string &content)
 {
 	std::sort(files.begin(), files.end());
 	std::sort(dirs.begin(), dirs.end());
-	
+
+	char rootpath[BUFSIZ + BUFSIZ + 256];
+	strcpy(rootpath, root);
+	int lz = strlen(rootpath);
+	if(lz>0 && rootpath[lz-1] != '/' && rootpath[lz-1] != '\\')
+	{
+		strcat(rootpath, _END_SLASH_STR);
+		++lz;
+	}
+
 	StreamBuffer b;
 	for(auto &f:files)
 	{
 		char buf[BUFSIZ+1000];
-		snprintf(buf, sizeof(buf), "%s<br/>\n", f.c_str());
+		std::string name;
+		if (!strncmp(f.data(), rootpath, lz) )
+		{
+			name = f.substr(lz);
+		}
+		else
+		{
+			name = f;
+		}
+
+		char hrefBuff[BUFSIZ+1000];
+		snprintf(hrefBuff, sizeof(hrefBuff), "\"%s/%s\"", _PREDESTINE, name.c_str());
+		for(auto &ch:hrefBuff)
+		{
+			if ('\\'==ch)
+			{
+				ch = '/';
+			}
+		}
+		snprintf(buf, sizeof(buf), "<a href=%s>%s</a><br/>\n", hrefBuff, name.c_str());
 		b.append(buf, strlen(buf));
 	}
 	for(auto &d:dirs)
 	{
 		char buf[BUFSIZ+1000];
-		snprintf(buf, sizeof(buf), "&lt;%s&gt;<br/>\n", d.c_str());
+		std::string name;
+		if ( !strncmp(d.data(), rootpath, lz) )
+		{
+			name = d.substr(lz);
+		}
+		else
+		{
+			name = d;
+		}
+		snprintf(buf, sizeof(buf), "%s&lt;%s&gt;<br/>%s\n", _DirFontStart, name.c_str(), _DirFontEnd);
 		b.append(buf, strlen(buf));
 	}
 	b.readString(content);
@@ -55,10 +105,62 @@ void formatContentByInfo(std::vector<std::string> &files, std::vector<std::strin
 }
 
 #if defined(_MSC_VER)
+//Windows implementation.
+//For debugging only.
+
+void elicitDirSub(const char *now, std::vector<std::string>& fv, std::vector<std::string> &dv)
+{
+	char curpath[MAX_PATH+1];
+	strcpy(curpath, now);
+	int lz = strlen(curpath);
+	if(lz>0 && curpath[lz-1] != '/' && curpath[lz-1] != '\\')
+	{
+		strcat_s(curpath, "\\");
+	}
+	char searchText[MAX_PATH+1];
+	strcpy(searchText, curpath);
+	strcat_s(searchText, "*.*");
+	WIN32_FIND_DATAA findFile;
+	HANDLE hFind = ::FindFirstFileA(searchText, &findFile);
+	if(INVALID_HANDLE_VALUE==hFind)
+	{
+		return;
+	}
+
+	std::vector<std::string> nd;
+	do
+	{
+		char fullpath[MAX_PATH + 100];
+		strcpy_s(fullpath, curpath); // ends with slash
+		strcat_s(fullpath, findFile.cFileName);
+		if( findFile.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) 
+		{
+			if( filterByName(findFile.cFileName) )
+			{
+				continue;
+			}
+			nd.push_back(fullpath);
+		} 
+		else
+		{
+			fv.push_back(fullpath);
+		}
+	}while(::FindNextFileA(hFind, &findFile));
+	::FindClose(hFind);
+	hFind = INVALID_HANDLE_VALUE;
+	for(const auto &d:nd)
+	{
+		elicitDirSub(d.c_str(), fv, dv);
+	}
+	std::copy(nd.begin(), nd.end(), std::back_inserter(dv));
+}
 
 void elicitDir(const char *root, std::string &content)
 {
 	content = "Windows(Not implemented yet)";
+	std::vector<std::string> files, dirs;
+	elicitDirSub(root, files, dirs);
+	formatContentByInfo(files, dirs, root, content);
 }
 
 #else  // Linux/Unix
