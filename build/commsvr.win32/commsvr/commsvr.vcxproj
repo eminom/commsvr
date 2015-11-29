@@ -143,6 +143,7 @@
     <ClInclude Include="..\..\..\src\ServerModel.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\SlashDef.h" />
     <ClInclude Include="..\..\..\src\StreamBuffer.h" />
     <ClInclude Include="..\..\..\src\StreamState.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
