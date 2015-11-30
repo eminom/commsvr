@@ -216,7 +216,7 @@ void elicitDir(const char *root, std::string &content)
 	//printf("Starting from <%s>\n", root);
 
 	elicitDirSub(root, filev, dirs);
-	formatContentByInfo(filev, dirs, content);
+	formatContentByInfo(filev, dirs, root, content);
 }
 
 #endif
