@@ -68,6 +68,26 @@ void finish_with_type(http_request *request, hw_http_response *response, void *u
 	//SETSTRING(content_type_value, "text/html");
 	SetCString(content_type_value, typ);
 	hw_set_response_header(response, &content_type_name, &content_type_value);
+
+	//By default, all transfer are encoded in chunk
+	// If not.
+	if (strcmp(typ, "text/html"))
+	{
+		// It is erronous to do so.(in chunked mode.)
+		//hw_string name, value;
+		//SETSTRING(name, "Transfer-Encoding");
+		//SETSTRING(value,"chunked");
+		//hw_set_response_header(response, &name, &value);
+
+		// It would also be erronous to do so(multiple content-length found in response, reported by Chrome)
+		//hw_string name, value;
+		//SETSTRING(name, "Content-Length");
+		//char buf[BUFSIZ];
+		//snprintf(buf, sizeof(buf), "%d", length);
+		//SETSTRING(value, buf);
+		//hw_set_response_header(response, &name, &value);
+	}
+
 	hw_string body;
 	body.value = (char*)text;
 	body.length = length;
@@ -155,10 +175,12 @@ void get_fetch(http_request* request, hw_http_response* response, void *user_dat
 				rewind(fin);
 				char *buffer = (char*)malloc((sz+1)*sizeof(char));
 				memset(buffer, 0, sz+1);
-				fread(buffer, 1, sz, fin);
-				buffer[sz] = 0;
+				fread(buffer, 1, sz, fin);  //~ and it returns "sz". 
+				//buffer[sz] = 0;
 				fclose(fin);
-				finish_with_type(request, response, user_data, "image/html", buffer, sz);
+				std::string mimeType = "image/";
+				mimeType += suffix;
+				finish_with_type(request, response, user_data, mimeType.c_str(), buffer, sz);
 				free(buffer);
 				processed = true;
 			}
