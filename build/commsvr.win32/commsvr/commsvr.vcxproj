@@ -53,7 +53,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir)\..\..\..\lib\libuv\include;$(ProjectDir)\..\..\..\lib\haywire\include;F:\Boost.v110\include\boost-1_59;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\..\..\src;$(ProjectDir)\..\..\..\lib\libuv\include;$(ProjectDir)\..\..\..\lib\haywire\include;F:\Boost.v110\include\boost-1_59;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -90,6 +90,7 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\CmdBuffStr.cc" />
     <ClCompile Include="..\..\..\src\CommSvr.cc" />
+    <ClCompile Include="..\..\..\src\config\HttpServerConfig.cc" />
     <ClCompile Include="..\..\..\src\DirWalker.cc" />
     <ClCompile Include="..\..\..\src\HelloInception.cc" />
     <ClCompile Include="..\..\..\src\main.cc">
@@ -113,12 +114,15 @@
     <ClCompile Include="..\..\..\src\StreamState.cc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\utils\ResponseUtils.cc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\src\base\HtmlContentType.h" />
     <ClInclude Include="..\..\..\src\client_proc_t.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\..\..\src\CmdBuffStr.h" />
+    <ClInclude Include="..\..\..\src\config\HttpServerConfig.h" />
     <ClInclude Include="..\..\..\src\DirWalker.h" />
     <ClInclude Include="..\..\..\src\EnvConfig.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -149,6 +153,7 @@
     <ClInclude Include="..\..\..\src\StreamState.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\utils\ResponseUtils.h" />
     <ClInclude Include="..\..\..\src\XAssert.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>

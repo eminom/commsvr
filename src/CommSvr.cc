@@ -25,7 +25,7 @@ int main()
 	int rv = 0;
 	char path[BUFSIZ*2];
 	if(char *p = retrieveCurrentDir(path, sizeof(path))){
-		rv = inception::helloLoop(p);
+		rv = inception::httpStaticFileLoop(p);
 	}
 	return rv;
 }

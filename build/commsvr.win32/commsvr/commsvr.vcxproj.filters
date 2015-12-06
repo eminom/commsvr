@@ -43,6 +43,12 @@
     <ClCompile Include="..\..\..\src\HelloInception.cc">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\utils\ResponseUtils.cc">
+      <Filter>Source\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\config\HttpServerConfig.cc">
+      <Filter>Source\config</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\client_proc_t.h">
@@ -96,10 +102,28 @@
     <ClInclude Include="..\..\..\src\HtmlContentType.h">
       <Filter>Source</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\utils\ResponseUtils.h">
+      <Filter>Source\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\base\HtmlContentType.h">
+      <Filter>Source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\config\HttpServerConfig.h">
+      <Filter>Source\config</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">
       <UniqueIdentifier>{19f6e18b-6a3c-4f2c-8dea-ce6e6d957b4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\utils">
+      <UniqueIdentifier>{6d2c079d-2a98-4566-b529-bc63196ab816}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\base">
+      <UniqueIdentifier>{f3985d08-2f40-49f1-ad9f-110dfdc07836}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\config">
+      <UniqueIdentifier>{972efa3d-2b6c-42af-91f9-b803011c83f5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

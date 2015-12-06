@@ -8,114 +8,13 @@
 #include "RootExplorer.h"
 #include "SlashDef.h"
 
-#define _DefaultMonitorSvrPort  11200
 //#define CRLF "\r\n"
-#include "HtmlContentType.h"
+#include "base/HtmlContentType.h"
+#include "utils/ResponseUtils.h"
+#include "config/HttpServerConfig.h"
 
 #define _PreFetch	"/fetch"
 
-void response_complete(void* pData)
-{
-	printf("response_complete(%s)\n", (char*)pData);
-    //std::string *pCont = static_cast<std::string*>(pData);
-    //delete pCont;
-}
-
-inline void SetString(hw_string &strIn, const std::string &content)
-{
-	strIn.value = const_cast<char*>(content.c_str());
-	strIn.length= content.size();
-}
-
-inline void SetCString(hw_string &strIn, const char *str)
-{
-	strIn.value = const_cast<char*>(str);
-	strIn.length= strlen(str);
-}
-
-void finish_no_res(http_request *request, hw_http_response *response, void *user_data)
-{
-	hw_string status_code;
-	SETSTRING(status_code, HTTP_STATUS_500);
-	hw_set_response_status_code(response, &status_code);
-	hw_string content_type_name, content_type_value;
-	SETSTRING(content_type_name, "Content-Type");
-	SETSTRING(content_type_value, ContentType_TextPlain);
-	hw_set_response_header(response, &content_type_name, &content_type_value);
-	hw_string body;
-	SETSTRING(body, "Resource not found(haywire updated)");
-	hw_set_body(response, &body);
-	if(request->keep_alive)
-	{
-		hw_string keep_alive_name, keep_alive_value;
-		SETSTRING(keep_alive_name, "Connection");
-		SETSTRING(keep_alive_value, "Keep-Alive");
-		hw_set_response_header(response, &keep_alive_name, &keep_alive_value);
-	}
-	else
-	{
-		hw_set_http_version(response, 1, 0);
-	}
-	hw_http_response_send(response, (void*)"get_fetch", response_complete);
-}
-
-void finish_with_type(http_request *request, hw_http_response *response, void *user_data, const char *typ, const char *text, int length)
-{
-	hw_string status_code;
-	SETSTRING(status_code, HTTP_STATUS_200);
-	hw_set_response_status_code(response, &status_code);
-	hw_string content_type_name, content_type_value;
-	SETSTRING(content_type_name, "Content-Type");
-	SetCString(content_type_value, typ);
-	hw_set_response_header(response, &content_type_name, &content_type_value);
-
-	//By default, all transfer are encoded in chunk
-	// If not.
-	if (strcmp(typ, ContentType_TextPlain))
-	{
-		// It is erronous to do so.(in chunked mode.)
-		//hw_string name, value;
-		//SETSTRING(name, "Transfer-Encoding");
-		//SETSTRING(value,"chunked");
-		//hw_set_response_header(response, &name, &value);
-
-		// It would also be erronous to do so(multiple content-length found in response, reported by Chrome)
-		//hw_string name, value;
-		//SETSTRING(name, "Content-Length");
-		//char buf[BUFSIZ];
-		//snprintf(buf, sizeof(buf), "%d", length);
-		//SETSTRING(value, buf);
-		//hw_set_response_header(response, &name, &value);
-	}
-
-	hw_string body;
-	body.value = (char*)text;
-	body.length = length;
-	hw_set_body(response, &body);
-	if(request->keep_alive)
-	{
-		hw_string keep_alive_name, keep_alive_value;
-		SETSTRING(keep_alive_name, "Connection");
-		SETSTRING(keep_alive_value, "Keep-Alive");
-		hw_set_response_header(response, &keep_alive_name, &keep_alive_value);
-	}
-	else
-	{
-		hw_set_http_version(response, 1, 0);
-	}
-	hw_http_response_send(response, (void*)"get_fetch", response_complete);
-}
-
-
-bool isPlainTextSuffix(const std::string &s)
-{
-	return "lua" == s || "tlog" == s || "txt" == s || "js" == s || "py" == s || "pl" == s;
-}
-
-bool isImageSuffix(const std::string &s)
-{
-	return "png" == s || "jpg" == s || "jpeg" == s;
-}
 
 void get_fetch(http_request* request, hw_http_response* response, void *user_data)
 {
@@ -157,10 +56,10 @@ void get_fetch(http_request* request, hw_http_response* response, void *user_dat
 				rewind(fin);
 				char *buffer = (char*)malloc((sz+1)*sizeof(char));
 				memset(buffer, 0, sz+1);
-				fread(buffer, 1, sz, fin);
+				size_t nread = fread(buffer, 1, sz, fin);
 				buffer[sz] = 0;
 				fclose(fin);
-				finish_with_type(request, response, user_data, ContentType_TextPlain, buffer, sz);
+				finish_response(request, response, HTTP_STATUS_200, user_data, ContentType_TextPlain, buffer, nread);
 				free(buffer);
 				processed = true;
 			}
@@ -180,15 +79,15 @@ void get_fetch(http_request* request, hw_http_response* response, void *user_dat
 				fclose(fin);
 				std::string mimeType = "image/";
 				mimeType += suffix;
-				finish_with_type(request, response, user_data, mimeType.c_str(), buffer, sz);
+				finish_response(request, response, HTTP_STATUS_200, user_data, mimeType.c_str(), buffer, sz);
 				free(buffer);
 				processed = true;
 			}
 		}
 		else
 		{
-			const char *word = "Unknown type";
-			finish_with_type(request, response, user_data, ContentType_TextPlain, word, strlen(word));
+			const char *word = "<font color=\"Red\">Unknown Resource Type</font>";
+			finish_response(request, response, HTTP_STATUS_500, user_data, ContentType_TextHtml, word, strlen(word));
 			processed = true;
 		}
 	}
@@ -196,7 +95,8 @@ void get_fetch(http_request* request, hw_http_response* response, void *user_dat
 	//Or else: resource not found
 	if(!processed)
 	{
-		finish_no_res(request, response, user_data);
+		const char *msg = "Ambiguous Request";
+		finish_response(request, response, HTTP_STATUS_500, user_data, ContentType_TextHtml, msg, strlen(msg));
 	}
 }
 
@@ -245,7 +145,7 @@ int getMonitorServerPort()
     return _DefaultMonitorSvrPort;
 }
 
-int helloLoop(const char *serverRootDir)
+int httpStaticFileLoop(const char *serverRootDir)
 {
 	RootExplorer::getInstance()->setWorkingDir(serverRootDir);
 	configuration config = {0};
