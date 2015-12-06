@@ -10,6 +10,7 @@
 
 #define _DefaultMonitorSvrPort  11200
 //#define CRLF "\r\n"
+#include "HtmlContentType.h"
 
 #define _PreFetch	"/fetch"
 
@@ -39,7 +40,7 @@ void finish_no_res(http_request *request, hw_http_response *response, void *user
 	hw_set_response_status_code(response, &status_code);
 	hw_string content_type_name, content_type_value;
 	SETSTRING(content_type_name, "Content-Type");
-	SETSTRING(content_type_value, "text/html");
+	SETSTRING(content_type_value, ContentType_TextPlain);
 	hw_set_response_header(response, &content_type_name, &content_type_value);
 	hw_string body;
 	SETSTRING(body, "Resource not found(haywire updated)");
@@ -65,13 +66,12 @@ void finish_with_type(http_request *request, hw_http_response *response, void *u
 	hw_set_response_status_code(response, &status_code);
 	hw_string content_type_name, content_type_value;
 	SETSTRING(content_type_name, "Content-Type");
-	//SETSTRING(content_type_value, "text/html");
 	SetCString(content_type_value, typ);
 	hw_set_response_header(response, &content_type_name, &content_type_value);
 
 	//By default, all transfer are encoded in chunk
 	// If not.
-	if (strcmp(typ, "text/html"))
+	if (strcmp(typ, ContentType_TextPlain))
 	{
 		// It is erronous to do so.(in chunked mode.)
 		//hw_string name, value;
@@ -107,7 +107,7 @@ void finish_with_type(http_request *request, hw_http_response *response, void *u
 }
 
 
-bool isTextSuffix(const std::string &s)
+bool isPlainTextSuffix(const std::string &s)
 {
 	return "lua" == s || "tlog" == s || "txt" == s || "js" == s || "py" == s || "pl" == s;
 }
@@ -147,7 +147,7 @@ void get_fetch(http_request* request, hw_http_response* response, void *user_dat
 		{
 			ch = tolower(ch);
 		}
-		if(isTextSuffix(suffix))
+		if(isPlainTextSuffix(suffix))
 		{
 			FILE *fin = fopen(request_path.c_str(), "r");
 			if(fin)
@@ -160,7 +160,7 @@ void get_fetch(http_request* request, hw_http_response* response, void *user_dat
 				fread(buffer, 1, sz, fin);
 				buffer[sz] = 0;
 				fclose(fin);
-				finish_with_type(request, response, user_data, "text/html", buffer, sz);
+				finish_with_type(request, response, user_data, ContentType_TextPlain, buffer, sz);
 				free(buffer);
 				processed = true;
 			}
@@ -188,7 +188,7 @@ void get_fetch(http_request* request, hw_http_response* response, void *user_dat
 		else
 		{
 			const char *word = "Unknown type";
-			finish_with_type(request, response, user_data, "text/html", word, strlen(word));
+			finish_with_type(request, response, user_data, ContentType_TextPlain, word, strlen(word));
 			processed = true;
 		}
 	}
@@ -213,7 +213,7 @@ void get_resourcepage(http_request* request, hw_http_response* response, void* u
     hw_set_response_status_code(response, &status_code);
     
     SETSTRING(content_type_name, "Content-Type");
-    SETSTRING(content_type_value, "text/html");
+    SETSTRING(content_type_value, ContentType_TextHtml);
     hw_set_response_header(response, &content_type_name, &content_type_value);
 
 	std::string content;

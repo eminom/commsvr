@@ -126,6 +126,7 @@
     <ClInclude Include="..\..\..\src\HeaderLengthStyle.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\HtmlContentType.h" />
     <ClInclude Include="..\..\..\src\Inception.h" />
     <ClInclude Include="..\..\..\src\ProtoDispatcher.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
