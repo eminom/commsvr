@@ -17,7 +17,9 @@ Source = \
 	src/HelloInception.cc \
 	src/DirWalker.cc \
 	src/RootExplorer.cc \
-	src/CmdBuffStr.cc
+	src/CmdBuffStr.cc \
+	src/config/HttpServerConfig.cc \
+	src/utils/ResponseUtils.cc
 
 ServerDist = src/Server.cc src/Echo.cc
 
@@ -29,7 +31,8 @@ IncludeFlag = -Ilib/libuv/include\
 	-I/usr/local/include\
 	-I/Users/eminom/dev/boost/macosx/include\
 	-Ilib/cJSON\
-	-Ilib/haywire/include
+	-Ilib/haywire/include\
+	-Isrc
 
 JsonSrc = lib/cJSON/cJSON.c
 
@@ -48,10 +51,18 @@ HaywireSrc = \
 	lib/haywire/src/haywire/http_server_impl.c \
 	lib/haywire/src/haywire/http_response.c
 
+HaywireSrcCxx = \
+	lib/haywire/src/haywire/extension/http_server_ex.cc
+
+IncludeHaySrc = \
+	-Ilib/haywire/include \
+	-Ilib/haywire/src/haywire
+
 all:
 	gcc -g -c ${IncludeFlag} ${JsonSrc} 
 	g++ -std=c++11 -g -c ${IncludeFlag} ${Source}
-	gcc -g -c -Ilib/haywire/include ${HaywireSrc}
+	gcc -g -c ${IncludeHaySrc} ${HaywireSrc}
+	g++ -g -c ${IncludeHaySrc}  ${HaywireSrcCxx}
 
 	# The old commsvr
 	#g++ -g -c ${IncludeFlag} ${Protocols}
@@ -69,3 +80,4 @@ clean:
 	rm -rf *.o
 	rm -rf *.pb.cc 
 	rm -rf *.pb.h
+	rm -f haysvr

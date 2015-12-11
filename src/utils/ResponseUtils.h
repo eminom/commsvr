@@ -6,6 +6,7 @@
 
 #include "haywire.h"
 #include <string>
+#include <cstring>
 
 void finish_response(http_request *request
 	, hw_http_response *response
