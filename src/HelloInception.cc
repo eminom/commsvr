@@ -58,7 +58,7 @@ void get_fetch(http_request* request, hw_http_response* response, void *user_dat
 			finish_response_file(request
 				, response
 				, fileGetStatusCode(request_path.c_str())
-				, "text file transfer"
+				, (void*)"text file transfer"
 				, ContentType_TextPlain
 				, request_path.c_str()
 				);
@@ -68,7 +68,7 @@ void get_fetch(http_request* request, hw_http_response* response, void *user_dat
 			finish_response_file(request
 				, response
 				, fileGetStatusCode(request_path.c_str())
-				, "file transfer"
+				, (void*)"file transfer"
 				, mimeType.c_str()
 				, request_path.c_str()
 				);
@@ -80,7 +80,7 @@ void get_fetch(http_request* request, hw_http_response* response, void *user_dat
 			finish_response_file(request
 				, response
 				, fileGetStatusCode(request_path.c_str())
-				, "unknown type file transfer"
+				, (void*)"unknown type file transfer"
 				, ""
 				, request_path.c_str()
 				);
@@ -88,7 +88,7 @@ void get_fetch(http_request* request, hw_http_response* response, void *user_dat
 		}
 		//~ Finally
 		const char *msg = "Ambiguous Request";
-		finish_response(request, response, HTTP_STATUS_500, "void()", ContentType_TextHtml, msg, strlen(msg));
+		finish_response(request, response, HTTP_STATUS_500, (void*)"void()", ContentType_TextHtml, msg, strlen(msg));
 		break;
 	}
 }

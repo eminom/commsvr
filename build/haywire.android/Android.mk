@@ -17,10 +17,12 @@ LOCAL_SRC_FILES := \
 ../../lib/haywire/src/haywire/http_server_impl.c \
 ../../lib/haywire/src/haywire/hw_string.c \
 ../../lib/haywire/src/haywire/route_compare_method.c \
-../../lib/haywire/src/haywire/server_stats.c 
+../../lib/haywire/src/haywire/server_stats.c \
+../../lib/haywire/src/haywire/extension/http_server_ex.cc \
 
 LOCAL_C_INCLUDES := \
 $(LOCAL_PATH)/../../lib/haywire/include \
+$(LOCAL_PATH)/../../lib/haywire/src/haywire \
 $(LOCAL_PATH)/../../lib/libuv/include
 
 include $(BUILD_STATIC_LIBRARY)
