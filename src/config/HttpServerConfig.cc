@@ -22,3 +22,15 @@ bool isImageSuffix(const std::string &suffix)
 		|| "jpg" == suffix 
 		|| "jpeg" == suffix;
 }
+
+
+std::string getMimeType(const std::string &suffix)
+{
+	if("png" == suffix){
+		return "image/png";
+	} else if( "jpg" == suffix || "jpeg" == suffix){
+		return "image/jpeg";
+	}
+	return "image/png"; ///` The default
+}
+

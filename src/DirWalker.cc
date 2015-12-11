@@ -149,7 +149,7 @@ void elicitDirSub(const char *now, std::vector<std::string>& fv, std::vector<std
 
 void elicitDir(const char *root, std::string &content)
 {
-	content = "Windows(Not implemented yet)";
+	//content = "Windows(Not implemented yet)";
 	std::vector<std::string> files, dirs;
 	elicitDirSub(root, files, dirs);
 	formatContentByInfo(files, dirs, root, content);

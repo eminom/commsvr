@@ -22,6 +22,15 @@ void finish_response(http_request *request
 	, const char *typeStr
 	, const char *text);
 
+
+void 
+finish_response_file(http_request *request
+	, hw_http_response *response
+	, const char *statusCode
+	, void *user_data
+	, const char *typeStr
+	, const char *filepath);
+
 void response_complete(void* pData);
 
 inline void SetString(hw_string &strIn, const std::string &content)

@@ -15,93 +15,75 @@
 
 #define _PreFetch	"/fetch"
 
+#include <sys/stat.h>
 
-void get_fetch(http_request* request, hw_http_response* response, void *user_data)
-{
-	bool processed = false;
+#define UnknownResStr	\
+	"<font color=\"Red\">Unknown Resource Type</font>"
+
+#define EmptyContentStr	\
+	"<font color=\"Red\">You may get nothing, but the server is here.(exactly)</font>"
+
+const char* fileGetStatusCode(const char *file) {
+	struct stat theS;
+	if( stat(file, &theS) < 0 ){
+		return HTTP_STATUS_500;
+	}
+	return HTTP_STATUS_200;
+}
+
+void get_fetch(http_request* request, hw_http_response* response, void *user_data) {
 	const char *url = request->url;
 	size_t lz = strlen(_PreFetch);
-	if(strlen(url) >= lz + 1 && !strncmp(_PreFetch, url, lz)  && *(url+(lz+1)))
-	{
+	while(strlen(url) >= lz + 1 && !strncmp(_PreFetch, url, lz)  && *(url+(lz+1))) {
 		const char *rest = url + (lz + 1);
 		std::string cwd = RootExplorer::getInstance()->getWorkingDir();
-		if(cwd.size()>0 && cwd[cwd.size()-1] != _END_SLASH)
-		{
+		if(cwd.size()>0 && cwd[cwd.size()-1] != _END_SLASH)	{
 			cwd += _END_SLASH_STR;
 		}
 		std::string request_path = cwd + rest;
 		const char* p = strrchr(rest, '/');
 		const char* q = strrchr(rest, '\\');
-		if ( !p || (p && q && p < q ) )
-		{
+		if ( !p || (p && q && p < q ) )	{
 			p = q;
 		}
 		const char* d = strrchr(rest, '.');
 		std::string suffix;
-		if (d && (!p || d > p) )
-		{
+		if (d && (!p || d > p) ) {
 			suffix = d + 1;
 		}
-		for(auto &ch:suffix)
-		{
+		for(auto &ch:suffix) {
 			ch = tolower(ch);
 		}
-		if(isPlainTextSuffix(suffix))
-		{
-			FILE *fin = fopen(request_path.c_str(), "r");
-			if(fin)
-			{
-				fseek(fin, 0, SEEK_END);
-				size_t sz = ftell(fin);
-				rewind(fin);
-				char *buffer = (char*)malloc((sz+1)*sizeof(char));
-				memset(buffer, 0, sz+1);
-				size_t nread = fread(buffer, 1, sz, fin);
-				buffer[sz] = 0;
-				fclose(fin);
-				finish_response(request, response, HTTP_STATUS_200, user_data, ContentType_TextPlain, buffer, nread);
-				free(buffer);
-				processed = true;
-			}
+		if(isPlainTextSuffix(suffix)) {
+			finish_response_file(request
+				, response
+				, fileGetStatusCode(request_path.c_str())
+				, "text file transfer"
+				, ContentType_TextPlain
+				, request_path.c_str()
+				);
+			break;
+		} else if(isImageSuffix(suffix)) {
+			std::string mimeType = getMimeType(suffix);
+			finish_response_file(request
+				, response
+				, HTTP_STATUS_200
+				, "file transfer"
+				, mimeType.c_str(), request_path.c_str());
+			break;
+		} else {
+			const char *word = UnknownResStr;
+			finish_response(request, response, HTTP_STATUS_500, "void(Unknown)", ContentType_TextHtml, word, strlen(word));
+			break;
 		}
-		else if(isImageSuffix(suffix))
-		{
-			FILE *fin = fopen(request_path.c_str(), "rb");
-			if(fin)
-			{
-				fseek(fin, 0, SEEK_END);
-				size_t sz = ftell(fin);
-				rewind(fin);
-				char *buffer = (char*)malloc((sz+1)*sizeof(char));
-				memset(buffer, 0, sz+1);
-				fread(buffer, 1, sz, fin);  //~ and it returns "sz". 
-				//buffer[sz] = 0;
-				fclose(fin);
-				std::string mimeType = "image/";
-				mimeType += suffix;
-				finish_response(request, response, HTTP_STATUS_200, user_data, mimeType.c_str(), buffer, sz);
-				free(buffer);
-				processed = true;
-			}
-		}
-		else
-		{
-			const char *word = "<font color=\"Red\">Unknown Resource Type</font>";
-			finish_response(request, response, HTTP_STATUS_500, user_data, ContentType_TextHtml, word, strlen(word));
-			processed = true;
-		}
-	}
-
-	//Or else: resource not found
-	if(!processed)
-	{
+		//~ Finally
 		const char *msg = "Ambiguous Request";
-		finish_response(request, response, HTTP_STATUS_500, user_data, ContentType_TextHtml, msg, strlen(msg));
+		finish_response(request, response, HTTP_STATUS_500, "void()", ContentType_TextHtml, msg, strlen(msg));
+		break;
 	}
 }
 
-void get_resourcepage(http_request* request, hw_http_response* response, void* user_data)
-{
+void get_resourcepage(http_request* request, hw_http_response* response, void* user_data) {
     hw_string status_code;
     hw_string content_type_name;
     hw_string content_type_value;
@@ -118,20 +100,16 @@ void get_resourcepage(http_request* request, hw_http_response* response, void* u
 
 	std::string content;
 	RootExplorer::getInstance()->retrieveContent(content);
-    if(!content.size())
-    {
-        content = "You may get nothing, but the server is here.(exactly)";
+    if(!content.size()) {
+        content = EmptyContentStr;
     }
     SetString(body, content);	//~ Only 1024 (*1024 by modification)
     hw_set_body(response, &body);
-    if (request->keep_alive)
-    {
+    if (request->keep_alive) {
         SETSTRING(keep_alive_name, "Connection");
         SETSTRING(keep_alive_value, "Keep-Alive");
         hw_set_response_header(response, &keep_alive_name, &keep_alive_value);
-    }
-    else
-    {
+    } else {
         hw_set_http_version(response, 1, 0);
     }
     hw_http_response_send(response, (void*)"get_resourcepage", response_complete);
@@ -140,13 +118,11 @@ void get_resourcepage(http_request* request, hw_http_response* response, void* u
 namespace inception
 {
     
-int getMonitorServerPort()
-{
+int getMonitorServerPort() {
     return _DefaultMonitorSvrPort;
 }
 
-int httpStaticFileLoop(const char *serverRootDir)
-{
+int httpStaticFileLoop(const char *serverRootDir) {
 	RootExplorer::getInstance()->setWorkingDir(serverRootDir);
 	configuration config = {0};
     config.http_listen_address = "0.0.0.0";

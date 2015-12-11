@@ -64,7 +64,7 @@ finish_response(http_request *request
 	{
 		hw_set_http_version(response, 1, 0);
 	}
-	hw_http_response_send(response, (void*)"get_fetch", response_complete);
+	hw_http_response_send(response, user_data, response_complete);
 }
 
 void 
@@ -77,4 +77,37 @@ finish_response(http_request *request
 {
 	finish_response(request, response, statusCode, user_data, typeStr, text, strlen(text));
 }
-	
+
+void 
+finish_response_file(http_request *request
+	, hw_http_response *response
+	, const char *statusCode
+	, void *user_data
+	, const char *typeStr
+	, const char *filepath)
+{
+	hw_string status_code;
+	SETSTRING(status_code, statusCode);
+	hw_set_response_status_code(response, &status_code);
+	hw_string content_type_name, content_type_value;
+	SETSTRING(content_type_name, "Content-Type");
+	SetCString(content_type_value, typeStr);
+	hw_set_response_header(response, &content_type_name, &content_type_value);
+
+	//hw_string body;
+	//body.value = (char*)text;
+	//body.length = length;
+	//hw_set_body(response, &body);
+	if(request->keep_alive)
+	{
+		hw_string keep_alive_name, keep_alive_value;
+		SETSTRING(keep_alive_name, "Connection");
+		SETSTRING(keep_alive_value, "Keep-Alive");
+		hw_set_response_header(response, &keep_alive_name, &keep_alive_value);
+	}
+	else
+	{
+		hw_set_http_version(response, 1, 0);
+	}
+	hw_http_response_send_file(response, user_data, filepath, response_complete);
+}

@@ -4,6 +4,9 @@
 #include "Inception.h"
 #include "StreamBuffer.h"
 
+//For some test.
+#include "test/TestDep.h"
+
 #ifdef _WIN32
 #include <windows.h>
 #else

@@ -7,6 +7,7 @@
 
 bool isPlainTextSuffix(const std::string&);
 bool isImageSuffix(const std::string&);
+std::string getMimeType(const std::string &);
 
 
 //~ 
