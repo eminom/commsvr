@@ -67,13 +67,23 @@ void get_fetch(http_request* request, hw_http_response* response, void *user_dat
 			std::string mimeType = getMimeType(suffix);
 			finish_response_file(request
 				, response
-				, HTTP_STATUS_200
+				, fileGetStatusCode(request_path.c_str())
 				, "file transfer"
-				, mimeType.c_str(), request_path.c_str());
+				, mimeType.c_str()
+				, request_path.c_str()
+				);
 			break;
 		} else {
-			const char *word = UnknownResStr;
-			finish_response(request, response, HTTP_STATUS_500, "void(Unknown)", ContentType_TextHtml, word, strlen(word));
+			//const char *word = UnknownResStr;
+			//finish_response(request, response, HTTP_STATUS_500, "void(Unknown)", ContentType_TextHtml, word, strlen(word));
+			//break;
+			finish_response_file(request
+				, response
+				, fileGetStatusCode(request_path.c_str())
+				, "unknown type file transfer"
+				, ""
+				, request_path.c_str()
+				);
 			break;
 		}
 		//~ Finally
