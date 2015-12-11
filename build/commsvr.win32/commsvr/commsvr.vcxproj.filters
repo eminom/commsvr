@@ -49,6 +49,9 @@
     <ClCompile Include="..\..\..\src\config\HttpServerConfig.cc">
       <Filter>Source\config</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\test\TestDep.cc">
+      <Filter>Source\test</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\client_proc_t.h">
@@ -99,9 +102,6 @@
     <ClInclude Include="..\..\..\src\SlashDef.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\HtmlContentType.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\utils\ResponseUtils.h">
       <Filter>Source\utils</Filter>
     </ClInclude>
@@ -110,6 +110,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\config\HttpServerConfig.h">
       <Filter>Source\config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\test\TestDep.h">
+      <Filter>Source\test</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +127,9 @@
     </Filter>
     <Filter Include="Source\config">
       <UniqueIdentifier>{972efa3d-2b6c-42af-91f9-b803011c83f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\test">
+      <UniqueIdentifier>{4d7d125a-e12c-4fd6-b35d-3cbf343e0098}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

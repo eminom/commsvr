@@ -114,6 +114,7 @@
     <ClCompile Include="..\..\..\src\StreamState.cc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\test\TestDep.cc" />
     <ClCompile Include="..\..\..\src\utils\ResponseUtils.cc" />
   </ItemGroup>
   <ItemGroup>
@@ -130,7 +131,6 @@
     <ClInclude Include="..\..\..\src\HeaderLengthStyle.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\HtmlContentType.h" />
     <ClInclude Include="..\..\..\src\Inception.h" />
     <ClInclude Include="..\..\..\src\ProtoDispatcher.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -153,6 +153,7 @@
     <ClInclude Include="..\..\..\src\StreamState.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\test\TestDep.h" />
     <ClInclude Include="..\..\..\src\utils\ResponseUtils.h" />
     <ClInclude Include="..\..\..\src\XAssert.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
