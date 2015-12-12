@@ -56,7 +56,8 @@ HaywireSrcCxx = \
 
 IncludeHaySrc = \
 	-Ilib/haywire/include \
-	-Ilib/haywire/src/haywire
+	-Ilib/haywire/src/haywire \
+	-Ilib/libuv/include
 
 all:
 	gcc -g -c ${IncludeFlag} ${JsonSrc} 
