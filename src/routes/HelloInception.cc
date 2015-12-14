@@ -13,7 +13,8 @@
 #include "utils/ResponseUtils.h"
 #include "config/HttpServerConfig.h"
 
-#define _PreFetch	"/fetch"
+#define _PreResourcePage	"/static"
+#define _PreFetch			"/fetch"
 
 #include <sys/stat.h>
 
@@ -22,6 +23,10 @@
 
 #define EmptyContentStr	\
 	"<font color=\"Red\">You may get nothing, but the server is here.(exactly)</font>"
+
+
+#define DummyContentStr \
+	"<center>OH YES OH NO OH GOD</center>"
 
 const char* fileGetStatusCode(const char *file) {
 	struct stat theS;
@@ -32,9 +37,10 @@ const char* fileGetStatusCode(const char *file) {
 }
 
 void get_fetch(http_request* request, hw_http_response* response, void *user_data) {
+	bool processed = false;
 	const char *url = request->url;
 	size_t lz = strlen(_PreFetch);
-	while(strlen(url) >= lz + 1 && !strncmp(_PreFetch, url, lz)  && *(url+(lz+1))) {
+	if(strlen(url) >= lz + 1 && !strncmp(_PreFetch, url, lz)  && *(url+(lz+1))) {
 		const char *rest = url + (lz + 1);
 		std::string cwd = RootExplorer::getInstance()->getWorkingDir();
 		if(cwd.size()>0 && cwd[cwd.size()-1] != _END_SLASH)	{
@@ -62,7 +68,7 @@ void get_fetch(http_request* request, hw_http_response* response, void *user_dat
 				, ContentType_TextPlain
 				, request_path.c_str()
 				);
-			break;
+			processed = true;
 		} else if(isImageSuffix(suffix)) {
 			std::string mimeType = getImageMimeType(suffix);
 			finish_response_file(request
@@ -72,7 +78,7 @@ void get_fetch(http_request* request, hw_http_response* response, void *user_dat
 				, mimeType.c_str()
 				, request_path.c_str()
 				);
-			break;
+			processed = true;
 		} else {
 			//const char *word = UnknownResStr;
 			//finish_response(request, response, HTTP_STATUS_500, "void(Unknown)", ContentType_TextHtml, word, strlen(word));
@@ -84,12 +90,12 @@ void get_fetch(http_request* request, hw_http_response* response, void *user_dat
 				, ContentType_BinaryStream
 				, request_path.c_str()
 				);
-			break;
+			processed = true;
 		}
-		//~ Finally
-		const char *msg = "Ambiguous Request";
-		finish_response(request, response, HTTP_STATUS_500, (void*)"void()", ContentType_TextPlain, msg, strlen(msg));
-		break;
+	} 
+	if (!processed) {
+		const char *msg = DummyContentStr;
+		finish_response(request, response, HTTP_STATUS_500, (void*)"void()", ContentType_TextHtml, msg, strlen(msg));
 	}
 }
 
@@ -140,7 +146,7 @@ int httpStaticFileLoop(const char *serverRootDir) {
 	config.thread_count = 0; //~ by default
 	config.parser = "http_parser";
     hw_init_with_config(&config);
-    hw_http_add_route("/",      get_resourcepage, NULL);  //Is the literal string a const ? (VS nods)
+    hw_http_add_route(_PreResourcePage, get_resourcepage, NULL);  //Is the literal string a const ? (VS nods)
 	hw_http_add_route(_PreFetch, get_fetch, NULL);
     return hw_http_open();
 }
