@@ -16,6 +16,7 @@
 #define _PreIndexServer		"/index"
 #define _PreResourcePage	"/static"
 #define _PreFetch			"/fetch"
+#define _PreUpload			"/upload.jsp"
 
 #include <sys/stat.h>
 
@@ -112,6 +113,16 @@ void get_indexserver(http_request *request, hw_http_response *response, void *us
 		);
 }
 
+void get_upload(http_request *request, hw_http_response *response, void *user_data){
+	finish_response(request
+		, response
+		, HTTP_STATUS_500
+		, (void*)"file upload request done"
+		, ContentType_TextPlain
+		, "Not supported for now"
+		);
+}
+
 void get_resourcepage(http_request* request, hw_http_response* response, void* user_data) {
     hw_string status_code;
     hw_string content_type_name;
@@ -162,6 +173,7 @@ int httpStaticFileLoop(const char *serverRootDir) {
 	hw_http_add_route(_PreIndexServer,  get_indexserver, NULL);
     hw_http_add_route(_PreResourcePage, get_resourcepage, NULL);  //Is the literal string a const ? (VS nods)
 	hw_http_add_route(_PreFetch, get_fetch, NULL);
+	hw_http_add_route(_PreUpload, get_upload, NULL);
     return hw_http_open();
 }
 
