@@ -6,6 +6,9 @@
 
 #include "base/HtmlContentType.h"
 
+#define _FileNotFoundStr	\
+	"<b>File not found. Too bad</b>"
+
 void response_complete(void* pData)
 {
 	printf("response_complete(%s)\n", (char*)pData);
@@ -84,30 +87,42 @@ finish_response_file(http_request *request
 	, const char *statusCode
 	, void *user_data
 	, const char *typeStr
-	, const char *filepath)
-{
+	, const char *filepath) {
 	hw_string status_code;
 	SETSTRING(status_code, statusCode);
 	hw_set_response_status_code(response, &status_code);
-	hw_string content_type_name, content_type_value;
-	SETSTRING(content_type_name, "Content-Type");
-	SetCString(content_type_value, typeStr);
-	hw_set_response_header(response, &content_type_name, &content_type_value);
 
 	//hw_string body;
 	//body.value = (char*)text;
 	//body.length = length;
 	//hw_set_body(response, &body);
-	if(request->keep_alive)
-	{
+	if(request->keep_alive)	{
 		hw_string keep_alive_name, keep_alive_value;
 		SETSTRING(keep_alive_name, "Connection");
 		SETSTRING(keep_alive_value, "Keep-Alive");
 		hw_set_response_header(response, &keep_alive_name, &keep_alive_value);
-	}
-	else
-	{
+	} else {
 		hw_set_http_version(response, 1, 0);
 	}
-	hw_http_response_send_file(response, user_data, filepath, response_complete);
+
+	if( !strcmp(statusCode, HTTP_STATUS_200)){
+		hw_string content_type_name;
+		hw_string content_type_value;
+		SETSTRING(content_type_name, "Content-Type");
+		SetCString(content_type_value, typeStr);
+		hw_set_response_header(response, &content_type_name, &content_type_value);
+		hw_http_response_send_file(response, user_data, filepath, response_complete);
+	} else {
+		//File not found. Override the content-type
+		hw_string content_type_name;
+		hw_string content_type_value;
+		SETSTRING(content_type_name,  "Content-Type");
+		SetCString(content_type_value, ContentType_TextHtml);
+		hw_set_response_header(response, &content_type_name, &content_type_value);
+		hw_string body;
+		body.value = _FileNotFoundStr;
+		body.length = strlen(body.value);
+		hw_set_body(response, &body);
+		hw_http_response_send(response, (void*)("file not found"), response_complete);
+	}
 }

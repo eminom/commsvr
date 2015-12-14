@@ -13,6 +13,7 @@
 #include "utils/ResponseUtils.h"
 #include "config/HttpServerConfig.h"
 
+#define _PreIndexServer		"/index"
 #define _PreResourcePage	"/static"
 #define _PreFetch			"/fetch"
 
@@ -99,6 +100,18 @@ void get_fetch(http_request* request, hw_http_response* response, void *user_dat
 	}
 }
 
+void get_indexserver(http_request *request, hw_http_response *response, void *user_data) {
+	std::string cwd = RootExplorer::getInstance()->getWorkingDir();
+	std::string rq_path = cwd + "/index.html";
+	finish_response_file(request
+		, response
+		, fileGetStatusCode(rq_path.c_str())
+		, (void*)"index page"
+		, ContentType_TextHtml
+		, rq_path.c_str()
+		);
+}
+
 void get_resourcepage(http_request* request, hw_http_response* response, void* user_data) {
     hw_string status_code;
     hw_string content_type_name;
@@ -146,6 +159,7 @@ int httpStaticFileLoop(const char *serverRootDir) {
 	config.thread_count = 0; //~ by default
 	config.parser = "http_parser";
     hw_init_with_config(&config);
+	hw_http_add_route(_PreIndexServer,  get_indexserver, NULL);
     hw_http_add_route(_PreResourcePage, get_resourcepage, NULL);  //Is the literal string a const ? (VS nods)
 	hw_http_add_route(_PreFetch, get_fetch, NULL);
     return hw_http_open();
