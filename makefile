@@ -14,9 +14,9 @@ Source = \
 	src/StreamBuffer.cc \
 	src/client_proc_t.cc \
 	src/Inception.cc \
-	src/HelloInception.cc \
-	src/DirWalker.cc \
-	src/RootExplorer.cc \
+	src/routes/HelloInception.cc \
+	src/files/DirWalker.cc \
+	src/files/RootExplorer.cc \
 	src/CmdBuffStr.cc \
 	src/config/HttpServerConfig.cc \
 	src/utils/ResponseUtils.cc
