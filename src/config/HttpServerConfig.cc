@@ -24,7 +24,7 @@ bool isImageSuffix(const std::string &suffix)
 }
 
 
-std::string getMimeType(const std::string &suffix)
+std::string getImageMimeType(const std::string &suffix)
 {
 	if("png" == suffix){
 		return "image/png";

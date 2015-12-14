@@ -64,7 +64,7 @@ void get_fetch(http_request* request, hw_http_response* response, void *user_dat
 				);
 			break;
 		} else if(isImageSuffix(suffix)) {
-			std::string mimeType = getMimeType(suffix);
+			std::string mimeType = getImageMimeType(suffix);
 			finish_response_file(request
 				, response
 				, fileGetStatusCode(request_path.c_str())
@@ -81,14 +81,14 @@ void get_fetch(http_request* request, hw_http_response* response, void *user_dat
 				, response
 				, fileGetStatusCode(request_path.c_str())
 				, (void*)"unknown type file transfer"
-				, ""
+				, ContentType_BinaryStream
 				, request_path.c_str()
 				);
 			break;
 		}
 		//~ Finally
 		const char *msg = "Ambiguous Request";
-		finish_response(request, response, HTTP_STATUS_500, (void*)"void()", ContentType_TextHtml, msg, strlen(msg));
+		finish_response(request, response, HTTP_STATUS_500, (void*)"void()", ContentType_TextPlain, msg, strlen(msg));
 		break;
 	}
 }
