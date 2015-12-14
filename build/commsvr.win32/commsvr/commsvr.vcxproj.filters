@@ -34,15 +34,6 @@
     <ClCompile Include="..\..\..\src\CommSvr.cc">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\DirWalker.cc">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\RootExplorer.cc">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\HelloInception.cc">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\utils\ResponseUtils.cc">
       <Filter>Source\utils</Filter>
     </ClCompile>
@@ -51,6 +42,15 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\test\TestDep.cc">
       <Filter>Source\test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\files\DirWalker.cc">
+      <Filter>Source\files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\files\RootExplorer.cc">
+      <Filter>Source\files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\routes\HelloInception.cc">
+      <Filter>Source\routes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -93,12 +93,6 @@
     <ClInclude Include="..\..\..\src\CmdBuffStr.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\DirWalker.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\RootExplorer.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\SlashDef.h">
       <Filter>Source</Filter>
     </ClInclude>
@@ -113,6 +107,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\test\TestDep.h">
       <Filter>Source\test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\files\DirWalker.h">
+      <Filter>Source\files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\files\RootExplorer.h">
+      <Filter>Source\files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +130,12 @@
     </Filter>
     <Filter Include="Source\test">
       <UniqueIdentifier>{4d7d125a-e12c-4fd6-b35d-3cbf343e0098}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\files">
+      <UniqueIdentifier>{99260bb0-b889-4025-b500-c3b8a3e131fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\routes">
+      <UniqueIdentifier>{a4e151a6-e7a8-45dc-b155-fd91aff6177a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
