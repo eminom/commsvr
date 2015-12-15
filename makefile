@@ -11,13 +11,13 @@ Library = \
 #			src/client_proc_t.cc src/ServerModel.cc \
 
 Source = \
-	src/StreamBuffer.cc \
+	src/utils/StreamBuffer.cc \
 	src/client_proc_t.cc \
-	src/Inception.cc \
+	src/services/Inception.cc \
 	src/routes/HelloInception.cc \
 	src/files/DirWalker.cc \
 	src/files/RootExplorer.cc \
-	src/CmdBuffStr.cc \
+	src/utils/CmdBuffStr.cc \
 	src/config/HttpServerConfig.cc \
 	src/utils/ResponseUtils.cc
 
