@@ -16,19 +16,10 @@
     <ClCompile Include="..\..\..\src\ServerModel.cc">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\StreamBuffer.cc">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\StreamState.cc">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\Inception.cc">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\main.cc">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\CmdBuffStr.cc">
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\CommSvr.cc">
@@ -51,6 +42,18 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\routes\HelloInception.cc">
       <Filter>Source\routes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\utils\CmdBuffStr.cc">
+      <Filter>Source\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\utils\StreamBuffer.cc">
+      <Filter>Source\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\utils\StreamBufferEx.cpp">
+      <Filter>Source\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\services\Inception.cc">
+      <Filter>Source\service</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -78,22 +81,10 @@
     <ClInclude Include="..\..\..\src\ServerModel.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\StreamBuffer.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\StreamState.h">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\XAssert.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\Inception.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\CmdBuffStr.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\SlashDef.h">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\utils\ResponseUtils.h">
@@ -113,6 +104,21 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\files\RootExplorer.h">
       <Filter>Source\files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\utils\CmdBuffStr.h">
+      <Filter>Source\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\utils\StreamBuffer.h">
+      <Filter>Source\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\utils\StreamBufferEx.h">
+      <Filter>Source\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\utils\SlashDef.h">
+      <Filter>Source\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\services\Inception.h">
+      <Filter>Source\service</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +142,9 @@
     </Filter>
     <Filter Include="Source\routes">
       <UniqueIdentifier>{a4e151a6-e7a8-45dc-b155-fd91aff6177a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\service">
+      <UniqueIdentifier>{3d126111-08f0-4e52-adff-b52d2a74b01a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

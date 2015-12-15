@@ -88,7 +88,6 @@
     <ClCompile Include="..\..\..\src\client_proc_t.cc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\CmdBuffStr.cc" />
     <ClCompile Include="..\..\..\src\CommSvr.cc" />
     <ClCompile Include="..\..\..\src\config\HttpServerConfig.cc" />
     <ClCompile Include="..\..\..\src\files\DirWalker.cc" />
@@ -96,7 +95,6 @@
     <ClCompile Include="..\..\..\src\main.cc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\Inception.cc" />
     <ClCompile Include="..\..\..\src\ProtoDispatcher.cc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -110,19 +108,23 @@
     <ClCompile Include="..\..\..\src\ServerModel.cc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\StreamBuffer.cc" />
+    <ClCompile Include="..\..\..\src\services\Inception.cc" />
     <ClCompile Include="..\..\..\src\StreamState.cc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\..\src\test\TestDep.cc" />
+    <ClCompile Include="..\..\..\src\utils\CmdBuffStr.cc" />
     <ClCompile Include="..\..\..\src\utils\ResponseUtils.cc" />
+    <ClCompile Include="..\..\..\src\utils\StreamBuffer.cc" />
+    <ClCompile Include="..\..\..\src\utils\StreamBufferEx.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\base\HtmlContentType.h" />
     <ClInclude Include="..\..\..\src\client_proc_t.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\CmdBuffStr.h" />
     <ClInclude Include="..\..\..\src\config\HttpServerConfig.h" />
     <ClInclude Include="..\..\..\src\EnvConfig.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -132,7 +134,6 @@
     <ClInclude Include="..\..\..\src\HeaderLengthStyle.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\Inception.h" />
     <ClInclude Include="..\..\..\src\ProtoDispatcher.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
@@ -148,13 +149,18 @@
     <ClInclude Include="..\..\..\src\ServerModel.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\SlashDef.h" />
-    <ClInclude Include="..\..\..\src\StreamBuffer.h" />
+    <ClInclude Include="..\..\..\src\services\Inception.h" />
     <ClInclude Include="..\..\..\src\StreamState.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\..\..\src\test\TestDep.h" />
+    <ClInclude Include="..\..\..\src\utils\CmdBuffStr.h" />
     <ClInclude Include="..\..\..\src\utils\ResponseUtils.h" />
+    <ClInclude Include="..\..\..\src\utils\SlashDef.h" />
+    <ClInclude Include="..\..\..\src\utils\StreamBuffer.h" />
+    <ClInclude Include="..\..\..\src\utils\StreamBufferEx.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="..\..\..\src\XAssert.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>

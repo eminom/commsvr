@@ -47,7 +47,9 @@
                                 }
                             }
                         };
-                        xhr.sendAsBinary(reader.result);
+                        //xhr.sendAsBinary(reader.result);
+                        console.log("OK, I am about to upload");
+                        xhr.send(reader.result);
                     }
                 };
                 reader.readAsBinaryString(file);
