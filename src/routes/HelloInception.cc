@@ -115,6 +115,11 @@ void get_indexserver(http_request *request, hw_http_response *response, void *us
 }
 
 void get_upload(http_request *request, hw_http_response *response, void *user_data){
+
+	printf("upload request is being processed\n");
+	if(request->body){
+		printf("Content-Length: %d\n", request->body->length);
+	}
 	finish_response(request
 		, response
 		, HTTP_STATUS_500

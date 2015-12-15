@@ -29,13 +29,24 @@
                         console.log(reader.error);
                     } else {
                         document.getElementById("bytesRead").textContent = file.size;
+                        console.log("file.size is ", file.size);
+                        console.log("typeof(reader.result) is " + typeof(reader.result));
+                        if(typeof(reader.result)==="string"){
+                            console.log("reader.result.length is " + reader.result.length);
+                            console.log("if same : " + (reader.result.length == file.size));
+                        }
                         var xhr = new XMLHttpRequest;
+                        var upload_url = "/upload.jsp?fileName=" + file.name;
                         xhr.open(
-                                "POST",                                 // method
-                                "upload.jsp?fileName=" + file.name,     // target url
-                                true                                    // let's be specific
+                                "POST",         // method
+                                upload_url,     // target url
+                                true            // let's be specific(async)
                         );
-                        xhr.overrideMimeType("application/octet-stream");
+                        xhr.setRequestHeader("Content-Length", file.size.toString());
+                        //xhr.setRequestHeader("Content-Type",
+                        //xhr.setRequestHeader("enctype", "application/octet-stream");
+                        //xhr.overrideMimeType("application/octet-stream");
+                        xhr.overrideMimeType("text/plain; charset=x-user-defined");
 
                         // It seems that sendAsBinary is deprecated.
                         // Use send instead(which has so many overrides)
@@ -44,11 +55,14 @@
                                 if (xhr.status == 200) {
                                     console.log("upload complete");
                                     console.log("response: " + xhr.responseText);
+                                } else {
+                                    console.error("response code: " + xhr.status);
+                                    console.error("response: " + xhr.responseText);
                                 }
                             }
                         };
                         //xhr.sendAsBinary(reader.result);
-                        console.log("OK, I am about to upload");
+                        console.log("OK, I am about to upload <" + reader.result.length + "> byte(s)");
                         xhr.send(reader.result);
                     }
                 };
