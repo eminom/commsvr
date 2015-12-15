@@ -63,11 +63,12 @@ void get_fetch(http_request* request, hw_http_response* response, void *user_dat
 			ch = tolower(ch);
 		}
 		if(isPlainTextSuffix(suffix)) {
+			std::string textMimeType = getTextMimeType(suffix);
 			finish_response_file(request
 				, response
 				, fileGetStatusCode(request_path.c_str())
 				, (void*)"text file transfer"
-				, ContentType_TextPlain
+				, textMimeType.c_str()
 				, request_path.c_str()
 				);
 			processed = true;

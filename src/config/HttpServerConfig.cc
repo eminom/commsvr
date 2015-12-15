@@ -13,7 +13,16 @@ bool isPlainTextSuffix(const std::string &suffix)
 		|| "pl" == suffix
 		|| "filters" == suffix
 		|| "vcxproj" == suffix
-		|| "user" == suffix;
+		|| "user" == suffix
+		|| "html" == suffix;
+}
+
+std::string getTextMimeType(const std::string &suffix)
+{
+	if ( "html" == suffix ) {
+		return "text/html";
+	}
+	return "text/plain";
 }
 
 bool isImageSuffix(const std::string &suffix)
