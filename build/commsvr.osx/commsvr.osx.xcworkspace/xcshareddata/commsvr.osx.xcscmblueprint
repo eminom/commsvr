@@ -1,0 +1,44 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "C5A68C10D786048571955183EC1625D0CFD5C441",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "9B7F3739B461AB09724AEF42132976A9C1A2B645" : 0,
+    "753EDB9A937D7747783662675802D4DFE2160828" : 0,
+    "C5A68C10D786048571955183EC1625D0CFD5C441" : 0,
+    "BC09C09DC2853BA9B3A84860F78F2E9FD790D8C3" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "DE5B3F9A-7E7E-4A61-8D5E-E8B220C8D7EF",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "9B7F3739B461AB09724AEF42132976A9C1A2B645" : "..\/..\/..",
+    "753EDB9A937D7747783662675802D4DFE2160828" : "commsvr\/lib\/haywire\/",
+    "C5A68C10D786048571955183EC1625D0CFD5C441" : "commsvr\/",
+    "BC09C09DC2853BA9B3A84860F78F2E9FD790D8C3" : "commsvr\/lib\/libuv\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "commsvr.osx",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "build\/commsvr.osx\/commsvr.osx.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/eminom\/Haywire.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "753EDB9A937D7747783662675802D4DFE2160828"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/eminom\/gamehall.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9B7F3739B461AB09724AEF42132976A9C1A2B645"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/libuv\/libuv",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "BC09C09DC2853BA9B3A84860F78F2E9FD790D8C3"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/eminom\/commsvr.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C5A68C10D786048571955183EC1625D0CFD5C441"
+    }
+  ]
+}

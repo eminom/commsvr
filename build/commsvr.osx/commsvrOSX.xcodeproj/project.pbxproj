@@ -1,0 +1,482 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DC22807C1C206C8300687DFD /* client_proc_t.cc in Sources */ = {isa = PBXBuildFile; fileRef = DC2280501C206C8300687DFD /* client_proc_t.cc */; };
+		DC22807D1C206C8300687DFD /* CommSvr.cc in Sources */ = {isa = PBXBuildFile; fileRef = DC2280521C206C8300687DFD /* CommSvr.cc */; };
+		DC22807E1C206C8300687DFD /* HttpServerConfig.cc in Sources */ = {isa = PBXBuildFile; fileRef = DC2280541C206C8300687DFD /* HttpServerConfig.cc */; };
+		DC22807F1C206C8300687DFD /* DirWalker.cc in Sources */ = {isa = PBXBuildFile; fileRef = DC2280581C206C8300687DFD /* DirWalker.cc */; };
+		DC2280801C206C8300687DFD /* RootExplorer.cc in Sources */ = {isa = PBXBuildFile; fileRef = DC22805A1C206C8300687DFD /* RootExplorer.cc */; };
+		DC2280841C206C8300687DFD /* HelloInception.cc in Sources */ = {isa = PBXBuildFile; fileRef = DC2280631C206C8300687DFD /* HelloInception.cc */; };
+		DC2280871C206C8300687DFD /* Inception.cc in Sources */ = {isa = PBXBuildFile; fileRef = DC22806A1C206C8300687DFD /* Inception.cc */; };
+		DC22808A1C206C8300687DFD /* CmdBuffStr.cc in Sources */ = {isa = PBXBuildFile; fileRef = DC2280721C206C8300687DFD /* CmdBuffStr.cc */; };
+		DC22808B1C206C8300687DFD /* ResponseUtils.cc in Sources */ = {isa = PBXBuildFile; fileRef = DC2280741C206C8300687DFD /* ResponseUtils.cc */; };
+		DC22808C1C206C8300687DFD /* StreamBuffer.cc in Sources */ = {isa = PBXBuildFile; fileRef = DC2280771C206C8300687DFD /* StreamBuffer.cc */; };
+		DC2280901C206D3B00687DFD /* libhaywire OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC22808E1C206D3B00687DFD /* libhaywire OSX.a */; };
+		DC2280911C206D3B00687DFD /* libuv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC22808F1C206D3B00687DFD /* libuv.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DC2280961C206E2C00687DFD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC2280921C206E2C00687DFD /* haywire OSX.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DC227F4D1C2066C600687DFD;
+			remoteInfo = "haywire OSX";
+		};
+		DC2280F11C206EDE00687DFD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC2280EA1C206EDE00687DFD /* uv.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1366FBDA3B41EA03E9CC86CA;
+			remoteInfo = libuv;
+		};
+		DC2280F31C206EDE00687DFD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC2280EA1C206EDE00687DFD /* uv.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 64757BCA7335FEFCED9A25EC;
+			remoteInfo = "run-tests";
+		};
+		DC2280F51C206EDE00687DFD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC2280EA1C206EDE00687DFD /* uv.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0F9AD78A28D4AB83078B4C46;
+			remoteInfo = "run-benchmarks";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DC2280411C206C5C00687DFD /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		DC2280431C206C5C00687DFD /* commsvrOSX */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = commsvrOSX; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC22804F1C206C8300687DFD /* HtmlContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HtmlContentType.h; sourceTree = "<group>"; };
+		DC2280501C206C8300687DFD /* client_proc_t.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = client_proc_t.cc; sourceTree = "<group>"; };
+		DC2280511C206C8300687DFD /* client_proc_t.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = client_proc_t.h; sourceTree = "<group>"; };
+		DC2280521C206C8300687DFD /* CommSvr.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CommSvr.cc; sourceTree = "<group>"; };
+		DC2280541C206C8300687DFD /* HttpServerConfig.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HttpServerConfig.cc; sourceTree = "<group>"; };
+		DC2280551C206C8300687DFD /* HttpServerConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpServerConfig.h; sourceTree = "<group>"; };
+		DC2280561C206C8300687DFD /* EnvConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnvConfig.h; sourceTree = "<group>"; };
+		DC2280581C206C8300687DFD /* DirWalker.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DirWalker.cc; sourceTree = "<group>"; };
+		DC2280591C206C8300687DFD /* DirWalker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirWalker.h; sourceTree = "<group>"; };
+		DC22805A1C206C8300687DFD /* RootExplorer.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RootExplorer.cc; sourceTree = "<group>"; };
+		DC22805B1C206C8300687DFD /* RootExplorer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootExplorer.h; sourceTree = "<group>"; };
+		DC2280631C206C8300687DFD /* HelloInception.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HelloInception.cc; sourceTree = "<group>"; };
+		DC22806A1C206C8300687DFD /* Inception.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Inception.cc; sourceTree = "<group>"; };
+		DC22806B1C206C8300687DFD /* Inception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Inception.h; sourceTree = "<group>"; };
+		DC22806F1C206C8300687DFD /* TestDep.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestDep.cc; sourceTree = "<group>"; };
+		DC2280701C206C8300687DFD /* TestDep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestDep.h; sourceTree = "<group>"; };
+		DC2280721C206C8300687DFD /* CmdBuffStr.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CmdBuffStr.cc; sourceTree = "<group>"; };
+		DC2280731C206C8300687DFD /* CmdBuffStr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CmdBuffStr.h; sourceTree = "<group>"; };
+		DC2280741C206C8300687DFD /* ResponseUtils.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ResponseUtils.cc; sourceTree = "<group>"; };
+		DC2280751C206C8300687DFD /* ResponseUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResponseUtils.h; sourceTree = "<group>"; };
+		DC2280761C206C8300687DFD /* SlashDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlashDef.h; sourceTree = "<group>"; };
+		DC2280771C206C8300687DFD /* StreamBuffer.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StreamBuffer.cc; sourceTree = "<group>"; };
+		DC2280781C206C8300687DFD /* StreamBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamBuffer.h; sourceTree = "<group>"; };
+		DC2280791C206C8300687DFD /* StreamBufferEx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StreamBufferEx.cpp; sourceTree = "<group>"; };
+		DC22807A1C206C8300687DFD /* StreamBufferEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamBufferEx.h; sourceTree = "<group>"; };
+		DC22807B1C206C8300687DFD /* XAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAssert.h; sourceTree = "<group>"; };
+		DC22808E1C206D3B00687DFD /* libhaywire OSX.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libhaywire OSX.a"; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/commsvr.osx-gvyjesogqrlvdievnukvftsrqvtc/Build/Products/Debug/libhaywire OSX.a"; sourceTree = "<group>"; };
+		DC22808F1C206D3B00687DFD /* libuv.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libuv.a; path = ../../lib/libuv/build/Debug/libuv.a; sourceTree = "<group>"; };
+		DC2280921C206E2C00687DFD /* haywire OSX.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "haywire OSX.xcodeproj"; sourceTree = "<group>"; };
+		DC2280EA1C206EDE00687DFD /* uv.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = uv.xcodeproj; path = "/Users/eminom2/GDVS/GameHallX/frameworks/runtime-src/Third/commsvr/build/../lib/libuv/uv.xcodeproj"; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DC2280401C206C5C00687DFD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC2280901C206D3B00687DFD /* libhaywire OSX.a in Frameworks */,
+				DC2280911C206D3B00687DFD /* libuv.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DC22803A1C206C5C00687DFD = {
+			isa = PBXGroup;
+			children = (
+				DC2280EA1C206EDE00687DFD /* uv.xcodeproj */,
+				DC2280921C206E2C00687DFD /* haywire OSX.xcodeproj */,
+				DC22808E1C206D3B00687DFD /* libhaywire OSX.a */,
+				DC22808F1C206D3B00687DFD /* libuv.a */,
+				DC22804D1C206C8300687DFD /* src */,
+				DC2280441C206C5C00687DFD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DC2280441C206C5C00687DFD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DC2280431C206C5C00687DFD /* commsvrOSX */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DC22804D1C206C8300687DFD /* src */ = {
+			isa = PBXGroup;
+			children = (
+				DC22804E1C206C8300687DFD /* base */,
+				DC2280501C206C8300687DFD /* client_proc_t.cc */,
+				DC2280511C206C8300687DFD /* client_proc_t.h */,
+				DC2280521C206C8300687DFD /* CommSvr.cc */,
+				DC2280531C206C8300687DFD /* config */,
+				DC2280561C206C8300687DFD /* EnvConfig.h */,
+				DC2280571C206C8300687DFD /* files */,
+				DC2280621C206C8300687DFD /* routes */,
+				DC2280691C206C8300687DFD /* services */,
+				DC22806E1C206C8300687DFD /* test */,
+				DC2280711C206C8300687DFD /* utils */,
+				DC22807B1C206C8300687DFD /* XAssert.h */,
+			);
+			name = src;
+			path = ../../src;
+			sourceTree = "<group>";
+		};
+		DC22804E1C206C8300687DFD /* base */ = {
+			isa = PBXGroup;
+			children = (
+				DC22804F1C206C8300687DFD /* HtmlContentType.h */,
+			);
+			path = base;
+			sourceTree = "<group>";
+		};
+		DC2280531C206C8300687DFD /* config */ = {
+			isa = PBXGroup;
+			children = (
+				DC2280541C206C8300687DFD /* HttpServerConfig.cc */,
+				DC2280551C206C8300687DFD /* HttpServerConfig.h */,
+			);
+			path = config;
+			sourceTree = "<group>";
+		};
+		DC2280571C206C8300687DFD /* files */ = {
+			isa = PBXGroup;
+			children = (
+				DC2280581C206C8300687DFD /* DirWalker.cc */,
+				DC2280591C206C8300687DFD /* DirWalker.h */,
+				DC22805A1C206C8300687DFD /* RootExplorer.cc */,
+				DC22805B1C206C8300687DFD /* RootExplorer.h */,
+			);
+			path = files;
+			sourceTree = "<group>";
+		};
+		DC2280621C206C8300687DFD /* routes */ = {
+			isa = PBXGroup;
+			children = (
+				DC2280631C206C8300687DFD /* HelloInception.cc */,
+			);
+			path = routes;
+			sourceTree = "<group>";
+		};
+		DC2280691C206C8300687DFD /* services */ = {
+			isa = PBXGroup;
+			children = (
+				DC22806A1C206C8300687DFD /* Inception.cc */,
+				DC22806B1C206C8300687DFD /* Inception.h */,
+			);
+			path = services;
+			sourceTree = "<group>";
+		};
+		DC22806E1C206C8300687DFD /* test */ = {
+			isa = PBXGroup;
+			children = (
+				DC22806F1C206C8300687DFD /* TestDep.cc */,
+				DC2280701C206C8300687DFD /* TestDep.h */,
+			);
+			path = test;
+			sourceTree = "<group>";
+		};
+		DC2280711C206C8300687DFD /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				DC2280721C206C8300687DFD /* CmdBuffStr.cc */,
+				DC2280731C206C8300687DFD /* CmdBuffStr.h */,
+				DC2280741C206C8300687DFD /* ResponseUtils.cc */,
+				DC2280751C206C8300687DFD /* ResponseUtils.h */,
+				DC2280761C206C8300687DFD /* SlashDef.h */,
+				DC2280771C206C8300687DFD /* StreamBuffer.cc */,
+				DC2280781C206C8300687DFD /* StreamBuffer.h */,
+				DC2280791C206C8300687DFD /* StreamBufferEx.cpp */,
+				DC22807A1C206C8300687DFD /* StreamBufferEx.h */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
+		DC2280931C206E2C00687DFD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DC2280971C206E2C00687DFD /* libhaywire OSX.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DC2280EB1C206EDE00687DFD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DC2280F21C206EDE00687DFD /* libuv.a */,
+				DC2280F41C206EDE00687DFD /* run-tests */,
+				DC2280F61C206EDE00687DFD /* run-benchmarks */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DC2280421C206C5C00687DFD /* commsvrOSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DC22804A1C206C5C00687DFD /* Build configuration list for PBXNativeTarget "commsvrOSX" */;
+			buildPhases = (
+				DC22803F1C206C5C00687DFD /* Sources */,
+				DC2280401C206C5C00687DFD /* Frameworks */,
+				DC2280411C206C5C00687DFD /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = commsvrOSX;
+			productName = commsvrOSX;
+			productReference = DC2280431C206C5C00687DFD /* commsvrOSX */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DC22803B1C206C5C00687DFD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = UESTC;
+				TargetAttributes = {
+					DC2280421C206C5C00687DFD = {
+						CreatedOnToolsVersion = 7.1;
+					};
+				};
+			};
+			buildConfigurationList = DC22803E1C206C5C00687DFD /* Build configuration list for PBXProject "commsvrOSX" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DC22803A1C206C5C00687DFD;
+			productRefGroup = DC2280441C206C5C00687DFD /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = DC2280931C206E2C00687DFD /* Products */;
+					ProjectRef = DC2280921C206E2C00687DFD /* haywire OSX.xcodeproj */;
+				},
+				{
+					ProductGroup = DC2280EB1C206EDE00687DFD /* Products */;
+					ProjectRef = DC2280EA1C206EDE00687DFD /* uv.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				DC2280421C206C5C00687DFD /* commsvrOSX */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		DC2280971C206E2C00687DFD /* libhaywire OSX.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libhaywire OSX.a";
+			remoteRef = DC2280961C206E2C00687DFD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DC2280F21C206EDE00687DFD /* libuv.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libuv.a;
+			remoteRef = DC2280F11C206EDE00687DFD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DC2280F41C206EDE00687DFD /* run-tests */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = "run-tests";
+			remoteRef = DC2280F31C206EDE00687DFD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DC2280F61C206EDE00687DFD /* run-benchmarks */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = "run-benchmarks";
+			remoteRef = DC2280F51C206EDE00687DFD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DC22803F1C206C5C00687DFD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC22808C1C206C8300687DFD /* StreamBuffer.cc in Sources */,
+				DC22807C1C206C8300687DFD /* client_proc_t.cc in Sources */,
+				DC22808B1C206C8300687DFD /* ResponseUtils.cc in Sources */,
+				DC22807F1C206C8300687DFD /* DirWalker.cc in Sources */,
+				DC2280871C206C8300687DFD /* Inception.cc in Sources */,
+				DC2280801C206C8300687DFD /* RootExplorer.cc in Sources */,
+				DC2280841C206C8300687DFD /* HelloInception.cc in Sources */,
+				DC22808A1C206C8300687DFD /* CmdBuffStr.cc in Sources */,
+				DC22807E1C206C8300687DFD /* HttpServerConfig.cc in Sources */,
+				DC22807D1C206C8300687DFD /* CommSvr.cc in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		DC2280481C206C5C00687DFD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		DC2280491C206C5C00687DFD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		DC22804B1C206C5C00687DFD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../lib/libuv/include",
+					"$(SRCROOT)/../../lib/haywire/include",
+					"$(SRCROOT)/../../src",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		DC22804C1C206C5C00687DFD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../lib/libuv/include",
+					"$(SRCROOT)/../../lib/haywire/include",
+					"$(SRCROOT)/../../src",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DC22803E1C206C5C00687DFD /* Build configuration list for PBXProject "commsvrOSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC2280481C206C5C00687DFD /* Debug */,
+				DC2280491C206C5C00687DFD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DC22804A1C206C5C00687DFD /* Build configuration list for PBXNativeTarget "commsvrOSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC22804B1C206C5C00687DFD /* Debug */,
+				DC22804C1C206C5C00687DFD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DC22803B1C206C5C00687DFD /* Project object */;
+}

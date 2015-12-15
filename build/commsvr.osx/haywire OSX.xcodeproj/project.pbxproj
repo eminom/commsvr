@@ -1,0 +1,403 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DC2280C51C206E4A00687DFD /* configuration.c in Sources */ = {isa = PBXBuildFile; fileRef = DC22809B1C206E4A00687DFD /* configuration.c */; };
+		DC2280C61C206E4A00687DFD /* configuration.h in Headers */ = {isa = PBXBuildFile; fileRef = DC22809C1C206E4A00687DFD /* configuration.h */; };
+		DC2280C71C206E4A00687DFD /* ini.c in Sources */ = {isa = PBXBuildFile; fileRef = DC22809D1C206E4A00687DFD /* ini.c */; };
+		DC2280C81C206E4A00687DFD /* ini.h in Headers */ = {isa = PBXBuildFile; fileRef = DC22809E1C206E4A00687DFD /* ini.h */; };
+		DC2280C91C206E4A00687DFD /* connection_consumer.c in Sources */ = {isa = PBXBuildFile; fileRef = DC22809F1C206E4A00687DFD /* connection_consumer.c */; };
+		DC2280CA1C206E4A00687DFD /* connection_consumer.h in Headers */ = {isa = PBXBuildFile; fileRef = DC2280A01C206E4A00687DFD /* connection_consumer.h */; };
+		DC2280CB1C206E4A00687DFD /* connection_dispatcher.c in Sources */ = {isa = PBXBuildFile; fileRef = DC2280A11C206E4A00687DFD /* connection_dispatcher.c */; };
+		DC2280CC1C206E4A00687DFD /* connection_dispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = DC2280A21C206E4A00687DFD /* connection_dispatcher.h */; };
+		DC2280CD1C206E4A00687DFD /* http_server_ex.cc in Sources */ = {isa = PBXBuildFile; fileRef = DC2280A41C206E4A00687DFD /* http_server_ex.cc */; };
+		DC2280CE1C206E4A00687DFD /* http_server_ex.h in Headers */ = {isa = PBXBuildFile; fileRef = DC2280A51C206E4A00687DFD /* http_server_ex.h */; };
+		DC2280CF1C206E4A00687DFD /* http_connection.h in Headers */ = {isa = PBXBuildFile; fileRef = DC2280A61C206E4A00687DFD /* http_connection.h */; };
+		DC2280D01C206E4A00687DFD /* http_parser.c in Sources */ = {isa = PBXBuildFile; fileRef = DC2280A71C206E4A00687DFD /* http_parser.c */; };
+		DC2280D11C206E4A00687DFD /* http_parser.h in Headers */ = {isa = PBXBuildFile; fileRef = DC2280A81C206E4A00687DFD /* http_parser.h */; };
+		DC2280D21C206E4A00687DFD /* http_request.c in Sources */ = {isa = PBXBuildFile; fileRef = DC2280A91C206E4A00687DFD /* http_request.c */; };
+		DC2280D31C206E4A00687DFD /* http_request.h in Headers */ = {isa = PBXBuildFile; fileRef = DC2280AA1C206E4A00687DFD /* http_request.h */; };
+		DC2280D41C206E4A00687DFD /* http_response.c in Sources */ = {isa = PBXBuildFile; fileRef = DC2280AB1C206E4A00687DFD /* http_response.c */; };
+		DC2280D51C206E4A00687DFD /* http_response.h in Headers */ = {isa = PBXBuildFile; fileRef = DC2280AC1C206E4A00687DFD /* http_response.h */; };
+		DC2280D61C206E4A00687DFD /* http_response_cache.c in Sources */ = {isa = PBXBuildFile; fileRef = DC2280AD1C206E4A00687DFD /* http_response_cache.c */; };
+		DC2280D71C206E4A00687DFD /* http_response_cache.h in Headers */ = {isa = PBXBuildFile; fileRef = DC2280AE1C206E4A00687DFD /* http_response_cache.h */; };
+		DC2280D81C206E4A00687DFD /* http_server.c in Sources */ = {isa = PBXBuildFile; fileRef = DC2280AF1C206E4A00687DFD /* http_server.c */; };
+		DC2280D91C206E4A00687DFD /* http_server.h in Headers */ = {isa = PBXBuildFile; fileRef = DC2280B01C206E4A00687DFD /* http_server.h */; };
+		DC2280DA1C206E4A00687DFD /* http_server_impl.c in Sources */ = {isa = PBXBuildFile; fileRef = DC2280B11C206E4A00687DFD /* http_server_impl.c */; };
+		DC2280DB1C206E4A00687DFD /* hw_string.c in Sources */ = {isa = PBXBuildFile; fileRef = DC2280B21C206E4A00687DFD /* hw_string.c */; };
+		DC2280DC1C206E4A00687DFD /* hw_string.h in Headers */ = {isa = PBXBuildFile; fileRef = DC2280B31C206E4A00687DFD /* hw_string.h */; };
+		DC2280DD1C206E4A00687DFD /* khash.h in Headers */ = {isa = PBXBuildFile; fileRef = DC2280B41C206E4A00687DFD /* khash.h */; };
+		DC2280DE1C206E4A00687DFD /* route_compare_method.c in Sources */ = {isa = PBXBuildFile; fileRef = DC2280B51C206E4A00687DFD /* route_compare_method.c */; };
+		DC2280DF1C206E4A00687DFD /* route_compare_method.h in Headers */ = {isa = PBXBuildFile; fileRef = DC2280B61C206E4A00687DFD /* route_compare_method.h */; };
+		DC2280E01C206E4A00687DFD /* server_stats.c in Sources */ = {isa = PBXBuildFile; fileRef = DC2280B71C206E4A00687DFD /* server_stats.c */; };
+		DC2280E11C206E4A00687DFD /* server_stats.h in Headers */ = {isa = PBXBuildFile; fileRef = DC2280B81C206E4A00687DFD /* server_stats.h */; };
+		DC2280E91C206E6800687DFD /* haywire.h in Headers */ = {isa = PBXBuildFile; fileRef = DC2280E81C206E6800687DFD /* haywire.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		DC227F4D1C2066C600687DFD /* libhaywire OSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libhaywire OSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC22809B1C206E4A00687DFD /* configuration.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = configuration.c; sourceTree = "<group>"; };
+		DC22809C1C206E4A00687DFD /* configuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = configuration.h; sourceTree = "<group>"; };
+		DC22809D1C206E4A00687DFD /* ini.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ini.c; sourceTree = "<group>"; };
+		DC22809E1C206E4A00687DFD /* ini.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ini.h; sourceTree = "<group>"; };
+		DC22809F1C206E4A00687DFD /* connection_consumer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = connection_consumer.c; sourceTree = "<group>"; };
+		DC2280A01C206E4A00687DFD /* connection_consumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = connection_consumer.h; sourceTree = "<group>"; };
+		DC2280A11C206E4A00687DFD /* connection_dispatcher.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = connection_dispatcher.c; sourceTree = "<group>"; };
+		DC2280A21C206E4A00687DFD /* connection_dispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = connection_dispatcher.h; sourceTree = "<group>"; };
+		DC2280A41C206E4A00687DFD /* http_server_ex.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = http_server_ex.cc; sourceTree = "<group>"; };
+		DC2280A51C206E4A00687DFD /* http_server_ex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = http_server_ex.h; sourceTree = "<group>"; };
+		DC2280A61C206E4A00687DFD /* http_connection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = http_connection.h; sourceTree = "<group>"; };
+		DC2280A71C206E4A00687DFD /* http_parser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = http_parser.c; sourceTree = "<group>"; };
+		DC2280A81C206E4A00687DFD /* http_parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = http_parser.h; sourceTree = "<group>"; };
+		DC2280A91C206E4A00687DFD /* http_request.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = http_request.c; sourceTree = "<group>"; };
+		DC2280AA1C206E4A00687DFD /* http_request.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = http_request.h; sourceTree = "<group>"; };
+		DC2280AB1C206E4A00687DFD /* http_response.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = http_response.c; sourceTree = "<group>"; };
+		DC2280AC1C206E4A00687DFD /* http_response.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = http_response.h; sourceTree = "<group>"; };
+		DC2280AD1C206E4A00687DFD /* http_response_cache.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = http_response_cache.c; sourceTree = "<group>"; };
+		DC2280AE1C206E4A00687DFD /* http_response_cache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = http_response_cache.h; sourceTree = "<group>"; };
+		DC2280AF1C206E4A00687DFD /* http_server.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = http_server.c; sourceTree = "<group>"; };
+		DC2280B01C206E4A00687DFD /* http_server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = http_server.h; sourceTree = "<group>"; };
+		DC2280B11C206E4A00687DFD /* http_server_impl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = http_server_impl.c; sourceTree = "<group>"; };
+		DC2280B21C206E4A00687DFD /* hw_string.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hw_string.c; sourceTree = "<group>"; };
+		DC2280B31C206E4A00687DFD /* hw_string.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hw_string.h; sourceTree = "<group>"; };
+		DC2280B41C206E4A00687DFD /* khash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = khash.h; sourceTree = "<group>"; };
+		DC2280B51C206E4A00687DFD /* route_compare_method.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = route_compare_method.c; sourceTree = "<group>"; };
+		DC2280B61C206E4A00687DFD /* route_compare_method.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = route_compare_method.h; sourceTree = "<group>"; };
+		DC2280B71C206E4A00687DFD /* server_stats.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = server_stats.c; sourceTree = "<group>"; };
+		DC2280B81C206E4A00687DFD /* server_stats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = server_stats.h; sourceTree = "<group>"; };
+		DC2280E81C206E6800687DFD /* haywire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = haywire.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DC227F4A1C2066C600687DFD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DC227F441C2066C600687DFD = {
+			isa = PBXGroup;
+			children = (
+				DC2280E71C206E6800687DFD /* include */,
+				DC2280981C206E4A00687DFD /* src */,
+				DC227F4E1C2066C600687DFD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DC227F4E1C2066C600687DFD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DC227F4D1C2066C600687DFD /* libhaywire OSX.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DC2280981C206E4A00687DFD /* src */ = {
+			isa = PBXGroup;
+			children = (
+				DC2280991C206E4A00687DFD /* haywire */,
+			);
+			name = src;
+			path = ../../lib/haywire/src;
+			sourceTree = "<group>";
+		};
+		DC2280991C206E4A00687DFD /* haywire */ = {
+			isa = PBXGroup;
+			children = (
+				DC22809A1C206E4A00687DFD /* configuration */,
+				DC22809F1C206E4A00687DFD /* connection_consumer.c */,
+				DC2280A01C206E4A00687DFD /* connection_consumer.h */,
+				DC2280A11C206E4A00687DFD /* connection_dispatcher.c */,
+				DC2280A21C206E4A00687DFD /* connection_dispatcher.h */,
+				DC2280A31C206E4A00687DFD /* extension */,
+				DC2280A61C206E4A00687DFD /* http_connection.h */,
+				DC2280A71C206E4A00687DFD /* http_parser.c */,
+				DC2280A81C206E4A00687DFD /* http_parser.h */,
+				DC2280A91C206E4A00687DFD /* http_request.c */,
+				DC2280AA1C206E4A00687DFD /* http_request.h */,
+				DC2280AB1C206E4A00687DFD /* http_response.c */,
+				DC2280AC1C206E4A00687DFD /* http_response.h */,
+				DC2280AD1C206E4A00687DFD /* http_response_cache.c */,
+				DC2280AE1C206E4A00687DFD /* http_response_cache.h */,
+				DC2280AF1C206E4A00687DFD /* http_server.c */,
+				DC2280B01C206E4A00687DFD /* http_server.h */,
+				DC2280B11C206E4A00687DFD /* http_server_impl.c */,
+				DC2280B21C206E4A00687DFD /* hw_string.c */,
+				DC2280B31C206E4A00687DFD /* hw_string.h */,
+				DC2280B41C206E4A00687DFD /* khash.h */,
+				DC2280B51C206E4A00687DFD /* route_compare_method.c */,
+				DC2280B61C206E4A00687DFD /* route_compare_method.h */,
+				DC2280B71C206E4A00687DFD /* server_stats.c */,
+				DC2280B81C206E4A00687DFD /* server_stats.h */,
+			);
+			path = haywire;
+			sourceTree = "<group>";
+		};
+		DC22809A1C206E4A00687DFD /* configuration */ = {
+			isa = PBXGroup;
+			children = (
+				DC22809B1C206E4A00687DFD /* configuration.c */,
+				DC22809C1C206E4A00687DFD /* configuration.h */,
+				DC22809D1C206E4A00687DFD /* ini.c */,
+				DC22809E1C206E4A00687DFD /* ini.h */,
+			);
+			path = configuration;
+			sourceTree = "<group>";
+		};
+		DC2280A31C206E4A00687DFD /* extension */ = {
+			isa = PBXGroup;
+			children = (
+				DC2280A41C206E4A00687DFD /* http_server_ex.cc */,
+				DC2280A51C206E4A00687DFD /* http_server_ex.h */,
+			);
+			path = extension;
+			sourceTree = "<group>";
+		};
+		DC2280E71C206E6800687DFD /* include */ = {
+			isa = PBXGroup;
+			children = (
+				DC2280E81C206E6800687DFD /* haywire.h */,
+			);
+			name = include;
+			path = ../../lib/haywire/include;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		DC227F4B1C2066C600687DFD /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC2280C61C206E4A00687DFD /* configuration.h in Headers */,
+				DC2280CE1C206E4A00687DFD /* http_server_ex.h in Headers */,
+				DC2280CA1C206E4A00687DFD /* connection_consumer.h in Headers */,
+				DC2280C81C206E4A00687DFD /* ini.h in Headers */,
+				DC2280D91C206E4A00687DFD /* http_server.h in Headers */,
+				DC2280DF1C206E4A00687DFD /* route_compare_method.h in Headers */,
+				DC2280D31C206E4A00687DFD /* http_request.h in Headers */,
+				DC2280DC1C206E4A00687DFD /* hw_string.h in Headers */,
+				DC2280E91C206E6800687DFD /* haywire.h in Headers */,
+				DC2280E11C206E4A00687DFD /* server_stats.h in Headers */,
+				DC2280D11C206E4A00687DFD /* http_parser.h in Headers */,
+				DC2280DD1C206E4A00687DFD /* khash.h in Headers */,
+				DC2280D51C206E4A00687DFD /* http_response.h in Headers */,
+				DC2280CF1C206E4A00687DFD /* http_connection.h in Headers */,
+				DC2280D71C206E4A00687DFD /* http_response_cache.h in Headers */,
+				DC2280CC1C206E4A00687DFD /* connection_dispatcher.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		DC227F4C1C2066C600687DFD /* haywire OSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DC227F511C2066C600687DFD /* Build configuration list for PBXNativeTarget "haywire OSX" */;
+			buildPhases = (
+				DC227F491C2066C600687DFD /* Sources */,
+				DC227F4A1C2066C600687DFD /* Frameworks */,
+				DC227F4B1C2066C600687DFD /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "haywire OSX";
+			productName = "haywire OSX";
+			productReference = DC227F4D1C2066C600687DFD /* libhaywire OSX.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DC227F451C2066C600687DFD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = UESTC;
+				TargetAttributes = {
+					DC227F4C1C2066C600687DFD = {
+						CreatedOnToolsVersion = 7.1;
+					};
+				};
+			};
+			buildConfigurationList = DC227F481C2066C600687DFD /* Build configuration list for PBXProject "haywire OSX" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DC227F441C2066C600687DFD;
+			productRefGroup = DC227F4E1C2066C600687DFD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DC227F4C1C2066C600687DFD /* haywire OSX */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DC227F491C2066C600687DFD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC2280C71C206E4A00687DFD /* ini.c in Sources */,
+				DC2280D21C206E4A00687DFD /* http_request.c in Sources */,
+				DC2280C91C206E4A00687DFD /* connection_consumer.c in Sources */,
+				DC2280D61C206E4A00687DFD /* http_response_cache.c in Sources */,
+				DC2280DA1C206E4A00687DFD /* http_server_impl.c in Sources */,
+				DC2280CB1C206E4A00687DFD /* connection_dispatcher.c in Sources */,
+				DC2280C51C206E4A00687DFD /* configuration.c in Sources */,
+				DC2280D01C206E4A00687DFD /* http_parser.c in Sources */,
+				DC2280D41C206E4A00687DFD /* http_response.c in Sources */,
+				DC2280DB1C206E4A00687DFD /* hw_string.c in Sources */,
+				DC2280DE1C206E4A00687DFD /* route_compare_method.c in Sources */,
+				DC2280D81C206E4A00687DFD /* http_server.c in Sources */,
+				DC2280E01C206E4A00687DFD /* server_stats.c in Sources */,
+				DC2280CD1C206E4A00687DFD /* http_server_ex.cc in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		DC227F4F1C2066C600687DFD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		DC227F501C2066C600687DFD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		DC227F521C2066C600687DFD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../lib/libuv/include",
+					"$(SRCROOT)/../../lib/haywire/include",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		DC227F531C2066C600687DFD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../lib/libuv/include",
+					"$(SRCROOT)/../../lib/haywire/include",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DC227F481C2066C600687DFD /* Build configuration list for PBXProject "haywire OSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC227F4F1C2066C600687DFD /* Debug */,
+				DC227F501C2066C600687DFD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DC227F511C2066C600687DFD /* Build configuration list for PBXNativeTarget "haywire OSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC227F521C2066C600687DFD /* Debug */,
+				DC227F531C2066C600687DFD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DC227F451C2066C600687DFD /* Project object */;
+}
