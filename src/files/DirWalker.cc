@@ -6,8 +6,8 @@
 #include <cstring>
 #include <vector>
 #include <algorithm>
-#include "StreamBuffer.h"
-#include "SlashDef.h"
+#include "utils/StreamBuffer.h"
+#include "utils/SlashDef.h"
 
 #if !defined(_MSC_VER)
 

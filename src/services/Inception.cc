@@ -9,11 +9,11 @@
 #include <ctime>
 #include <uv.h>
 
-#include "StreamBuffer.h"
+#include "utils/StreamBuffer.h"
 #include "StreamState.h"
 #include "EnvConfig.h"
 #include "ServerConfig.h"
-#include "CmdBuffStr.h"
+#include "utils/CmdBuffStr.h"
 
 
 #define DEFAULT_BACKLOG 128
