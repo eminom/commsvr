@@ -9,14 +9,14 @@ LOCAL_MODULE_FILENAME := libcommsvr-static-android
 
 LOCAL_SRC_FILES := \
 ../src/client_proc_t.cc \
-../src/Inception.cc \
-../src/HelloInception.cc \
-../src/StreamBuffer.cc \
-../src/DirWalker.cc \
-../src/RootExplorer.cc \
-../src/CmdBuffStr.cc \
+../src/services/Inception.cc \
+../src/routes/HelloInception.cc \
+../src/files/DirWalker.cc \
+../src/files/RootExplorer.cc \
 ../src/config/HttpServerConfig.cc \
-../src/utils/ResponseUtils.cc
+../src/utils/StreamBuffer.cc \
+../src/utils/ResponseUtils.cc \
+../src/utils/CmdBuffStr.cc 
 
 LOCAL_STATIC_LIBRARIES += libuv
 LOCAL_STATIC_LIBRARIES += libhaywire
