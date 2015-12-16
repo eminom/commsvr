@@ -5,9 +5,8 @@
 
 #include <string>
 
-std::string getFileMimeType(const std::string &);
+bool getFileMimeType(const std::string &suffix, std::string &mimeType);
 
-//~ 
 #define _DefaultMonitorSvrPort  13000
 
 #endif
