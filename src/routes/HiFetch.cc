@@ -24,9 +24,6 @@ void get_fetch(http_request* request, hw_http_response* response, void *user_dat
 	if(strlen(url) >= lz + 1 && !strncmp(_PreFetch, url, lz)  && *(url+(lz+1))) {
 		const char *rest = url + (lz + 1);
 		std::string cwd = RootExplorer::getInstance()->getWorkingDir();
-		if(cwd.size()>0 && cwd[cwd.size()-1] != _END_SLASH)	{
-			cwd += _END_SLASH_STR;
-		}
 		std::string request_path = cwd + rest;
 		const char* p = strrchr(rest, '/');
 		const char* q = strrchr(rest, '\\');
