@@ -55,6 +55,18 @@
     <ClCompile Include="..\..\..\src\services\Inception.cc">
       <Filter>Source\service</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\routes\HiUpload.cc">
+      <Filter>Source\routes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\routes\HiFetch.cc">
+      <Filter>Source\routes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\routes\HiIndex.cc">
+      <Filter>Source\routes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\routes\HiResources.cc">
+      <Filter>Source\routes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\client_proc_t.h">
@@ -120,6 +132,9 @@
     <ClInclude Include="..\..\..\src\services\Inception.h">
       <Filter>Source\service</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\routes\HelloInception.h">
+      <Filter>Source\routes\include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">
@@ -145,6 +160,9 @@
     </Filter>
     <Filter Include="Source\service">
       <UniqueIdentifier>{3d126111-08f0-4e52-adff-b52d2a74b01a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\routes\include">
+      <UniqueIdentifier>{60dbfcfe-52b7-4f10-87f2-d5339ed06169}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

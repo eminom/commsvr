@@ -102,6 +102,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\..\src\routes\HelloInception.cc" />
+    <ClCompile Include="..\..\..\src\routes\HiFetch.cc" />
+    <ClCompile Include="..\..\..\src\routes\HiIndex.cc" />
+    <ClCompile Include="..\..\..\src\routes\HiResources.cc" />
+    <ClCompile Include="..\..\..\src\routes\HiUpload.cc" />
     <ClCompile Include="..\..\..\src\Server.cc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -140,6 +144,7 @@
     <ClInclude Include="..\..\..\src\ProtoHandle.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\routes\HelloInception.h" />
     <ClInclude Include="..\..\..\src\Server.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
