@@ -11,8 +11,13 @@ LOCAL_SRC_FILES := \
 ../src/client_proc_t.cc \
 ../src/services/Inception.cc \
 ../src/routes/HelloInception.cc \
+../src/routes/HiFetch.cc \
+../src/routes/HiUpload.cc \
+../src/routes/HiResources.cc \
+../src/routes/HiIndex.cc \
 ../src/files/DirWalker.cc \
 ../src/files/RootExplorer.cc \
+../src/files/DirMaker.cc \
 ../src/config/HttpServerConfig.cc \
 ../src/utils/StreamBuffer.cc \
 ../src/utils/ResponseUtils.cc \
