@@ -2,6 +2,7 @@
 
 #include "RootExplorer.h"
 #include "DirWalker.h"
+#include "utils/SlashDef.h"
 
 static RootExplorer *_instance = nullptr;
 
@@ -20,6 +21,8 @@ RootExplorer* RootExplorer::getInstance()
 void RootExplorer::setWorkingDir(const std::string &d)
 {
 	_rootdir = d;
+	if(!d.empty() && d.back() != _END_SLASH)
+		_rootdir += _END_SLASH_STR;
 }
 
 const char* RootExplorer::getWorkingDir()const
