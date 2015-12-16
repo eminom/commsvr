@@ -15,8 +15,13 @@ Source = \
 	src/client_proc_t.cc \
 	src/services/Inception.cc \
 	src/routes/HelloInception.cc \
+	src/routes/HiUpload.cc \
+	src/routes/HiFetch.cc \
+	src/routes/HiResources.cc \
+	src/routes/HiIndex.cc \
 	src/files/DirWalker.cc \
 	src/files/RootExplorer.cc \
+	src/files/DirMaker.cc \
 	src/utils/CmdBuffStr.cc \
 	src/config/HttpServerConfig.cc \
 	src/utils/ResponseUtils.cc

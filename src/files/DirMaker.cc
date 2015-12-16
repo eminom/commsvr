@@ -6,10 +6,12 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/stat.h>
+
+#include <cstdlib>
+#include <cstring>
 #endif
 
 #include <string>
-
 #ifdef _MSC_VER
 
 void MkdirRecur(const std::string& pre)
