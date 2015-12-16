@@ -11,3 +11,4 @@ pb
 conf.json
 haysvr
 /build
+/static
