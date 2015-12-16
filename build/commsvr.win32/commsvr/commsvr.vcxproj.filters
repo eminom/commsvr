@@ -67,6 +67,12 @@
     <ClCompile Include="..\..\..\src\routes\HiResources.cc">
       <Filter>Source\routes</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\routes\HiUploadSeal.c">
+      <Filter>Source\routes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\files\DirMaker.cc">
+      <Filter>Source\files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\client_proc_t.h">
@@ -134,6 +140,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\routes\HelloInception.h">
       <Filter>Source\routes\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\files\DirMaker.h">
+      <Filter>Source\files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

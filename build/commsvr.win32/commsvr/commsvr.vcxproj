@@ -90,6 +90,7 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\CommSvr.cc" />
     <ClCompile Include="..\..\..\src\config\HttpServerConfig.cc" />
+    <ClCompile Include="..\..\..\src\files\DirMaker.cc" />
     <ClCompile Include="..\..\..\src\files\DirWalker.cc" />
     <ClCompile Include="..\..\..\src\files\RootExplorer.cc" />
     <ClCompile Include="..\..\..\src\main.cc">
@@ -106,6 +107,9 @@
     <ClCompile Include="..\..\..\src\routes\HiIndex.cc" />
     <ClCompile Include="..\..\..\src\routes\HiResources.cc" />
     <ClCompile Include="..\..\..\src\routes\HiUpload.cc" />
+    <ClCompile Include="..\..\..\src\routes\HiUploadSeal.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\..\src\Server.cc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -133,6 +137,7 @@
     <ClInclude Include="..\..\..\src\EnvConfig.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\files\DirMaker.h" />
     <ClInclude Include="..\..\..\src\files\DirWalker.h" />
     <ClInclude Include="..\..\..\src\files\RootExplorer.h" />
     <ClInclude Include="..\..\..\src\HeaderLengthStyle.h">

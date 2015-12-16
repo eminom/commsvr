@@ -1,6 +1,15 @@
 <body>
 <head>
     <script type="text/javascript">
+        XMLHttpRequest.prototype.sendAsBinaryX = function(datastr) {
+            function byteValue(x) {
+                return x.charCodeAt(0) & 0xff;
+            }
+            var ords = Array.prototype.map.call(datastr, byteValue);
+            var ui8a = new Uint8Array(ords);
+            this.send(ui8a.buffer);
+        };
+
         function uploadAndSubmit() {
             var form = document.forms["demoForm"];
 
@@ -36,13 +45,15 @@
                             console.log("if same : " + (reader.result.length == file.size));
                         }
                         var xhr = new XMLHttpRequest;
-                        var upload_url = "/upload.jsp?fileName=" + file.name;
+                        var upload_url = "/upload.jsp?name=src/a/b/c/d/e/f/g" + file.name;
                         xhr.open(
                                 "POST",         // method
                                 upload_url,     // target url
                                 true            // let's be specific(async)
                         );
-                        xhr.setRequestHeader("Content-Length", file.size.toString());
+                        //xhr.setRequestHeader("Content-Length", file.size.toString());
+                        //xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest" );
+                        //xhr.setRequestHeader("X-File-Name","abc.jpg");
                         //xhr.setRequestHeader("Content-Type",
                         //xhr.setRequestHeader("enctype", "application/octet-stream");
                         //xhr.overrideMimeType("application/octet-stream");
@@ -62,8 +73,9 @@
                             }
                         };
                         //xhr.sendAsBinary(reader.result);
-                        console.log("OK, I am about to upload <" + reader.result.length + "> byte(s)");
-                        xhr.send(reader.result);
+                        //console.log("OK, I am about to upload <" + reader.result.length + "> byte(s)");
+                        //xhr.send(reader.result);  //send ?? there is an error in it.
+                        xhr.sendAsBinaryX(reader.result);
                     }
                 };
                 reader.readAsBinaryString(file);
