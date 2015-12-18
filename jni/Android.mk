@@ -15,6 +15,8 @@ LOCAL_SRC_FILES := \
 ../src/routes/HiUpload.cc \
 ../src/routes/HiResources.cc \
 ../src/routes/HiIndex.cc \
+../src/routes/task/TaskUVBase.cc \
+../src/routes/task/UploadTask.cc \
 ../src/files/DirWalker.cc \
 ../src/files/RootExplorer.cc \
 ../src/files/DirMaker.cc \
