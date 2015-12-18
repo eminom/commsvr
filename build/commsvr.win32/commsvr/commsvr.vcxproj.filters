@@ -73,6 +73,9 @@
     <ClCompile Include="..\..\..\src\files\DirMaker.cc">
       <Filter>Source\files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\routes\data\UploadTask.cc">
+      <Filter>Source\routes\data</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\client_proc_t.h">
@@ -144,6 +147,12 @@
     <ClInclude Include="..\..\..\src\files\DirMaker.h">
       <Filter>Source\files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\routes\data\UploadTask.h">
+      <Filter>Source\routes\data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\routes\data\MyUVTask.h">
+      <Filter>Source\routes\data</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">
@@ -172,6 +181,9 @@
     </Filter>
     <Filter Include="Source\routes\include">
       <UniqueIdentifier>{60dbfcfe-52b7-4f10-87f2-d5339ed06169}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\routes\data">
+      <UniqueIdentifier>{2af2d292-af0a-43fc-8c00-a6a1626ccda1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
