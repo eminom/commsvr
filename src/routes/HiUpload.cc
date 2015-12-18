@@ -15,6 +15,12 @@
 #include "config/HttpServerConfig.h"
 #include "files/DirMaker.h"
 
+#include "data/UploadTask.h"
+#include <uv.h>
+
+
+extern "C" uv_loop_t *uv_loop; // Defined in haywire http server module.
+
 #define _END_IN_MAL()\
 	{\
 		finish_response(request\
@@ -27,6 +33,16 @@
 		return;\
 	}
 
+void on_work_start(uv_work_t *req){
+	UploadTask *uTask = (UploadTask*)req->data;
+	uTask->Proceed();
+}
+
+void on_work_done(uv_work_t *req, int status){
+	UploadTask *uTask = (UploadTask*)req->data;
+	delete uTask;
+	free(req);
+}
 
 // request->body->length shall be strictly equal to file size(no matter what form it is)
 void get_upload(http_request *request, hw_http_response *response, void *user_data){
@@ -47,7 +63,7 @@ void get_upload(http_request *request, hw_http_response *response, void *user_da
 	std::string finalpath = RootExplorer::getInstance()->getWorkingDir() + path;
 	std::string tpath = RootExplorer::getInstance()->getWorkingDir() + sub;
 
-	MkdirRecur(tpath);
+	MkdirRecur(tpath);//~ TODO: in async mode?(or do it in this hacking way)
 
 	//_AllocObj()
 	//_DefsObj(ptr)
@@ -57,15 +73,17 @@ void get_upload(http_request *request, hw_http_response *response, void *user_da
 	//*pszDirPath   = new std::string(pszDirPath);
 	//slashpos    = 0;
 
+	uv_work_t *work_req = (uv_work_t*)malloc(sizeof(uv_work_t));
+	UploadTask *uTask = new UploadTask(request->body, finalpath);
+	work_req->data = uTask;
+	uv_queue_work(uv_loop, work_req, on_work_start, on_work_done);
+
+	//: replace the old one. 
+	request->body = (hw_string*)malloc(sizeof(hw_string));
+	request->body->length = 0;
+	request->body->value = nullptr;
+	//const char *resCode = HTTP_STATUS_500;
 	const char *resCode = HTTP_STATUS_500;
-	if(FILE *fout = fopen(finalpath.c_str(), "wb"))	{
-		if(request->body && request->body->value){
-			auto written = fwrite(request->body->value, 1, request->body->length, fout);
-			if(written == request->body->length)
-				resCode = HTTP_STATUS_200;
-		}
-		fclose(fout);
-	}
 	finish_response(request,
 		response,
 		resCode,
