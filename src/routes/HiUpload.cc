@@ -83,7 +83,7 @@ void get_upload(http_request *request, hw_http_response *response, void *user_da
 	request->body->length = 0;
 	request->body->value = nullptr;
 	//const char *resCode = HTTP_STATUS_500;
-	const char *resCode = HTTP_STATUS_500;
+	const char *resCode = HTTP_STATUS_200;
 	finish_response(request,
 		response,
 		resCode,
