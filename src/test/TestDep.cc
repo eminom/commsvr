@@ -6,20 +6,48 @@
 #include <cstdlib>
 
 #include <fcntl.h>
+#include <uv.h>
 
-void onTestClose(uv_handle_t *handle)
-{
-	printf("Void() = %p\n", handle);
+#ifdef _MSC_VER
+#include <Windows.h>
+#define sleep(a)	::Sleep(a*1000)
+#define random()	rand()
+#endif
+
+#define FIB_UNTIL 100
+//extern uv_loop_t *loop;
+
+long fib_(long t) {
+    if (t == 0 || t == 1)
+        return 1;
+    else
+        return fib_(t-1) + fib_(t-2);
 }
 
-int TestEntry()
-{
-	uv_write_t write_req;
-	memset(&write_req, 0, sizeof(write_req));
-	//uv_req_init(uv_default_loop(), &write_req);
-	uv_close((uv_handle_t*)(write_req.handle), onTestClose);
+void fib(uv_work_t *req) {
+    int n = (int) req->data;
+	printf("Starting calc fib<%d>\n", n);
+    //if (random() % 2)
+    //    sleep(1);
+    //else
+    //    sleep(3);
+    long fib = fib_(n);
+	printf("Done calc fib<%d>\n", n);
+	//free(req); // Corrupted(some lock may still remain in position)
+    //fprintf(stderr, "%dth fibonacci is %lu\n", n, fib);
+}
 
-	uv_run(uv_default_loop(), UV_RUN_DEFAULT);
-	printf("The end.\n");
-	return 0;
+void after_fib(uv_work_t *req, int status) {
+    //fprintf(stderr, "Done calculating %dth fibonacci\n", *(int *) req->data);
+	free(req);
+}
+
+int TestEntry() {
+    uv_loop_t *loop = uv_default_loop();
+    for (int i = 0; i < FIB_UNTIL; i++) {
+		uv_work_t *req = (uv_work_t*)malloc(sizeof(uv_work_t));
+		req->data = (int*)i;
+        uv_queue_work(loop, req, fib, after_fib);
+    }
+    return uv_run(loop, UV_RUN_DEFAULT);
 }
