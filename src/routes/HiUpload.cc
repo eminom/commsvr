@@ -39,13 +39,13 @@ void on_work_start(uv_work_t *req){
 }
 
 void on_work_done(uv_work_t *req, int status){
-	UploadTask *uTask = (UploadTask*)req->data;
-	delete uTask;
+	//UploadTask *uTask = (UploadTask*)req->data;
+	//delete uTask;
 	free(req);
 }
 
 // request->body->length shall be strictly equal to file size(no matter what form it is)
-void get_upload(http_request *request, hw_http_response *response, void *user_data){
+void get_upload(http_request *request, hw_http_response *response, void *user_data) {
 
 	const char *prep = "name=";
 	const char *beg = strchr(request->url, '/');
@@ -57,7 +57,7 @@ void get_upload(http_request *request, hw_http_response *response, void *user_da
 	if(path.empty())
 		_END_IN_MAL()
 
-	printf("store in <%s>\n", path.c_str());
+	//printf("store in <%s>\n", path.c_str());
 	const char *pre = strrchr(path.c_str(), '/');
 	std::string sub = pre ? std::string(path.c_str(), pre - path.c_str()) : "";
 	std::string finalpath = RootExplorer::getInstance()->getWorkingDir() + path;
