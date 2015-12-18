@@ -15,7 +15,7 @@
 #include "config/HttpServerConfig.h"
 #include "files/DirMaker.h"
 
-#include "data/UploadTask.h"
+#include "task/UploadTask.h"
 #include <uv.h>
 
 
@@ -33,16 +33,6 @@ extern "C" uv_loop_t *uv_loop; // Defined in haywire http server module.
 		return;\
 	}
 
-void on_work_start(uv_work_t *req){
-	UploadTask *uTask = (UploadTask*)req->data;
-	uTask->Proceed();
-}
-
-void on_work_done(uv_work_t *req, int status){
-	//UploadTask *uTask = (UploadTask*)req->data;
-	//delete uTask;
-	free(req);
-}
 
 // request->body->length shall be strictly equal to file size(no matter what form it is)
 void get_upload(http_request *request, hw_http_response *response, void *user_data) {
@@ -73,10 +63,7 @@ void get_upload(http_request *request, hw_http_response *response, void *user_da
 	//*pszDirPath   = new std::string(pszDirPath);
 	//slashpos    = 0;
 
-	uv_work_t *work_req = (uv_work_t*)malloc(sizeof(uv_work_t));
-	UploadTask *uTask = new UploadTask(request->body, finalpath);
-	work_req->data = uTask;
-	uv_queue_work(uv_loop, work_req, on_work_start, on_work_done);
+	queueSimpleTaskUV(new UploadTask(request->body, finalpath));
 
 	//: replace the old one. 
 	request->body = (hw_string*)malloc(sizeof(hw_string));
