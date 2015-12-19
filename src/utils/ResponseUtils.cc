@@ -20,7 +20,7 @@ void
 finish_response(http_request *request
 	, hw_http_response *response
 	, const char *statusCode
-	, void *user_data
+	, RespMsg *pUser
 	, const char *typ
 	, const char *text
 	, int length)
@@ -67,25 +67,24 @@ finish_response(http_request *request
 	{
 		hw_set_http_version(response, 1, 0);
 	}
-	hw_http_response_send(response, user_data, response_complete);
+	hw_http_response_send(response, pUser, pUser->getFinishCallback());
 }
 
 void 
 finish_response(http_request *request
 	, hw_http_response *response
 	, const char *statusCode
-	, void *user_data
+	, RespMsg* pFinish
 	, const char *typeStr
 	, const char *text)
 {
-	finish_response(request, response, statusCode, user_data, typeStr, text, strlen(text));
+	finish_response(request, response, statusCode, pFinish, typeStr, text, strlen(text));
 }
 
 void 
 finish_response_file(http_request *request
 	, hw_http_response *response
 	, const char *statusCode
-	, void *user_data
 	, const char *typeStr
 	, const char *filepath) {
 	hw_string status_code;
@@ -111,7 +110,11 @@ finish_response_file(http_request *request
 		SETSTRING(content_type_name, "Content-Type");
 		SetCString(content_type_value, typeStr);
 		hw_set_response_header(response, &content_type_name, &content_type_value);
-		hw_http_response_send_file(response, user_data, filepath, response_complete);
+		std::string msg = "Fetch for:<";
+		msg += request->url;
+		msg += ">";
+		auto pFinish = _BuildRStr(msg);
+		hw_http_response_send_file(response, pFinish, filepath, pFinish->getFinishCallback());
 	} else {
 		//File not found. Override the content-type
 		hw_string content_type_name;
@@ -123,6 +126,10 @@ finish_response_file(http_request *request
 		body.value = _FileNotFoundStr;
 		body.length = strlen(body.value);
 		hw_set_body(response, &body);
-		hw_http_response_send(response, (void*)("file not found"), response_complete);
+		std::string msg = "Failed fetch for:<";
+		msg += request->url;
+		msg += ">";
+		auto pFinish = _BuildRStr(msg);
+		hw_http_response_send(response, pFinish, pFinish->getFinishCallback());
 	}
 }

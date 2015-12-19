@@ -8,10 +8,12 @@
 #include <string>
 #include <cstring>
 
+#include "RespMsg.h"
+
 void finish_response(http_request *request
 	, hw_http_response *response
 	, const char *statusCode
-	, void *user_data
+	, RespMsg *pFinish
 	, const char *typeStr
 	, const char *text
 	, int length);
@@ -19,7 +21,7 @@ void finish_response(http_request *request
 void finish_response(http_request *request
 	, hw_http_response *response
 	, const char *statusCode
-	, void *user_data
+	, RespMsg *pFinish
 	, const char *typeStr
 	, const char *text);
 
@@ -28,7 +30,6 @@ void
 finish_response_file(http_request *request
 	, hw_http_response *response
 	, const char *statusCode
-	, void *user_data
 	, const char *typeStr
 	, const char *filepath);
 
