@@ -21,18 +21,6 @@
 
 extern "C" uv_loop_t *uv_loop; // Defined in haywire http server module.
 
-#define _END_IN_MAL()\
-	{\
-		finish_response(request\
-			, response\
-			, HTTP_STATUS_500\
-			, (void*)"file upload request done"\
-			, ContentType_TextPlain\
-			, "Malicious Request"\
-			);\
-		return;\
-	}
-
 
 // request->body->length shall be strictly equal to file size(no matter what form it is)
 void get_upload(http_request *request, hw_http_response *response, void *user_data) {
@@ -44,8 +32,16 @@ void get_upload(http_request *request, hw_http_response *response, void *user_da
 	std::string path;
 	if (beg && strlen(beg) > 1 + strlen(prep) && !strncmp(prep, beg+1, strlen(prep)))
 		path = beg + 1 + strlen(prep);
-	if(path.empty())
-		_END_IN_MAL()
+	if(path.empty()) {
+		finish_response(request
+			, response
+			, HTTP_STATUS_500
+			, _BuildRStr("Invalid upload url format")
+			, ContentType_TextPlain
+			, "Malicious Request"
+			);
+		return;
+	}
 
 	//printf("store in <%s>\n", path.c_str());
 	const char *pre = strrchr(path.c_str(), '/');
@@ -74,7 +70,7 @@ void get_upload(http_request *request, hw_http_response *response, void *user_da
 	finish_response(request,
 		response,
 		resCode,
-		(void*)("Uploading"),
+		_BuildRStr(std::string("Upload for <") + request->url + ">"),
 		ContentType_TextPlain,
 		"Upload complete"
 		);
