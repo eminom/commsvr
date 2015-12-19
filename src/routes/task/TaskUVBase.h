@@ -5,6 +5,7 @@
 #define _MY_UV_TASK_TASK_UV_MY__DEF__
 
 #include "uv.h"
+#include <cstdlib>
 
 extern "C" uv_loop_t *uv_loop; // Implemented in haywire http server.
 

@@ -19,12 +19,15 @@ Source = \
 	src/routes/HiFetch.cc \
 	src/routes/HiResources.cc \
 	src/routes/HiIndex.cc \
+	src/routes/task/TaskUVBase.cc \
+	src/routes/task/UploadTask.cc \
 	src/files/DirWalker.cc \
 	src/files/RootExplorer.cc \
 	src/files/DirMaker.cc \
 	src/utils/CmdBuffStr.cc \
 	src/config/HttpServerConfig.cc \
-	src/utils/ResponseUtils.cc
+	src/utils/ResponseUtils.cc \
+	src/utils/RespMsg.cc
 
 ServerDist = src/Server.cc src/Echo.cc
 
