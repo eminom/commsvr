@@ -16,13 +16,12 @@
 
 #include "HelloInception.h"
 
-void get_indexserver(http_request *request, hw_http_response *response, void *user_data) {
+void get_indexserver(http_request *request, hw_http_response *response, void *) {
 	std::string cwd = RootExplorer::getInstance()->getWorkingDir();
 	std::string rq_path = cwd + "index.html";
 	finish_response_file(request
 		, response
 		, fileGetStatusCode(rq_path.c_str())
-		, (void*)"index page"
 		, ContentType_TextHtml
 		, rq_path.c_str()
 		);
