@@ -20,7 +20,7 @@ void
 finish_response(http_request *request
 	, hw_http_response *response
 	, const char *statusCode
-	, RespMsg *pUser
+	, RespMsg *pFinish
 	, const char *typ
 	, const char *text
 	, int length)
@@ -67,7 +67,7 @@ finish_response(http_request *request
 	{
 		hw_set_http_version(response, 1, 0);
 	}
-	hw_http_response_send(response, pUser, pUser->getFinishCallback());
+	pFinish->sendResp(response);
 }
 
 void 
@@ -114,7 +114,7 @@ finish_response_file(http_request *request
 		msg += request->url;
 		msg += ">";
 		auto pFinish = _BuildRStr(msg);
-		hw_http_response_send_file(response, pFinish, filepath, pFinish->getFinishCallback());
+		pFinish->sendFile(response, filepath);
 	} else {
 		//File not found. Override the content-type
 		hw_string content_type_name;
@@ -130,6 +130,6 @@ finish_response_file(http_request *request
 		msg += request->url;
 		msg += ">";
 		auto pFinish = _BuildRStr(msg);
-		hw_http_response_send(response, pFinish, pFinish->getFinishCallback());
+		pFinish->sendResp(response);
 	}
 }
