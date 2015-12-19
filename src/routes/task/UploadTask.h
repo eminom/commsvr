@@ -10,13 +10,6 @@
 #include <string>
 #include "uv.h"
 
-#define _UtBody(name)\
-	void on_##name(uv_fs_t*);\
-	static void ut_##name(uv_fs_t *req){\
-		uv_fs_req_cleanup(req);\
-		UploadTask *self = (UploadTask*)req->data;\
-		self->on_##name(req);\
-	}
 
 class UploadTask:public TaskUV {
 	//typedef UploadTask this_class;
@@ -28,9 +21,9 @@ public:
 	virtual void Proceed()override;
 
 private:
-	_UtBody(fileOpen)
-	_UtBody(fileWrite)
-	_UtBody(fileClose)
+	_UtBody(fileOpen, UploadTask)
+	_UtBody(fileWrite,UploadTask)
+	_UtBody(fileClose,UploadTask)
 
 	void goToOpen();
 	void goToWrite();

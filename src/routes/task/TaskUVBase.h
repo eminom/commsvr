@@ -25,5 +25,12 @@ inline void queueSimpleTaskUV(TaskUV *task) {
 	uv_queue_work(uv_loop, __req, &taskUV::on_work_start, &taskUV::on_work_done);
 }
 
+#define _UtBody(name, TYPE)\
+	void on_##name(uv_fs_t*);\
+	static void ut_##name(uv_fs_t *req){\
+		uv_fs_req_cleanup(req);\
+		TYPE *self = (TYPE*)req->data;\
+		self->on_##name(req);\
+	}
 
 #endif
