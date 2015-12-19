@@ -37,7 +37,6 @@ void get_fetch(http_request* request, hw_http_response* response, void *user_dat
 		finish_response_file(request
 			, response
 			, fileGetStatusCode(request_path.c_str())
-			, (void*)"file transfer"
 			, mimeType.c_str()
 			, request_path.c_str()
 			);
@@ -46,7 +45,7 @@ void get_fetch(http_request* request, hw_http_response* response, void *user_dat
 		finish_response(request
 			, response
 			, HTTP_STATUS_500
-			, (void*)"void()"
+			, _BuildRStr("Invalid fetch format")
 			, ContentType_TextHtml
 			, msg
 			, strlen(msg)
