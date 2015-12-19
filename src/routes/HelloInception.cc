@@ -43,6 +43,7 @@ int httpStaticFileLoop(const char *serverRootDir) {
     hw_http_add_route(_PreResourcePage, get_resourcepage, NULL);  //Is the literal string a const ? (VS nods)
 	hw_http_add_route(_PreFetch, get_fetch, NULL);
 	hw_http_add_route(_PreUpload, get_upload, NULL);
+	hw_http_add_route(_PreDelete, get_delete, NULL);
     return hw_http_open();
 }
 

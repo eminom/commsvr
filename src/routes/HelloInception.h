@@ -10,6 +10,7 @@
 #define _PreResourcePage	"/static"
 #define _PreFetch			"/fetch"
 #define _PreUpload			"/upload.jsp"
+#define _PreDelete			"/delete"
 
 #define UnknownResStr	\
 	"<font color=\"Red\">Unknown Resource Type</font>"
@@ -26,6 +27,7 @@ void get_fetch(http_request* request, hw_http_response* response, void *user_dat
 void get_upload(http_request *request, hw_http_response *response, void *user_data);
 void get_indexserver(http_request *request, hw_http_response *response, void *user_data);
 void get_resourcepage(http_request* request, hw_http_response* response, void* user_data);
+void get_delete(http_request *req, hw_http_response *response, void*);
 
 #define _START_INCEPTION()	namespace inception {
 #define _END_INCEPTION()	}
