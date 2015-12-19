@@ -85,6 +85,9 @@
     <ClCompile Include="..\..\..\src\routes\task\MakeDirTask.cc">
       <Filter>Source\routes\task</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\utils\RespMsg.cc">
+      <Filter>Source\utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\client_proc_t.h">
@@ -167,6 +170,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\routes\task\MakeDirTask.h">
       <Filter>Source\routes\task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\utils\RespMsg.h">
+      <Filter>Source\utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
