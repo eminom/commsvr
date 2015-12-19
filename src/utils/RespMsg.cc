@@ -14,13 +14,16 @@ void RespMsg::print() {
 	printf("%s\n", msg_.c_str());
 }
 
-http_response_complete_callback 
-RespMsg::getFinishCallback() {
-	return &RespMsg::whenResponseDone;
-}
-
 void RespMsg::whenResponseDone(void* pData) {
 	RespMsg *self = reinterpret_cast<RespMsg*>(pData);
 	self->print();
 	delete self;
+}
+
+void RespMsg::sendResp(hw_http_response* resp) {
+	hw_http_response_send(resp, this, &RespMsg::whenResponseDone);
+}
+
+void RespMsg::sendFile(hw_http_response* resp, const char*localFullPath) {
+	hw_http_response_send_file(resp,  this, localFullPath, &RespMsg::whenResponseDone);
 }
