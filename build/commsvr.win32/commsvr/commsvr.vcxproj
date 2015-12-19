@@ -108,6 +108,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\..\src\routes\HelloInception.cc" />
+    <ClCompile Include="..\..\..\src\routes\HiDelete.cc" />
     <ClCompile Include="..\..\..\src\routes\HiFetch.cc" />
     <ClCompile Include="..\..\..\src\routes\HiIndex.cc" />
     <ClCompile Include="..\..\..\src\routes\HiResources.cc" />
@@ -117,6 +118,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\..\src\routes\task\BiTask.cc" />
+    <ClCompile Include="..\..\..\src\routes\task\DeleteTask.cc" />
     <ClCompile Include="..\..\..\src\routes\task\MakeDirTask.cc" />
     <ClCompile Include="..\..\..\src\routes\task\TaskUVBase.cc" />
     <ClCompile Include="..\..\..\src\routes\task\UploadTask.cc" />
@@ -168,6 +170,7 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\routes\HelloInception.h" />
     <ClInclude Include="..\..\..\src\routes\task\BiTask.h" />
+    <ClInclude Include="..\..\..\src\routes\task\DeleteTask.h" />
     <ClInclude Include="..\..\..\src\routes\task\MakeDirTask.h" />
     <ClInclude Include="..\..\..\src\routes\task\TaskUVBase.h" />
     <ClInclude Include="..\..\..\src\routes\task\UploadTask.h" />

@@ -88,6 +88,12 @@
     <ClCompile Include="..\..\..\src\utils\RespMsg.cc">
       <Filter>Source\utils</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\routes\HiDelete.cc">
+      <Filter>Source\routes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\routes\task\DeleteTask.cc">
+      <Filter>Source\routes\task</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\client_proc_t.h">
@@ -173,6 +179,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\utils\RespMsg.h">
       <Filter>Source\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\routes\task\DeleteTask.h">
+      <Filter>Source\routes\task</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
