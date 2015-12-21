@@ -15,15 +15,18 @@ LOCAL_SRC_FILES := \
 ../src/routes/HiUpload.cc \
 ../src/routes/HiResources.cc \
 ../src/routes/HiIndex.cc \
+../src/routes/HiDelete.cc \
 ../src/routes/task/TaskUVBase.cc \
 ../src/routes/task/UploadTask.cc \
+../src/routes/task/DeleteTask.cc \
 ../src/files/DirWalker.cc \
 ../src/files/RootExplorer.cc \
 ../src/files/DirMaker.cc \
 ../src/config/HttpServerConfig.cc \
 ../src/utils/StreamBuffer.cc \
 ../src/utils/ResponseUtils.cc \
-../src/utils/CmdBuffStr.cc 
+../src/utils/CmdBuffStr.cc \
+../src/utils/RespMsg.cc
 
 LOCAL_STATIC_LIBRARIES += libuv
 LOCAL_STATIC_LIBRARIES += libhaywire
