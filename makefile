@@ -29,7 +29,8 @@ Source = \
 	src/utils/CmdBuffStr.cc \
 	src/config/HttpServerConfig.cc \
 	src/utils/ResponseUtils.cc \
-	src/utils/RespMsg.cc
+	src/utils/RespMsg.cc \
+	deps/xxhash/xxhash.c
 
 ServerDist = src/Server.cc src/Echo.cc
 
@@ -42,7 +43,8 @@ IncludeFlag = -Ilib/libuv/include\
 	-I/Users/eminom/dev/boost/macosx/include\
 	-Ilib/cJSON\
 	-Ilib/haywire/include\
-	-Isrc
+	-Isrc\
+	-I.
 
 JsonSrc = lib/cJSON/cJSON.c
 

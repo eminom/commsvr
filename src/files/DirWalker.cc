@@ -226,18 +226,26 @@ void elicitDirSub(const char *now
 	std::copy(nd.begin(), nd.end(), std::back_inserter(dv));
 }
 
-void elicitDir(const char *root, std::string &content, bool doHash, unsigned int seed)
-{
-	//content = "Windows(Not implemented yet)";
-	FVS files;
-	VS dirs;
-	elicitDirSub(root, files, dirs, doHash, seed);
-	formatContentByInfo(files, dirs, root, content);
-}
-
 #else  // Linux/Unix
 
-void elicitDirSub(const char *now, std::vector<std::string> &fv, std::vector<std::string> &dv)
+unsigned int getHashUnix(const char *fullpath, unsigned int seed) {
+	int fin = open(fullpath, O_RDONLY, S_IRWXU);
+	if(fin<0){
+		return 0;
+	}
+
+	int lsize = 1024 * 256;
+	char buf[lsize];
+	ssize_t nRead = 0;
+	void *state = XXH32_init(seed);
+	while( (nRead = read(fin, buf, lsize)) > 0) {
+		XXH32_update(state, buf, nRead);
+	}
+	close(fin);
+	return  XXH32_digest(state);
+}
+
+void elicitDirSub(const char *now, FVS &fv, VS &dv, bool doHash, unsigned int seed)
 {
 	char path[1000 + BUFSIZ];
 	strcpy(path, now);
@@ -278,26 +286,30 @@ void elicitDirSub(const char *now, std::vector<std::string> &fv, std::vector<std
 		}
 		else
 		{
-			fv.push_back(newp);
+			if(!doHash){
+				fv.push_back(FileItem(newp));
+			} else {
+				fv.push_back(FileItem(newp, getHashUnix(newp, seed)));
+			}
 		}
 	}
 	closedir(dp);
-	for(const auto &d:dirs)
-	{
+	for(const auto &d:dirs)	{
 		//printf(">> \"%s\"\n", d.c_str());
-		elicitDirSub(d.c_str(), fv, dv);
+		elicitDirSub(d.c_str(), fv, dv, doHash, seed);
 	}
 	std::copy(dirs.begin(), dirs.end(), std::back_inserter(dv));
 }
 
+#endif
+
 void elicitDir(const char *root, std::string &content, bool doHash, unsigned int seed)
 {
-	FVS filev;
+	//content = "Windows(Not implemented yet)";
+	FVS files;
 	VS dirs;
-	//printf("Starting from <%s>\n", root);
-
-	elicitDirSub(root, filev, dirs, seed);
-	formatContentByInfo(filev, dirs, root, content);
+	elicitDirSub(root, files, dirs, doHash, seed);
+	formatContentByInfo(files, dirs, root, content);
 }
 
-#endif
+
