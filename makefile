@@ -17,6 +17,7 @@ Source = \
 	src/routes/HelloInception.cc \
 	src/routes/HiDelete.cc \
 	src/routes/HiUpload.cc \
+	src/routes/HiSeed.cc \
 	src/routes/HiFetch.cc \
 	src/routes/HiResources.cc \
 	src/routes/HiIndex.cc \
