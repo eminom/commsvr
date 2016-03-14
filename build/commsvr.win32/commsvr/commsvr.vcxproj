@@ -113,6 +113,7 @@
     <ClCompile Include="..\..\..\src\routes\HiFetch.cc" />
     <ClCompile Include="..\..\..\src\routes\HiIndex.cc" />
     <ClCompile Include="..\..\..\src\routes\HiResources.cc" />
+    <ClCompile Include="..\..\..\src\routes\HiSeed.cc" />
     <ClCompile Include="..\..\..\src\routes\HiUpload.cc" />
     <ClCompile Include="..\..\..\src\routes\HiUploadSeal.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>

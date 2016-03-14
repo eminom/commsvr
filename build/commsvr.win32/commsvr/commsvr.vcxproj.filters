@@ -97,6 +97,9 @@
     <ClCompile Include="..\..\..\deps\xxhash\xxhash.c">
       <Filter>Source\xxhash</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\routes\HiSeed.cc">
+      <Filter>Source\routes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\client_proc_t.h">
