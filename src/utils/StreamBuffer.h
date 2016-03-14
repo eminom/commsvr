@@ -14,6 +14,7 @@ public:
 
 public:
 	void append(const char *start, int length);
+	void append(const std::string &str);
 	bool readString(std::string &str, int length);
 	bool readString(std::string &str);
 	

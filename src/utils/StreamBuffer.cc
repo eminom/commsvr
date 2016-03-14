@@ -32,6 +32,11 @@ StreamBuffer::~StreamBuffer()
 	}
 }
 
+void StreamBuffer::append(const std::string &in)
+{
+	append(in.data(), in.size());
+}
+
 void StreamBuffer::append(const char *start, int length)
 {
 	if(!owned_)
