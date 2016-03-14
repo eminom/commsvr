@@ -94,6 +94,9 @@
     <ClCompile Include="..\..\..\src\routes\task\DeleteTask.cc">
       <Filter>Source\routes\task</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\deps\xxhash\xxhash.c">
+      <Filter>Source\xxhash</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\client_proc_t.h">
@@ -183,6 +186,9 @@
     <ClInclude Include="..\..\..\src\routes\task\DeleteTask.h">
       <Filter>Source\routes\task</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\deps\xxhash\xxhash.h">
+      <Filter>Source\xxhash</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">
@@ -214,6 +220,9 @@
     </Filter>
     <Filter Include="Source\routes\task">
       <UniqueIdentifier>{2af2d292-af0a-43fc-8c00-a6a1626ccda1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\xxhash">
+      <UniqueIdentifier>{4ab4fd43-d7a2-4a60-a5d9-7bb83a359bc2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

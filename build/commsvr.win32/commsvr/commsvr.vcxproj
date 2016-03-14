@@ -53,13 +53,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir)\..\..\..\src;$(ProjectDir)\..\..\..\lib\libuv\include;$(ProjectDir)\..\..\..\lib\haywire\include;F:\Boost.v110\include\boost-1_59;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\..\..\;$(ProjectDir)\..\..\..\src;$(ProjectDir)\..\..\..\lib\libuv\include;$(ProjectDir)\..\..\..\lib\haywire\include;F:\Boost.v110\include\boost-1_59;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)\..\commsvr\Debug\lib;$(ProjectDir)\builds\windows\Debug\haywire\lib;$(ProjectDir)\Debug;F:\Boost.v110\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)\..\commsvr\Debug\lib;$(ProjectDir)\builds\windows\Debug\haywire\;$(ProjectDir)\Debug;F:\Boost.v110\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>haywire.patch.win32.lib;haywire.lib;ws2_32.lib;Iphlpapi.lib;Psapi.lib;Userenv.lib;libuv.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>libcmtd.lib</IgnoreSpecificDefaultLibraries>
     </Link>
@@ -87,6 +87,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\deps\xxhash\xxhash.c" />
     <ClCompile Include="..\..\..\src\client_proc_t.cc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -146,6 +147,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\deps\xxhash\xxhash.h" />
     <ClInclude Include="..\..\..\src\base\HtmlContentType.h" />
     <ClInclude Include="..\..\..\src\client_proc_t.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
