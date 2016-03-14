@@ -17,6 +17,19 @@
 
 
 void get_resourcepage(http_request* request, hw_http_response* response, void* user_data) {
+	bool withHash = false;
+	const char *url = request->url;
+	const size_t lz = strlen(_PreResourcePage);
+	if(strlen(url) >= lz + 1 
+		&& '/' == url[lz]
+		&& !strncmp(_PreResourcePage, url, lz)  
+		&& *(url+(lz+1))) {
+		const char *rest = url + (lz + 1);
+		if (!strcmp(rest, "hash")){
+			withHash = true;
+		}
+	}
+
     hw_string status_code;
     hw_string content_type_name;
     hw_string content_type_value;
@@ -32,7 +45,7 @@ void get_resourcepage(http_request* request, hw_http_response* response, void* u
     hw_set_response_header(response, &content_type_name, &content_type_value);
 
 	std::string content;
-	RootExplorer::getInstance()->retrieveContent(content, true, _XxhashSeed);
+	RootExplorer::getInstance()->retrieveContent(content, withHash, _XxhashSeed);
     if (!content.size()) {
         content = EmptyContentStr;
     }
