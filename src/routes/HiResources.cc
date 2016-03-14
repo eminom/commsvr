@@ -32,7 +32,7 @@ void get_resourcepage(http_request* request, hw_http_response* response, void* u
     hw_set_response_header(response, &content_type_name, &content_type_value);
 
 	std::string content;
-	RootExplorer::getInstance()->retrieveContent(content);
+	RootExplorer::getInstance()->retrieveContent(content, true, 0x20482048);
     if (!content.size()) {
         content = EmptyContentStr;
     }

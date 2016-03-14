@@ -30,9 +30,9 @@ const char* RootExplorer::getWorkingDir()const
 	return _rootdir.c_str();
 }
 
-void RootExplorer::retrieveContent(std::string &out, bool doHash)
+void RootExplorer::retrieveContent(std::string &out, bool doHash, unsigned int seed)
 {
-	elicitDir(_rootdir.c_str(), out, doHash);
+	elicitDir(_rootdir.c_str(), out, doHash, seed);
 }
 
 
