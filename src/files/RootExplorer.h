@@ -14,7 +14,7 @@ public:
 public:
 	void setWorkingDir(const std::string &dir);
 	const char *getWorkingDir()const;
-	void retrieveContent(std::string &out);
+	void retrieveContent(std::string &out, bool doHash);
 
 private:
 	std::string _rootdir;
