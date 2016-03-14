@@ -23,9 +23,80 @@
 
 #endif
 
+#include "deps/xxhash/xxhash.h"
+
 #define _DirFontStart	"<font color=\"blue\"><b>"
 #define _DirFontEnd		"</b></font>"
 #define _PREDESTINE		"fetch"
+
+
+struct FileItem {
+public:
+	FileItem(const char *name, unsigned int hv)
+		:_name(name), _hashValue(hv), _hasHash(true){}
+	FileItem(const std::string &name, unsigned int hv)
+		:_name(name), _hashValue(hv), _hasHash(true){}
+	FileItem(const char *name)
+		:_name(name), _hashValue(0), _hasHash(false){}
+
+public:
+	std::string toStr(const char *rootpath)const{
+		return _hasHash ? toStrHash(rootpath): toStrNoHash(rootpath);
+	}
+
+	bool operator<(const FileItem&rhs)const{
+		return _name < rhs._name;
+	}
+
+	//const std::string& nameRef()const{
+	//	return name;
+	//}
+
+private:
+	std::string stripHash(const char *rootpath, std::string &name)const{
+		int lz = strlen(rootpath);
+		if (!strncmp(_name.data(), rootpath, lz) ) {
+			name = _name.substr(lz);
+		} else {
+			name = _name;
+		}
+		char href[BUFSIZ];
+		snprintf(href, sizeof(href), "\"%s/%s\"", _PREDESTINE, name.c_str());
+		for(auto &ch:href){
+			if ('\\'==ch){
+				ch = '/';
+			}
+		}
+		return href;
+	}
+
+	std::string toStrNoHash(const char *rootpath)const{
+		std::string name;
+		std::string href = stripHash(rootpath, name);
+		char buf[BUFSIZ + 1024];
+		snprintf(buf, sizeof(buf), "<a href=%s>%s</a><br/>\n", href.c_str(), name.c_str());
+		return buf;
+	}
+
+	std::string toStrHash(const char *rootpath)const {
+		std::string name;
+		std::string href = stripHash(rootpath, name);
+		char buf[BUFSIZ+1024];
+		snprintf(buf, sizeof(buf), "<a href=%s xxhash=\"%08x\">%s</a><br/>\n"
+			, href.c_str()
+			, _hashValue
+			, name.c_str());
+		return buf;
+	}
+
+private:
+	std::string _name;
+	unsigned int _hashValue;
+	bool _hasHash;
+};
+
+typedef std::vector<FileItem> FVS;
+typedef std::vector<std::string> VS;
 
 int filterByName(const char *name)
 {
@@ -37,7 +108,7 @@ int filterByName(const char *name)
 	return 0;
 }
 
-void formatContentByInfo(std::vector<std::string> &files, std::vector<std::string> &dirs, const char *root, std::string &content)
+void formatContentByInfo(FVS &files, VS &dirs, const char *root, std::string &content)
 {
 	std::sort(files.begin(), files.end());
 	std::sort(dirs.begin(), dirs.end());
@@ -45,48 +116,23 @@ void formatContentByInfo(std::vector<std::string> &files, std::vector<std::strin
 	char rootpath[BUFSIZ + BUFSIZ + 256];
 	strcpy(rootpath, root);
 	int lz = strlen(rootpath);
-	if(lz>0 && rootpath[lz-1] != '/' && rootpath[lz-1] != '\\')
-	{
+	if(lz>0 && rootpath[lz-1] != '/' && rootpath[lz-1] != '\\')	{
 		strcat(rootpath, _END_SLASH_STR);
 		++lz;
 	}
 
 	StreamBuffer b;
-	for(auto &f:files)
-	{
-		char buf[BUFSIZ+1000];
-		std::string name;
-		if (!strncmp(f.data(), rootpath, lz) )
-		{
-			name = f.substr(lz);
-		}
-		else
-		{
-			name = f;
-		}
+	std::for_each(files.begin(), files.end(), [&](const FileItem &f){
+		std::string str = f.toStr(rootpath);
+		b.append(str);
+	});
 
-		char hrefBuff[BUFSIZ+1000];
-		snprintf(hrefBuff, sizeof(hrefBuff), "\"%s/%s\"", _PREDESTINE, name.c_str());
-		for(auto &ch:hrefBuff)
-		{
-			if ('\\'==ch)
-			{
-				ch = '/';
-			}
-		}
-		snprintf(buf, sizeof(buf), "<a href=%s>%s</a><br/>\n", hrefBuff, name.c_str());
-		b.append(buf, strlen(buf));
-	}
-	for(auto &d:dirs)
-	{
+	for(auto &d:dirs) {
 		char buf[BUFSIZ+1000];
 		std::string name;
-		if ( !strncmp(d.data(), rootpath, lz) )
-		{
+		if ( !strncmp(d.data(), rootpath, lz) )	{
 			name = d.substr(lz);
-		}
-		else
-		{
+		} else {
 			name = d;
 		}
 		snprintf(buf, sizeof(buf), "%s&lt;%s&gt;<br/>%s\n", _DirFontStart, name.c_str(), _DirFontEnd);
@@ -99,9 +145,40 @@ void formatContentByInfo(std::vector<std::string> &files, std::vector<std::strin
 #if defined(_MSC_VER)
 //Windows implementation.
 //For debugging only.
+// Refer:
+// https://msdn.microsoft.com/en-us/library/windows/desktop/bb540534(v=vs.85).aspx
+unsigned int doHash(const char *fullpath, unsigned int seed) {
+	HANDLE hFile = CreateFileA(fullpath,
+		GENERIC_READ,
+		FILE_SHARE_READ,       // share for reading
+		NULL,                  // default security
+		OPEN_EXISTING,         // existing file only
+		FILE_ATTRIBUTE_NORMAL | FILE_FLAG_OVERLAPPED, // normal file
+		NULL
+	);         
+	if(INVALID_HANDLE_VALUE==hFile){
+		return 0;
+	}
+	const int lsize = 1024*1024*1;
+	char *buffer = (char*)::HeapAlloc(::GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, lsize);
+	void *state = XXH32_init(seed);
+	DWORD dwBytesRead = 0;
+	while (::ReadFile(hFile, buffer, lsize, &dwBytesRead, NULL)) {
+		if (dwBytesRead == 0)
+			break;
+		XXH32_update(state, buffer, dwBytesRead);
+	}
+	::CloseHandle(hFile);
+	::HeapFree(::GetProcessHeap(), 0, buffer);
+	unsigned int hash = XXH32_digest(state);
+	return hash;
+}
 
-void elicitDirSub(const char *now, std::vector<std::string>& fv, std::vector<std::string> &dv)
-{
+void elicitDirSub(const char *now
+				  , FVS& fv
+				  , VS&  dv
+				  , bool doHash
+				  , unsigned int seed) {
 	char curpath[MAX_PATH+1];
 	strcpy(curpath, now);
 	int lz = strlen(curpath);
@@ -135,23 +212,26 @@ void elicitDirSub(const char *now, std::vector<std::string>& fv, std::vector<std
 		} 
 		else
 		{
-			fv.push_back(fullpath);
+			if(!doHash) {
+				fv.push_back(FileItem(fullpath,0));
+			}
 		}
 	}while(::FindNextFileA(hFind, &findFile));
 	::FindClose(hFind);
 	hFind = INVALID_HANDLE_VALUE;
 	for(const auto &d:nd)
 	{
-		elicitDirSub(d.c_str(), fv, dv);
+		elicitDirSub(d.c_str(), fv, dv, doHash, seed);
 	}
 	std::copy(nd.begin(), nd.end(), std::back_inserter(dv));
 }
 
-void elicitDir(const char *root, std::string &content)
+void elicitDir(const char *root, std::string &content, bool doHash, unsigned int seed)
 {
 	//content = "Windows(Not implemented yet)";
-	std::vector<std::string> files, dirs;
-	elicitDirSub(root, files, dirs);
+	FVS files;
+	VS dirs;
+	elicitDirSub(root, files, dirs, doHash, seed);
 	formatContentByInfo(files, dirs, root, content);
 }
 
@@ -210,12 +290,13 @@ void elicitDirSub(const char *now, std::vector<std::string> &fv, std::vector<std
 	std::copy(dirs.begin(), dirs.end(), std::back_inserter(dv));
 }
 
-void elicitDir(const char *root, std::string &content)
+void elicitDir(const char *root, std::string &content, bool doHash, unsigned int seed)
 {
-	std::vector<std::string> filev, dirs;
+	FVS filev;
+	VS dirs;
 	//printf("Starting from <%s>\n", root);
 
-	elicitDirSub(root, filev, dirs);
+	elicitDirSub(root, filev, dirs, seed);
 	formatContentByInfo(filev, dirs, root, content);
 }
 
