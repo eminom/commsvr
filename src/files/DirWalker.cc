@@ -29,28 +29,29 @@
 #define _DirFontEnd		"</b></font>"
 #define _PREDESTINE		"fetch"
 
+bool getFileHash(const char *fullpath, unsigned int seed, unsigned int &hashResult);
 
+
+// Though seed can be zero
+// But we take zero seed as no hash
 struct FileItem {
 public:
-	FileItem(const char *name, unsigned int hv)
-		:_name(name), _hashValue(hv), _hasHash(true){}
-	FileItem(const std::string &name, unsigned int hv)
-		:_name(name), _hashValue(hv), _hasHash(true){}
+	FileItem(const char *name, unsigned int hashValue)
+		:_name(name), _hasHash(true)
+		,_hashValue(hashValue) {}
+
 	FileItem(const char *name)
-		:_name(name), _hashValue(0), _hasHash(false){}
+		:_name(name), _hasHash(false)
+		,_hashValue(0) {}
 
 public:
-	std::string toStr(const char *rootpath)const{
+	std::string toStr(const char *rootpath) const {
 		return _hasHash ? toStrHash(rootpath): toStrNoHash(rootpath);
 	}
 
 	bool operator<(const FileItem&rhs)const{
 		return _name < rhs._name;
 	}
-
-	//const std::string& nameRef()const{
-	//	return name;
-	//}
 
 private:
 	std::string stripHash(const char *rootpath, std::string &name)const{
@@ -147,7 +148,7 @@ void formatContentByInfo(FVS &files, VS &dirs, const char *root, std::string &co
 //For debugging only.
 // Refer:
 // https://msdn.microsoft.com/en-us/library/windows/desktop/bb540534(v=vs.85).aspx
-unsigned int doHash(const char *fullpath, unsigned int seed) {
+bool getFileHash(const char *fullpath, unsigned int seed, unsigned int &hashResult) {
 	HANDLE hFile = CreateFileA(fullpath,
 		GENERIC_READ,
 		FILE_SHARE_READ,       // share for reading
@@ -157,7 +158,7 @@ unsigned int doHash(const char *fullpath, unsigned int seed) {
 		NULL
 	);         
 	if(INVALID_HANDLE_VALUE==hFile){
-		return 0;
+		return false;
 	}
 	const int lsize = 1024*1024*1;
 	char *buffer = (char*)::HeapAlloc(::GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, lsize);
@@ -170,8 +171,8 @@ unsigned int doHash(const char *fullpath, unsigned int seed) {
 	}
 	::CloseHandle(hFile);
 	::HeapFree(::GetProcessHeap(), 0, buffer);
-	unsigned int hash = XXH32_digest(state);
-	return hash;
+	hashResult = XXH32_digest(state);
+	return true; // Result is validated.
 }
 
 void elicitDirSub(const char *now
@@ -212,8 +213,11 @@ void elicitDirSub(const char *now
 		} 
 		else
 		{
-			if(!doHash) {
-				fv.push_back(FileItem(fullpath,0));
+			unsigned int hashv = 0;
+			if(doHash && getFileHash(fullpath, seed, hashv)) {
+				fv.push_back(FileItem(fullpath, hashv));
+			} else {
+				fv.push_back(FileItem(fullpath));
 			}
 		}
 	}while(::FindNextFileA(hFind, &findFile));
@@ -228,12 +232,11 @@ void elicitDirSub(const char *now
 
 #else  // Linux/Unix
 
-unsigned int getHashUnix(const char *fullpath, unsigned int seed) {
+bool getFileHash(const char *fullpath, unsigned int seed, unsigned int &hashResult) {
 	int fin = open(fullpath, O_RDONLY, S_IRWXU);
-	if(fin<0){
-		return 0;
+	if (fin<0) {
+		return false;
 	}
-
 	int lsize = 1024 * 256;
 	char buf[lsize];
 	ssize_t nRead = 0;
@@ -242,7 +245,8 @@ unsigned int getHashUnix(const char *fullpath, unsigned int seed) {
 		XXH32_update(state, buf, nRead);
 	}
 	close(fin);
-	return  XXH32_digest(state);
+	hashResult = XXH32_digest(state);
+	return true;
 }
 
 void elicitDirSub(const char *now, FVS &fv, VS &dv, bool doHash, unsigned int seed)
@@ -286,10 +290,11 @@ void elicitDirSub(const char *now, FVS &fv, VS &dv, bool doHash, unsigned int se
 		}
 		else
 		{
-			if(!doHash){
-				fv.push_back(FileItem(newp));
+			unsigned int hashv = 0;
+			if(doHash && getFileHash(newp, seed, hashv)){
+				fv.push_back(FileItem(newp, hashv));
 			} else {
-				fv.push_back(FileItem(newp, getHashUnix(newp, seed)));
+				fv.push_back(FileItem(newp));
 			}
 		}
 	}
