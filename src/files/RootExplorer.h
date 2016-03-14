@@ -20,5 +20,6 @@ public:
 private:
 	std::string _rootdir;
 	time_t _timeStamp;
+	bool _lastHashed;
 	std::string contentCached_;
 };
