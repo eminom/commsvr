@@ -154,7 +154,7 @@ bool getFileHash(const char *fullpath, unsigned int seed, unsigned int &hashResu
 		FILE_SHARE_READ,       // share for reading
 		NULL,                  // default security
 		OPEN_EXISTING,         // existing file only
-		FILE_ATTRIBUTE_NORMAL | FILE_FLAG_OVERLAPPED, // normal file
+		FILE_ATTRIBUTE_NORMAL, // | FILE_FLAG_OVERLAPPED, // normal file
 		NULL
 	);         
 	if(INVALID_HANDLE_VALUE==hFile){
