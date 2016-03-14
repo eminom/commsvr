@@ -13,7 +13,7 @@
 #define _PreDelete			"/delete"
 #define _PreGetSeed			"/seed"
 
-#define _XxhashSeed			0x20482048
+#define _XxhashSeed			0x88225821
 
 #define UnknownResStr	\
 	"<font color=\"Red\">Unknown Resource Type</font>"
