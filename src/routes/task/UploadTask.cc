@@ -7,6 +7,7 @@
 
 extern "C" uv_loop_t *uv_loop;
 
+#include "deps/xxhash/xxhash.h"
 #define _SEGMENT_SIZE	65536
 
 UploadTask::~UploadTask()
@@ -24,11 +25,32 @@ UploadTask::UploadTask(hw_string *body, const std::string &finalpath)
 	,_finalpath(finalpath)
 	,_written(0)
 	,_left(body->length)
+	,_seed(0)
 {
-	
+}
+
+UploadTask::UploadTask(hw_string *body, const std::string &finalpath, const std::string &x2hash, unsigned int seed)
+	:_body(body)
+	,_finalpath(finalpath)
+	,_written(0)
+	,_left(body->length)
+	,_xxhash(x2hash)
+	,_seed(seed)
+{
 }
 
 void UploadTask::Proceed(){
+	if(_xxhash.size() > 0){
+		void *state = XXH32_init(_seed);
+		XXH32_update(state, _body->value, _body->length);
+		unsigned int resHsah = XXH32_digest(state);
+		unsigned int inHash = 0;
+		if( 1 != sscanf(_xxhash.c_str(), "%x", &inHash) || inHash != resHsah){
+			printf("Hash failed for <%08x> from in<%08x>\n", resHsah, inHash);
+			delete this;
+			return;
+		}
+	}
 	goToOpen();
 }
 

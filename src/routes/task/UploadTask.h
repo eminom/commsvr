@@ -18,6 +18,7 @@ public:
 
 public:
 	UploadTask(hw_string*, const std::string &full);
+	UploadTask(hw_string*, const std::string &full, const std::string &x2hash, unsigned int seed);
 	virtual void Proceed()override;
 
 private:
@@ -34,6 +35,8 @@ private:
 	int _written;	//~ no more that 32G(SURE)
 	int _left;
 	std::string _finalpath;
+	std::string _xxhash;
+	unsigned int _seed;
 
 	uv_fs_t open_req;
 	uv_fs_t write_req;
