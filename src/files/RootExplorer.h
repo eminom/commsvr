@@ -1,6 +1,7 @@
 
 #pragma once
 #include <string>
+#include <ctime>
 
 class RootExplorer
 {
@@ -18,4 +19,6 @@ public:
 
 private:
 	std::string _rootdir;
+	time_t _timeStamp;
+	std::string contentCached_;
 };

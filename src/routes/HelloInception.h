@@ -12,6 +12,8 @@
 #define _PreUpload			"/upload.jsp"
 #define _PreDelete			"/delete"
 
+#define _XxhashSeed			0x20482048
+
 #define UnknownResStr	\
 	"<font color=\"Red\">Unknown Resource Type</font>"
 

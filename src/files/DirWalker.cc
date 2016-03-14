@@ -32,8 +32,6 @@
 bool getFileHash(const char *fullpath, unsigned int seed, unsigned int &hashResult);
 
 
-// Though seed can be zero
-// But we take zero seed as no hash
 struct FileItem {
 public:
 	FileItem(const char *name, unsigned int hashValue)

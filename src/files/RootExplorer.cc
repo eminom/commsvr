@@ -4,10 +4,13 @@
 #include "DirWalker.h"
 #include "utils/SlashDef.h"
 
+#define _MinimumTimeStamp	1500
+
 static RootExplorer *_instance = nullptr;
 
 RootExplorer::~RootExplorer(){}
-RootExplorer::RootExplorer(){}
+RootExplorer::RootExplorer():_timeStamp(0){
+}
 
 RootExplorer* RootExplorer::getInstance()
 {
@@ -32,7 +35,15 @@ const char* RootExplorer::getWorkingDir()const
 
 void RootExplorer::retrieveContent(std::string &out, bool doHash, unsigned int seed)
 {
-	elicitDir(_rootdir.c_str(), out, doHash, seed);
+	time_t t = time(0);
+	if( t - _timeStamp > _MinimumTimeStamp) {
+		printf("Updating db\n");
+		elicitDir(_rootdir.c_str(), out, doHash, seed);
+		_timeStamp = t;
+		contentCached_ = out; // cache
+	} else {
+		out = contentCached_;
+	}
 }
 
 
