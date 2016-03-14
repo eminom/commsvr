@@ -14,6 +14,7 @@ LOCAL_SRC_FILES := \
 ../src/routes/HiFetch.cc \
 ../src/routes/HiUpload.cc \
 ../src/routes/HiResources.cc \
+../src/routes/HiSeed.cc \
 ../src/routes/HiIndex.cc \
 ../src/routes/HiDelete.cc \
 ../src/routes/task/TaskUVBase.cc \
@@ -35,7 +36,8 @@ LOCAL_C_INCLUDES := \
 $(LOCAL_PATH)/../src \
 $(LOCAL_PATH)/../lib/libuv/include \
 $(LOCAL_PATH)/../lib/libuv/src \
-$(LOCAL_PATH)/../lib/haywire/include
+$(LOCAL_PATH)/../lib/haywire/include \
+$(LOCAL_PATH)/../../workpool/CurlTestBed/synker
 
 include $(BUILD_STATIC_LIBRARY)
 $(call import-module, commsvr/build/libuv.android)
