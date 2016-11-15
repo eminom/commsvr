@@ -6,6 +6,7 @@
 #include <cstring>
 #include <vector>
 #include <algorithm>
+#include <iterator>	//~ for back_inserter
 #include "utils/StreamBuffer.h"
 #include "utils/SlashDef.h"
 
