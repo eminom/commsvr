@@ -13,3 +13,5 @@ conf.json
 haysvr
 /build
 /static
+/lib/cJSON
+/lib/libuv
